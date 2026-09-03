@@ -121,8 +121,8 @@ WPS = [
   authors=["Tsegay Tekleselassie","Marc Witte","Jonas Radbruch","Lukas Hensel","Ingo E. Isphording"], random_order=True,
   v="IZA Discussion Paper 17761 &middot; March 2026 update", vz="IZA 讨论稿 17761 · 2026 年 3 月更新",
   ab="We conduct a field experiment with job seekers to investigate how feedback influences job search and labor market outcomes. Job seekers who receive feedback on their ability compared to other job seekers update their beliefs and increase their search effort. Specifically, initially underconfident individuals intensify their job search. In contrast, overconfident individuals do not adjust their behavior. Moreover, job seekers&rsquo; willingness-to-pay (WTP) for feedback predicts treatment effects: only among underconfident individuals with positive WTP, we observe significant increases in both search effort and search success. We present suggestive evidence that this pattern arises from heterogeneity in how job seekers perceive the relevance of relative cognitive ability to job search returns. While the intervention appears cost-effective, job seekers&rsquo; WTP remains insufficient to cover its costs.",
-  links=[("draft","工作论文",pdf("feedback-confidence-job-search.pdf","https://github.com/Luthor113/papers/raw/main/Demand_for_feedback.pdf")),
-         ("IZA discussion paper","IZA 讨论稿","https://www.iza.org/publications/dp/17761")]),
+  # The March 2026 draft here supersedes IZA DP 17761, so that link is not shown.
+  links=[("draft","工作论文",pdf("feedback-confidence-job-search.pdf","https://www.iza.org/publications/dp/17761"))]),
 
  dict(y="2026", t="From Followers to Leaders: The Career Impact of High-quality Managers",
   a_en="Yuyu Chen &amp; Xinjue Yao", a_zh="与 Chen、Yao 合著",
