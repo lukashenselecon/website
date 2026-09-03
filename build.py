@@ -339,20 +339,12 @@ def home(lang):
 {SHOT}
 <p>我是北京大学光华管理学院经济学副教授，同时担任 J-PAL 特邀研究员与 IZA 研究员。我主要采用自然实地实验的方法，研究人们如何形成关于劳动力市场的信念——关于自身的比较优势、关于雇主看重什么、关于其他人正在做什么——以及当这些信念出现偏差时，他们的职业发展会因此付出怎样的代价。</p>
 <p>我的田野工作主要在埃塞俄比亚、南非、中国与越南展开，研究对象包括求职者、工厂工人与企业。另一条研究脉络关注管理者：你被分配到什么样的直接主管，会在多大程度上影响你多年之后的职业发展。第三条脉络把同样的实验方法用于政治行为：人们为何走上街头参与集会，以及在做出决定之前，他们对人群规模与他人动机的判断起到什么作用。</p>
-<hr>
-<p class="lbl">精选研究</p>
-<div class="entries">
-{entry(PUBS[0],lang)}
-{entry(WPS[1],lang)}
-{entry(PUBS[1],lang)}
-</div>
-<p class="meta">完整列表见<a class="lk" href="/zh/publications">发表论文</a>与<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>
+<p>已发表的论文见<a class="lk" href="/zh/publications">发表论文</a>；工作论文与正在进行的田野项目见<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>
 
 <h2 class="sec">联系方式</h2>
 <ul class="cvlist">
   <li><span>邮箱</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
   <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}</div></li>
-  <li><span>办公室</span><div>北京大学光华管理学院新楼 343 室，北京</div></li>
 </ul>
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/references">推荐信</a>页面；关于论文指导，请见<a class="lk" href="/zh/teaching">教学与指导</a>页面。</p>"""
     return f"""<p class="lbl">Peking University &middot; Guanghua</p>
@@ -360,20 +352,12 @@ def home(lang):
 {SHOT}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a J-PAL Invited Researcher, and an IZA Research Fellow. My work uses natural field experiments to study how people form beliefs about the labour market &mdash; about their own comparative advantage, about what employers want, about what everyone else is doing &mdash; and what happens to their careers when those beliefs are wrong.</p>
 <p>Most of my field work runs in Ethiopia, South Africa, China, and Vietnam, with jobseekers, factory workers, and firms. A second strand is about managers: how much the quality of the manager you happen to be assigned shapes your own career years later. A third asks the same questions of political behaviour &mdash; why people turn out for a protest, and what they believe about the crowd before they do.</p>
-<hr>
-<p class="lbl">Selected work</p>
-<div class="entries">
-{entry(PUBS[0],lang)}
-{entry(WPS[1],lang)}
-{entry(PUBS[1],lang)}
-</div>
-<p class="meta">Full lists on <a class="lk" href="/publications">Publications</a> and <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
+<p>Published articles are on <a class="lk" href="/publications">Publications</a>; drafts and field work still under way are on <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
 
 <h2 class="sec">How to get in touch</h2>
 <ul class="cvlist">
   <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
   <li><span>Office hours</span><div>{OFFICE_HOURS_EN}</div></li>
-  <li><span>Office</span><div>Room 343, New Guanghua Building, Peking University, Beijing</div></li>
 </ul>
 <p class="meta">Students asking for a letter should read the <a class="lk" href="/references">Reference letters</a> page first; on thesis supervision, see <a class="lk" href="/teaching">Teaching and Supervision</a>.</p>"""
 
