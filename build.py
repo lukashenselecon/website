@@ -14,8 +14,8 @@ OFFICE_HOURS_EN = "By appointment — email me and I will find a slot the same w
 OFFICE_HOURS_ZH = "邮件预约即可，我会尽量安排在同一周内。"
 
 # Profile links. Leave a value empty and the link is left off the page.
-TWITTER = ""        # handle without the @, e.g. "lukashensel"
-ORCID   = ""        # e.g. "0000-0002-1825-0097"
+TWITTER = "LukasHenselEcon"
+ORCID   = "0000-0002-4962-2885"
 BLUESKY = "lukashenselecon.bsky.social"
 SCHOLAR = "https://scholar.google.com/citations?user=_swX_6kAAAAJ"
 # -----------------------------------------------------------------------
