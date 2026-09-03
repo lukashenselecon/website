@@ -23,7 +23,7 @@ SCHOLAR = "https://scholar.google.com/citations?user=_swX_6kAAAAJ"
 
 NAV=[("","Home","首页"),("publications","Publications","发表论文"),
      ("work-in-progress","Work in Progress","在研工作"),
-     ("teaching","Teaching","教学"),("references","References","推荐信"),
+     ("teaching","Teaching &amp; Supervision","教学与指导"),("references","References","推荐信"),
      ("cv","CV","个人简历")]
 
 def url(lang,slug):
@@ -331,29 +331,43 @@ def wip(lang):
 def teaching(lang):
     if lang=="zh":
         return f"""<p class="lbl">北京大学光华管理学院</p>
-<h1>教学</h1>
-<p>我在光华管理学院讲授发展经济学，面向本科生与研究生同堂开课；同时主持一门研究研讨课，学生在课上报告并讨论进行中的研究。</p>
-<p class="group">2026 年秋季学期</p>
+<h1>教学与指导</h1>
+
+<p class="group">课程</p>
 <ul class="cvlist">
-  <li><span>发展经济学</span><div>本科生与研究生 · 每周授课</div></li>
-  <li><span>研究研讨课</span><div>研究生 · 在研论文报告与讨论</div></li>
+  <li><span>发展经济学</span><div>本科生与研究生 · 2026 年秋季学期</div></li>
+  <li><span>研究研讨课</span><div>“未来领导者”国际本科项目 · 2026 年秋季学期</div></li>
 </ul>
+<p><b>发展经济学。</b>本课程讨论为什么有些国家和地区比另一些更贫穷，以及哪些政策真正起了作用。课程围绕实证证据展开：贫困、劳动力市场、企业、健康与教育，以及近二十年来用于识别因果效应的方法——尤其是随机对照试验。课程面向本科生与研究生同堂开设。</p>
+<p><b>研究研讨课。</b>面向“未来领导者”国际本科项目的学生。课程的目标是完成一项属于自己的实证研究：从一个真正想回答的问题出发，找到可用的数据，做出可信的识别，并把结果讲清楚。</p>
 <p>课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
 <p class="oh"><b>办公时间：</b>{OFFICE_HOURS_ZH}</p>
-<p>有意以我为导师撰写论文的学生，请先阅读<a class="lk" href="/zh/work-in-progress">在研工作</a>页面，再来信说明你希望研究的问题。需要推荐信的同学请见<a class="lk" href="/zh/references">推荐信</a>页面。</p>
-<p class="meta">课程相关问题请发送邮件至 <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>。</p>"""
+
+<p class="group">论文指导</p>
+<p>我指导本科、硕士与博士论文，全程可以用英文完成——不需要用中文写作。</p>
+<p>我的学生大多研究广义上的应用微观经济学问题，并且带有较强的实证成分。这个范围比我自己的研究要宽得多：近年的论文题目包括地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、基于世界银行企业调查的企业层面证据，以及人民币成为全球储备货币的前景。只要你的问题能用数据来回答，基本都在范围之内。</p>
+<p>我看重的是你真正关心的问题，以及一条可信的回答路径——而不是题目是否贴近我自己的论文。如果你还不确定自己的想法是否成熟，那通常正是开始交谈的好时机。</p>
+<p><b>如何联系我：</b>发邮件给我，说明你大致想研究什么。不需要写成正式的开题报告——一段话，说明你感兴趣的问题、为什么感兴趣，以及你设想可能用到的数据，就足够了。</p>
+<p class="meta">邮箱：<a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>。需要推荐信请见<a class="lk" href="/zh/references">推荐信</a>页面。</p>"""
     return f"""<p class="lbl">Guanghua School of Management</p>
-<h1>Teaching</h1>
-<p>I teach Development Economics, taken together by undergraduate and graduate students, and run a research seminar in which students present and discuss work in progress.</p>
-<p class="group">Autumn 2026</p>
+<h1>Teaching and Supervision</h1>
+
+<p class="group">Courses</p>
 <ul class="cvlist">
-  <li><span>Development Economics</span><div>Undergraduate and graduate &middot; weekly lectures</div></li>
-  <li><span>Research Seminar</span><div>Graduate &middot; presentations and discussion of work in progress</div></li>
+  <li><span>Development Economics</span><div>Undergraduate and graduate &middot; Autumn 2026</div></li>
+  <li><span>Research Seminar</span><div>Future Leaders international undergraduate programme &middot; Autumn 2026</div></li>
 </ul>
+<p><b>Development Economics.</b> Why some places stay poor, and which policies actually change that. The course is built around empirical evidence &mdash; on poverty, labour markets, firms, health and education &mdash; and around the methods economists have used over the past two decades to identify causal effects, randomised trials in particular. Undergraduate and graduate students take it together.</p>
+<p><b>Research Seminar.</b> For students in the Future Leaders international undergraduate programme. The point of the course is to produce a piece of empirical research of your own: to start from a question you actually want answered, find data that can speak to it, make the identification credible, and explain the result clearly.</p>
 <p>Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
 <p class="oh"><b>Office hours:</b> {OFFICE_HOURS_EN}</p>
-<p>Students interested in writing a thesis with me should read the <a class="lk" href="/work-in-progress">Work in Progress</a> page first, then write to me with the question they want to work on. If you need a letter of reference, the <a class="lk" href="/references">References</a> page says what to send.</p>
-<p class="meta">Questions about a course: <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>.</p>"""
+
+<p class="group">Supervision</p>
+<p>I supervise Bachelor, Master, and PhD theses, and I am happy to work in English throughout &mdash; you do not need to write in Chinese.</p>
+<p>Most of my students work on applied microeconomics, very broadly defined, with a strong empirical component. That is a wider tent than my own research. Recent theses have looked at how provincial management of local courts shapes labour disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, firm-level evidence from the World Bank Enterprise Surveys, and the renminbi&rsquo;s prospects as a global reserve currency. If your question can be taken to data, it is probably in scope.</p>
+<p>What I look for is a question you care about and a credible way of answering it &mdash; not a topic close to my own papers. If you are not sure whether your idea is far enough along, that is usually a good moment to come and talk rather than a reason to wait.</p>
+<p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal &mdash; a paragraph saying what question interests you, why, and what data you imagine using is plenty.</p>
+<p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>. If you need a letter of reference, see the <a class="lk" href="/references">References</a> page.</p>"""
 
 def references(lang):
     if lang=="zh":
@@ -453,8 +467,9 @@ PAGES=[("", home, "Lukas Hensel", "Lukas Hensel — 北京大学光华管理学�
         "Lukas Hensel 的同行评议论文，附摘要、免费版本与复现材料。"),
        ("work-in-progress", wip, "Work in Progress · Lukas Hensel", "在研工作 · Lukas Hensel",
         "Working papers and field projects in progress.", "工作论文与正在进行的田野项目。"),
-       ("teaching", teaching, "Teaching · Lukas Hensel", "教学 · Lukas Hensel",
-        "Courses taught at Guanghua School of Management, Peking University.", "在北京大学光华管理学院讲授的课程。"),
+       ("teaching", teaching, "Teaching and Supervision · Lukas Hensel", "教学与指导 · Lukas Hensel",
+        "Courses at Guanghua, and how to approach me about a Bachelor, Master or PhD thesis.",
+        "在光华管理学院讲授的课程，以及如何就本科、硕士与博士论文指导与我联系。"),
        ("references", references, "Reference letters · Lukas Hensel", "推荐信 · Lukas Hensel",
         "How to request a letter of reference: who I can write for, how to ask, and what to send.",
         "如何申请推荐信：我可以为谁写、如何提出请求、需要提供哪些材料。"),

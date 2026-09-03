@@ -87,7 +87,7 @@ PUBS = [
   ab="We examine how income shocks affect the suicide rate in Indonesia. We use a difference-in-differences approach, exploiting the cash transfer&rsquo;s nationwide rollout, and corroborate the findings using a randomized experiment. Our estimates show that the cash transfers reduce the yearly suicide rate by 0.36 per 100,000 people, corresponding to an 18% decrease. Moreover, a different type of income shock, variability in agricultural productivity, also affects the suicide rate. The cash transfer program reduces the causal impact of the agricultural productivity shocks, suggesting an important role for policy interventions. Finally, we provide evidence for depression as a psychological mechanism.",
   links=[("gated","期刊版本","https://www.mitpressjournals.org/doi/pdf/10.1162/rest_a_00777"),
          ("ungated","免费版本",pdf("income-shocks-suicides.pdf","https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2716684")),
-         ("analysis code","分析代码","REPLICATION_URL_TO_ADD")]),
+         ("analysis code","分析代码","https://doi.org/10.7910/DVN/ETS5LV")]),
 ]
 
 WPS = [
