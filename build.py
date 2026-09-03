@@ -273,7 +273,7 @@ def bibtex(p):
 # ---------- one entry ----------
 BST = "https://ctan.org/pkg/econ-bst"
 
-def entry(p,lang):
+def entry(p,lang,cite=True):
     zh = lang=="zh"
     yr = p.get("yz",p["y"]) if zh else p["y"]
     au = p["a_zh"] if zh else "with "+p["a_en"]
@@ -290,20 +290,16 @@ def entry(p,lang):
                 f'<span class="car">&#9656;</span>{label}</span></summary>'
                 f'<div class="panel{extra}">{inner}</div></details>')
 
-    # big row: the abstract leads, then the things to open or download
-    big = []
+    # one row: read it, get it, cite it
+    row = []
     if p.get("ab"):
-        big.append(panel("摘要" if zh else "Abstract", f'<p>{p["ab"]}</p>'))
+        row.append(panel("摘要" if zh else "Abstract", f'<p>{p["ab"]}</p>'))
     for en, zh_lab, u in p["links"]:
         if u.startswith("REPLICATION_URL"):     # not supplied yet — see README
             continue
         ext = ' rel="noopener"' if u.startswith("http") else ""
-        big.append(f'<a class="chip" href="{u}"{ext}>{zh_lab if zh else en}</a>')
-    if big:
-        out.append('<div class="chips">'+"".join(big)+'</div>')
-
-    # small row: how to cite
-    if p.get("v"):
+        row.append(f'<a class="chip" href="{u}"{ext}>{zh_lab if zh else en}</a>')
+    if cite and p.get("v"):
         copy_c = "复制" if zh else "Copy"
         bst_note = ("引用格式与 <a href=\"%s\" rel=\"noopener\">econ.bst</a> 一致。" % BST) if zh else \
                    ("Formatted for <a href=\"%s\" rel=\"noopener\">econ.bst</a>." % BST)
@@ -312,15 +308,15 @@ def entry(p,lang):
             rnd = ('<p class="fine">作者顺序为随机排列（AEA 作者顺序随机化工具），以 &#9441; 标示。</p>' if zh else
                    '<p class="fine">Author order was randomized using the AEA Author Randomization Tool, '
                    'marked with &#9441;.</p>')
-        cite_row = [
-            panel("引用格式" if zh else "Citation",
-                  f'<p>{_html.escape(formatted(p))}</p>{rnd}'
-                  f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>', " cite"),
-            panel("BibTeX",
-                  f'<pre>{_html.escape(bibtex(p))}</pre>'
-                  f'<p class="fine">{bst_note}</p>'
-                  f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>')]
-        out.append('<div class="chips tight">'+"".join(cite_row)+'</div>')
+        row.append(panel("引用格式" if zh else "Citation",
+                         f'<p>{_html.escape(formatted(p))}</p>{rnd}'
+                         f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>', " cite"))
+        row.append(panel("BibTeX",
+                         f'<pre>{_html.escape(bibtex(p))}</pre>'
+                         f'<p class="fine">{bst_note}</p>'
+                         f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>'))
+    if row:
+        out.append('<div class="chips">'+"".join(row)+'</div>')
 
     # coverage
     if p.get("coverage"):
@@ -413,8 +409,8 @@ def wip(lang):
     g1="工作论文" if lang=="zh" else "Working papers"
     g2="进行中" if lang=="zh" else "In progress"
     return (f'<p class="lbl">{lbl}</p>\n<h1>{h}</h1>\n'
-            f'<p class="group">{g1}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang) for p in WPS)+"\n</div>\n"
-            f'<p class="group">{g2}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang) for p in WIP)+"\n</div>")
+            f'<p class="group">{g1}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang,cite=False) for p in WPS)+"\n</div>\n"
+            f'<p class="group">{g2}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang,cite=False) for p in WIP)+"\n</div>")
 
 def teaching(lang):
     if lang=="zh":
