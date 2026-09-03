@@ -10,8 +10,9 @@ EMAIL="lukas.hensel@gsm.pku.edu.cn"
 # For a fixed slot, write it out, e.g.
 #   OFFICE_HOURS_EN = "Wednesdays 14:00–16:00, Guanghua Building 2, Room 217"
 #   OFFICE_HOURS_ZH = "每周三 14:00–16:00，光华管理学院 2 号楼 217 室"
-OFFICE_HOURS_EN = "By appointment — email me and I will find a slot the same week."
-OFFICE_HOURS_ZH = "邮件预约即可，我会尽量安排在同一周内。"
+OFFICE_HOURS_EN = ("Tuesdays 10:30–11:45, Guanghua Building 2, Office 343. "
+                   "Email ahead if you want to discuss something specific — otherwise just come by.")
+OFFICE_HOURS_ZH = "每周二 10:30–11:45，光华管理学院 2 号楼 343 室。如需讨论特定问题，请提前发邮件；否则直接过来即可。"
 
 # Profile links. Leave a value empty and the link is left off the page.
 TWITTER = "LukasHenselEcon"
