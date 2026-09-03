@@ -361,8 +361,10 @@ def home(lang):
         return f"""<p class="lbl">北京大学 · 光华管理学院</p>
 <h1>关于信念、信息与工作的实地实验</h1>
 {portrait(lang)}
-<p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我主要采用自然实地实验的方法，研究人们如何形成关于劳动力市场的信念——关于自身的比较优势、关于雇主看重什么、关于其他人正在做什么——以及当这些信念出现偏差时，他们的职业发展会因此付出怎样的代价。</p>
-<p>我的田野工作主要在埃塞俄比亚、南非、中国与越南展开，研究对象包括求职者、工厂工人与企业。另一条研究脉络关注管理者：你被分配到什么样的直接主管，会在多大程度上影响你多年之后的职业发展。第三条脉络把同样的实验方法用于政治行为：人们为何走上街头参与集会，以及在做出决定之前，他们对人群规模与他人动机的判断起到什么作用。</p>
+<p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我用实地实验的方法研究中低收入国家的劳动力市场如何运转。</p>
+<p>反复出现的问题是信息。求职者并不清楚自己相对于其他应聘者的长处究竟在哪里；雇主也很难判断谁真正合适；双方都在依据常常并不准确的判断行动。结果是一个匹配效率低于其潜力的市场：劳动者进入了并不发挥自身所长的岗位，企业则依靠既有的人际网络招聘，从未见到本可以录用的应聘者。我通过实验把缺失的信息提供给劳动者、企业，或者双方，然后观察求职、招聘与职业发展会因此发生什么变化。</p>
+<p>另一条研究脉络把类似的问题用于政治行为：人们为何参与抗议活动与政治竞选动员，以及他们对同伴与对手的判断如何影响这些决定。</p>
+<p>我的田野工作在埃塞俄比亚、南非、吉尔吉斯斯坦、中国与越南展开。</p>
 <p>已发表的论文见<a class="lk" href="/zh/publications">发表论文</a>；工作论文与正在进行的田野项目见<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>
 
 <h2 class="sec">联系方式</h2>
@@ -374,8 +376,10 @@ def home(lang):
     return f"""<p class="lbl">Peking University &middot; Guanghua</p>
 <h1>Field experiments on beliefs, information, and work</h1>
 {portrait(lang)}
-<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses natural field experiments to study how people form beliefs about the labour market &mdash; about their own comparative advantage, about what employers want, about what everyone else is doing &mdash; and what happens to their careers when those beliefs are wrong.</p>
-<p>Most of my field work runs in Ethiopia, South Africa, China, and Vietnam, with jobseekers, factory workers, and firms. A second strand is about managers: how much the quality of the manager you happen to be assigned shapes your own career years later. A third asks the same questions of political behaviour &mdash; why people turn out for a protest, and what they believe about the crowd before they do.</p>
+<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses field experiments to study how labour markets in low- and middle-income countries function.</p>
+<p>The recurring problem is information. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms recruit through their own networks and never see the candidates they might have hired. I run experiments that supply the missing information &mdash; to workers, to firms, or to both &mdash; and follow what it does to search, to hiring, and to careers.</p>
+<p>A second stream asks similar questions of political behaviour: why people turn out for protests and political campaigns, and how beliefs about their peers and their opponents shape those decisions.</p>
+<p>The field work runs in Ethiopia, South Africa, Kyrgyzstan, China, and Vietnam.</p>
 <p>Published articles are on <a class="lk" href="/publications">Publications</a>; drafts and field work still under way are on <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
 
 <h2 class="sec">How to get in touch</h2>
