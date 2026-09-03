@@ -65,13 +65,17 @@ hr{border:0;border-top:1px solid var(--rule);margin:32px 0}
 .portrait{float:right;margin:4px 0 18px 26px;width:184px}
 .shot{display:block;width:184px;height:230px;border:1px solid var(--rule);
   object-fit:cover;background:var(--tint)}
-.profiles{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:11px 0 0;padding:0;list-style:none}
-.profiles a{display:inline-flex;align-items:center;justify-content:center;height:28px;min-width:28px;
-  padding:0 10px;border:1px solid #E0CFCF;border-radius:15px;background:var(--accent-bg);
+.profiles{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:13px;margin:14px 0 0;padding:0;list-style:none}
+.profiles a{display:block;line-height:0;border-radius:4px;
+  transition:transform .15s ease,opacity .15s ease;opacity:.92}
+.profiles a:hover{opacity:1;transform:translateY(-1px)}
+.profiles a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.profiles a.txt{display:inline-flex;align-items:center;justify-content:center;height:26px;
+  padding:0 10px;border:1px solid #E0CFCF;border-radius:13px;background:var(--accent-bg);
   color:var(--accent);text-decoration:none;font-size:10px;letter-spacing:.1em;
-  text-transform:uppercase;font-weight:600;line-height:1}
-.profiles a:hover{background:var(--accent);color:var(--paper);border-color:var(--accent)}
-.profiles img{width:16px;height:16px;display:block}
+  text-transform:uppercase;font-weight:600;line-height:1;opacity:1}
+.profiles img{width:24px;height:24px;display:block}
 @media (max-width:640px){
   .portrait{float:none;margin:0 auto 22px;width:200px}
   .shot{width:200px;height:250px}

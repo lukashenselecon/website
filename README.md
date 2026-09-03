@@ -75,12 +75,12 @@ least 560px wide. The four buttons under it come from `PROFILE_BUTTONS` in
 `build.py` and are driven by the `ORCID`, `SCHOLAR`, `TWITTER` and `BLUESKY`
 values at the top of that file — empty a value and the button disappears.
 
-They show text labels rather than the ORCID, Google Scholar, X and Bluesky
-logos, which are trademarks belonging to those services. If you want the real
-marks, download them from each service's brand page and save them as
-`assets/icons/orcid.svg`, `scholar.svg`, `twitter.svg` and `bluesky.svg` — the
-build uses the file automatically when it is there, and falls back to the text
-label when it is not.
+The logos live in `assets/icons/` as 96px PNGs with transparent backgrounds,
+shown at 24px. The build looks for `<key>.svg`, then `.png`, then `.webp`, and
+falls back to a text label if it finds nothing — so replacing a PNG with a
+crisper SVG is just a matter of dropping the file in.
+
+To change the order of the icons, reorder `PROFILE_BUTTONS`.
 
 ## Coverage
 

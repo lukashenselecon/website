@@ -18,6 +18,7 @@ OFFICE_HOURS_ZH = "每周二 10:30–11:45，光华管理学院 2 号楼 343 室
 TWITTER = "LukasHenselEcon"
 ORCID   = "0000-0002-4962-2885"
 BLUESKY = "lukashenselecon.bsky.social"
+LINKEDIN = "lukas-hensel-economics"   # the part after /in/
 SCHOLAR = "https://scholar.google.com/citations?user=_swX_6kAAAAJ"
 # -----------------------------------------------------------------------
 
@@ -336,22 +337,34 @@ def entry(p,lang):
 # is used in place of the text label. The official marks are published by each
 # service under its own brand terms, so they are not bundled here.
 PROFILE_BUTTONS = [
-    ("orcid",   "ORCID",   "https://orcid.org/%s"          % ORCID   if ORCID   else ""),
-    ("scholar", "Scholar", SCHOLAR),
-    ("twitter", "Twitter", "https://twitter.com/%s"        % TWITTER if TWITTER else ""),
-    ("bluesky", "Bluesky", "https://bsky.app/profile/%s"   % BLUESKY if BLUESKY else ""),
+    ("orcid",    "ORCID",    "https://orcid.org/%s"        % ORCID    if ORCID    else ""),
+    ("scholar",  "Scholar",  SCHOLAR),
+    ("twitter",  "Twitter",  "https://twitter.com/%s"      % TWITTER  if TWITTER  else ""),
+    ("bluesky",  "Bluesky",  "https://bsky.app/profile/%s" % BLUESKY  if BLUESKY  else ""),
+    ("linkedin", "LinkedIn", "https://www.linkedin.com/in/%s/" % LINKEDIN if LINKEDIN else ""),
 ]
+
+def _icon(key):
+    """The logo file for this service, or None if it is not in assets/icons/."""
+    for ext in ("svg", "png", "webp"):
+        rel = "assets/icons/%s.%s" % (key, ext)
+        if os.path.exists(rel):
+            return "/" + rel
+    return None
 
 def portrait(lang):
     alt = "Lukas Hensel"
     items = []
     for key, label, url in PROFILE_BUTTONS:
         if not url: continue
-        icon = os.path.join("assets", "icons", key + ".svg")
-        inner = ('<img src="/assets/icons/%s.svg" alt="" width="16" height="16">' % key
-                 if os.path.exists(icon) else label)
-        items.append('<li><a href="%s" rel="me noopener" title="%s" aria-label="%s">%s</a></li>'
-                     % (url, label, label, inner))
+        src = _icon(key)
+        if src:
+            inner = '<img src="%s" alt="" width="24" height="24" loading="lazy">' % src
+            cls = ""
+        else:
+            inner, cls = label, ' class="txt"'
+        items.append('<li><a href="%s"%s rel="me noopener" title="%s" aria-label="%s">%s</a></li>'
+                     % (url, cls, label, label, inner))
     return ('<figure class="portrait">'
             '<img class="shot" src="/assets/photo.jpg" alt="%s" width="184" height="230">'
             '<ul class="profiles">%s</ul></figure>' % (alt, "".join(items)))
