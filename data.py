@@ -152,7 +152,7 @@ WIP = [
   a_en="Rob Garlick, Kate Orkin &amp; Jennifer Kades", a_zh="与 Garlick、Orkin、Kades 合著",
   v="South Africa &middot; analysis underway", vz="南非 · 数据分析中", links=[]),
  dict(y="&mdash;", t="Women&rsquo;s Group Empowerment Can Increase Political Participation: Evidence from Five Coordinated Field Experiments",
-  a_en="Damir Esenaliev, Anselm Hager &amp; Aiganysh Kazakbaeva", a_zh="与 Esenaliev、Hager、Kazakbaeva 合著",
+  a_en="Damir Esenaliev, Anselm Hager &amp; Elnura Kazakbaeva", a_zh="与 Esenaliev、Hager、Kazakbaeva 合著",
   v="EGAP Metaketa V", vz="EGAP Metaketa V 项目",
   links=[("project page","项目主页","http://egap.org/metaketa/metaketa-v-womens-action-committees-and-local-services")]),
 ]

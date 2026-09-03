@@ -41,6 +41,12 @@ PEOPLE = {
   "Ingo E. Isphording":  "https://sites.google.com/view/ingoeisphording/about-me",
   "Jonas Radbruch":      "https://sites.google.com/site/jonasradbruch01/",
   "Maria Balgova":       "https://www.iza.org/people/staff/28631/maria-balgova",
+  "Andrea Kiss":         "https://www.andreakiss.net/",
+  "Sara Spaziani":       "https://www.saraspaziani.com/home",
+  "Cornelius Christian": "https://corneliuschristian.com/",
+  "Stefano Fiorin":      "https://sites.google.com/site/stefanofiorineconomics/",
+  "Damir Esenaliev":     "https://isdc.org/team/damir-esenaliev/",
+  "Yuyu Chen":           "https://ideas.repec.org/e/pch138.html",
 }
 # Surnames, for the Chinese pages where only the family name is printed.
 SURNAMES = {}
@@ -282,13 +288,19 @@ def entry(p,lang):
                 f'<span class="car">&#9656;</span>{label}</span></summary>'
                 f'<div class="panel{extra}">{inner}</div></details>')
 
-    # one tight row: resource links, then citation and BibTeX
-    row=[]
-    for en,zh_lab,u in p["links"]:
-        if u.startswith("REPLICATION_URL"):      # not supplied yet — see README
+    # big row: the abstract leads, then the things to open or download
+    big = []
+    if p.get("ab"):
+        big.append(panel("摘要" if zh else "Abstract", f'<p>{p["ab"]}</p>'))
+    for en, zh_lab, u in p["links"]:
+        if u.startswith("REPLICATION_URL"):     # not supplied yet — see README
             continue
-        ext=' rel="noopener"' if u.startswith("http") else ""
-        row.append(f'<a class="chip" href="{u}"{ext}>{zh_lab if zh else en}</a>')
+        ext = ' rel="noopener"' if u.startswith("http") else ""
+        big.append(f'<a class="chip" href="{u}"{ext}>{zh_lab if zh else en}</a>')
+    if big:
+        out.append('<div class="chips">'+"".join(big)+'</div>')
+
+    # small row: how to cite
     if p.get("v"):
         copy_c = "复制" if zh else "Copy"
         bst_note = ("引用格式与 <a href=\"%s\" rel=\"noopener\">econ.bst</a> 一致。" % BST) if zh else \
@@ -298,19 +310,15 @@ def entry(p,lang):
             rnd = ('<p class="fine">作者顺序为随机排列（AEA 作者顺序随机化工具），以 &#9441; 标示。</p>' if zh else
                    '<p class="fine">Author order was randomized using the AEA Author Randomization Tool, '
                    'marked with &#9441;.</p>')
-        row.append(panel("引用格式" if zh else "Citation",
-                         f'<p>{_html.escape(formatted(p))}</p>{rnd}'
-                         f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>', " cite"))
-        row.append(panel("BibTeX",
-                         f'<pre>{_html.escape(bibtex(p))}</pre>'
-                         f'<p class="fine">{bst_note}</p>'
-                         f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>'))
-    if row:
-        out.append('<div class="chips tight">'+"".join(row)+'</div>')
-
-    # the abstract keeps its own line, at full size
-    if p.get("ab"):
-        out.append('<div class="chips">'+panel("摘要" if zh else "Abstract", f'<p>{p["ab"]}</p>')+'</div>')
+        cite_row = [
+            panel("引用格式" if zh else "Citation",
+                  f'<p>{_html.escape(formatted(p))}</p>{rnd}'
+                  f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>', " cite"),
+            panel("BibTeX",
+                  f'<pre>{_html.escape(bibtex(p))}</pre>'
+                  f'<p class="fine">{bst_note}</p>'
+                  f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>')]
+        out.append('<div class="chips tight">'+"".join(cite_row)+'</div>')
 
     # coverage
     if p.get("coverage"):
