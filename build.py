@@ -157,6 +157,7 @@ def _volpages(vs):
     return (vol, num, pages)
 
 def _year(p):
+    if p.get("cite_year"): return str(p["cite_year"])
     y = _plain(p["y"])
     return y if y.isdigit() else ""
 
@@ -166,12 +167,15 @@ def formatted(p):
     for i, n in enumerate(people):
         first, last = _split(n)
         bits.append(("%s, %s" % (last, first)) if i == 0 else n)
-    if p.get("etal"): who = ", ".join(bits) + ", et al"
+    if p.get("random_order"): who = " \u24e1 ".join(bits)
+    elif p.get("etal"): who = ", ".join(bits) + ", et al"
     elif len(bits) == 1: who = bits[0]
     elif len(bits) == 2: who = "%s, and %s" % (bits[0], bits[1])
     else: who = ", ".join(bits[:-1]) + ", and " + bits[-1]
     yr = _year(p) or "n.d"          # the format string adds the final period
-    out = '%s. %s. “%s.” %s' % (who, yr, _plain(p["t"]), _plain(p.get("v","")))
+    t = _plain(p["t"])
+    t = t if t[-1:] in "?!" else t + "."
+    out = '%s. %s. “%s” %s' % (who, yr, t, _plain(p.get("v","")))
     vol, num, pages = _volpages(p.get("vs"))
     if vol:
         out += " %s" % vol
@@ -207,44 +211,69 @@ def bibtex(p):
     else:
         note = venue or "Working paper"
     if yr: f.append(("year", yr))
+    if p.get("random_order"):
+        note = (note + ". " if note else "") + "Author order randomized"
     if note: f.append(("note", note))
     w = max(len(k) for k,_ in f)
     return "@%s{%s,\n%s\n}" % (kind, key, ",\n".join("  %-*s = {%s}" % (w,k,v) for k,v in f))
 
 # ---------- one entry ----------
+BST = "https://ctan.org/pkg/econ-bst"
+
 def entry(p,lang):
-    yr = p.get("yz",p["y"]) if lang=="zh" else p["y"]
-    au = p["a_zh"] if lang=="zh" else "with "+p["a_en"]
-    ven = p.get("vz",p["v"]) if lang=="zh" else p["v"]
-    vs = (" &middot; "+p["vs"]) if p.get("vs") and lang=="en" else (", "+p["vs"] if p.get("vs") else "")
-    flag = f'<span class="flag">{"即将发表" if lang=="zh" else "Forthcoming"}</span>' if p.get("flag") else ""
-    sep = "，" if lang=="zh" else " &middot; "
+    zh = lang=="zh"
+    yr = p.get("yz",p["y"]) if zh else p["y"]
+    au = p["a_zh"] if zh else "with "+p["a_en"]
+    ven = p.get("vz",p["v"]) if zh else p["v"]
+    vs = (" &middot; "+p["vs"]) if p.get("vs") and not zh else (", "+p["vs"] if p.get("vs") else "")
+    flag = f'<span class="flag">{"即将发表" if zh else "Forthcoming"}</span>' if p.get("flag") else ""
+    sep = "，" if zh else " &middot; "
     out=[f'<article class="entry"><div class="yr">{yr}</div><div>',
          f'<h2 class="ti">{p["t"]}</h2>',
          f'<p class="au">{au}{sep}<b>{ven}</b>{vs}{flag}</p>']
-    if p["links"]:
-        row=[]
-        for en,zh,u in p["links"]:
-            ext=' rel="noopener"' if u.startswith("http") else ""
-            row.append(f'<a class="chip" href="{u}"{ext}>{zh if lang=="zh" else en}</a>')
-        out.append('<div class="chips">'+"".join(row)+'</div>')
+
     def panel(label, inner, extra=""):
         return (f'<details class="dd"><summary><span class="chip">'
                 f'<span class="car">&#9656;</span>{label}</span></summary>'
                 f'<div class="panel{extra}">{inner}</div></details>')
-    dd=[]
-    if p.get("ab"):
-        dd.append(panel("摘要" if lang=="zh" else "Abstract", f'<p>{p["ab"]}</p>'))
+
+    # one tight row: resource links, then citation and BibTeX
+    row=[]
+    for en,zh_lab,u in p["links"]:
+        if u.startswith("REPLICATION_URL"):      # not supplied yet — see README
+            continue
+        ext=' rel="noopener"' if u.startswith("http") else ""
+        row.append(f'<a class="chip" href="{u}"{ext}>{zh_lab if zh else en}</a>')
     if p.get("v"):
-        copy_c = "复制" if lang=="zh" else "Copy"
-        dd.append(panel("引用格式" if lang=="zh" else "Citation",
-                        f'<p>{_html.escape(formatted(p))}</p>'
-                        f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>', " cite"))
-        dd.append(panel("BibTeX",
-                        f'<pre>{_html.escape(bibtex(p))}</pre>'
-                        f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>'))
-    if dd:
-        out.append('<div class="chips">'+"".join(dd)+'</div>')
+        copy_c = "复制" if zh else "Copy"
+        bst_note = ("引用格式与 <a href=\"%s\" rel=\"noopener\">econ.bst</a> 一致。" % BST) if zh else \
+                   ("Formatted for <a href=\"%s\" rel=\"noopener\">econ.bst</a>." % BST)
+        rnd = ""
+        if p.get("random_order"):
+            rnd = ('<p class="fine">作者顺序为随机排列（AEA 作者顺序随机化工具），以 &#9441; 标示。</p>' if zh else
+                   '<p class="fine">Author order was randomized using the AEA Author Randomization Tool, '
+                   'marked with &#9441;.</p>')
+        row.append(panel("引用格式" if zh else "Citation",
+                         f'<p>{_html.escape(formatted(p))}</p>{rnd}'
+                         f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>', " cite"))
+        row.append(panel("BibTeX",
+                         f'<pre>{_html.escape(bibtex(p))}</pre>'
+                         f'<p class="fine">{bst_note}</p>'
+                         f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>'))
+    if row:
+        out.append('<div class="chips tight">'+"".join(row)+'</div>')
+
+    # the abstract keeps its own line, at full size
+    if p.get("ab"):
+        out.append('<div class="chips">'+panel("摘要" if zh else "Abstract", f'<p>{p["ab"]}</p>')+'</div>')
+
+    # coverage
+    if p.get("coverage"):
+        links = " ".join(
+            f'<a class="cov" href="{u}" rel="noopener">{zh_lab if zh else en}</a>'
+            for en, zh_lab, u in p["coverage"])
+        out.append(f'<p class="coverage"><span>{"媒体报道" if zh else "Coverage"}</span>{links}</p>')
+
     out.append('</div></article>')
     return "\n".join(out)
 

@@ -46,15 +46,39 @@ deletes it there.
 - **The Chinese pages** — I drafted them; you and a native-speaker colleague
   should correct the tone before you tell anyone the site exists.
 
+## Citations
+
+`build.py` generates the Citation and BibTeX panels from `data.py`. Two things
+control the author line:
+
+- `authors=[...]` — the order printed on the paper. Set for every paper whose
+  title page I could check. Without it the build falls back to alphabetical,
+  which is right for most economics papers but not all.
+- `random_order=True` — for papers using the AEA Author Randomization Tool.
+  The citation then joins the names with ⓡ and adds a note; the BibTeX entry
+  carries `note = {Author order randomized}`.
+
+Both panels are formatted to match [econ.bst](https://ctan.org/pkg/econ-bst),
+which the BibTeX panel links to.
+
+## Coverage
+
+Add `coverage=[("Label","中文标签","https://…")]` to any paper in `data.py` and
+a Coverage line appears under it. Two VoxDev pieces are in; anything else you
+have — press, IGC, VoxEU, J-PAL — drops in the same way.
+
 ## Still missing
 
 - **Teaching page content.** The page is live but generic — courses, years, and
   levels go in `build.py`, in the commented block inside `teaching()`.
-- **Four abstracts** — *Does Party Competition Affect Political Activism?*,
-  *Designing Severance Insurance*, *Jobseekers' Beliefs about Comparative
-  Advantage*, and *From Followers to Leaders*. Those four entries have no
-  `ab=` field in `data.py`; add one and the Abstract toggle appears. The other
-  twelve are in already, taken from the published versions.
+- **The replication link for *Income Shocks and Suicides*.** `data.py` has
+  `("analysis code", "分析代码", "REPLICATION_URL_TO_ADD")` — the build skips any
+  link whose URL starts with `REPLICATION_URL`, so nothing is broken meanwhile.
+  Replace the string and the chip appears.
+- **Author order for two papers I could not check**: *Political Activists are
+  Not Driven by Instrumental Motives* (BJPS) and *Mutual Knowledge of Social
+  Norms* are set from the PDF and the APSR page respectively; everything else
+  comes from a title page I read directly.
 
 ## Notes
 

@@ -18,6 +18,7 @@ Filenames the build looks for:
 | `global-behaviors-covid.pdf` | Global Behaviors, Perceptions and Social Norms |
 | `coronavirus-perceptions.pdf` | Coronavirus Perceptions and Economic Anxiety |
 | `income-shocks-suicides.pdf` | Income Shocks and Suicides |
+| `party-competition-activism.pdf` | Does Party Competition Affect Political Activism? |
 | `comparative-advantage-beliefs.pdf` | Jobseekers' Beliefs about Comparative Advantage |
 | `mitigating-job-loss-ethiopia.pdf` | Mitigating the Consequences of Job Loss |
 | `feedback-confidence-job-search.pdf` | Feedback, Confidence, and Job Search Behavior |
@@ -26,5 +27,5 @@ Filenames the build looks for:
 | `mutual-knowledge-social-norms.pdf` | Mutual Knowledge of Social Norms |
 | `designing-severance-insurance.pdf` | Designing Severance Insurance |
 
-The three open-access articles (BJPS, APSR, Journal of Politics) keep pointing at
-the publisher — that is already the canonical free version.
+The two open-access articles (BJPS and APSR) keep pointing at the publisher —
+that is already the canonical free version.
