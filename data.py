@@ -36,6 +36,8 @@ PUBS = [
   links=[("open access","开放获取","https://www.cambridge.org/core/journals/british-journal-of-political-science/article/political-activists-are-not-driven-by-instrumental-motives-evidence-from-two-natural-field-experiments/48F339234B1B450641A65A420AC6D3FD"),
          ("replication package","复现材料","https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/GDOPMX")]),
 
+ # The Economic Journal replication package: the Zenodo DOI here was wrong.
+ # Put the real URL in place of REPLICATION_URL_EJ and the chip comes back.
  dict(y="2023", t="Political Activists as Free-Riders",
   a_en="Anselm Hager, Johannes Hermle &amp; Christopher Roth", a_zh="与 Hager、Hermle、Roth 合著",
   authors=["Anselm Hager","Lukas Hensel","Johannes Hermle","Christopher Roth"],
@@ -43,7 +45,7 @@ PUBS = [
   ab="How does a citizen&rsquo;s decision to participate in political activism depend on the participation of others? We conduct a nationwide natural field experiment in collaboration with a major European party during a recent national election. In a party survey, we randomly provide canvassers with true information about the canvassing intentions of their peers. When learning that more peers participate in canvassing than previously believed, canvassers significantly reduce both their canvassing intentions and behaviour. An additional survey among party supporters underscores the importance of free-riding motives and reveals that there is strong heterogeneity in motives underlying supporters&rsquo; behavioural responses.",
   links=[("gated","期刊版本","https://doi.org/10.1093/ej/uead020"),
          ("ungated","免费版本",pdf("political-activists-free-riders.pdf","https://github.com/Luthor113/papers/raw/main/Hensel_Political_Activists.pdf")),
-         ("replication package","复现材料","https://doi.org/10.5281/zenodo.7663389")]),
+         ("replication package","复现材料","REPLICATION_URL_EJ")]),
 
  dict(y="2022", t="Group Size and Protest Mobilization across Movements and Countermovements",
   a_en="Anselm Hager, Johannes Hermle &amp; Christopher Roth", a_zh="与 Hager、Hermle、Roth 合著",
@@ -56,7 +58,6 @@ PUBS = [
  dict(y="2022", t="Global Behaviors, Perceptions, and the Emergence of Social Norms at the Onset of the COVID-19 Pandemic",
   a_en="Marc Witte, A. Stefano Caria, Thiemo Fetzer, Stefano Fiorin et al.", a_zh="与 Witte、Caria、Fetzer、Fiorin 等合著", etal=True,
   authors=["Lukas Hensel","Marc Witte","A. Stefano Caria","Thiemo Fetzer","Stefano Fiorin"],
-  coverage=[("Media round-up","媒体汇总","https://www.trfetzer.com/global-behaviors-perceptions-and-the-emergence-of-social-norms-at-the-onset-of-the-covid-19-pandemic/")],
   v="Journal of Economic Behavior and Organization", vs="193, 473&ndash;496",
   ab="We conducted a large-scale survey covering 58 countries and over 100,000 respondents between late March and early April 2020 to study beliefs and attitudes towards citizens&rsquo; and governments&rsquo; responses at the onset of the COVID-19 pandemic. Most respondents reported holding normative beliefs in support of COVID-19 containment measures, as well as high rates of adherence to these measures. They also believed that their government and their country&rsquo;s citizens were not doing enough and underestimated the degree to which others in their country supported strong behavioral and policy responses to the pandemic. Normative beliefs were strongly associated with adherence, as well as beliefs about others&rsquo; and the government&rsquo;s response. Lockdowns were associated with greater optimism about others&rsquo; and the government&rsquo;s response, and improvements in measures of perceived mental well-being; these effects tended to be larger for those with stronger normative beliefs. Our findings highlight how social norms can arise quickly and effectively to support cooperation at a global scale.",
   links=[("gated","期刊版本","https://www.sciencedirect.com/science/article/pii/S016726812100487X"),

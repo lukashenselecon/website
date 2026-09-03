@@ -375,7 +375,7 @@ def home(lang):
 <h1>关于信念、信息与工作的实地实验</h1>
 {portrait(lang)}
 <p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我用实地实验的方法研究中低收入国家的劳动力市场如何运转。</p>
-<p>我关注劳动力市场中的信息摩擦。求职者并不清楚自己相对于其他应聘者的长处究竟在哪里；雇主也很难判断谁真正合适；双方都在依据常常并不准确的判断行动。结果是一个匹配效率低于其潜力的市场：劳动者进入了并不发挥自身所长的岗位，企业则依靠既有的人际网络招聘，从未见到本可以录用的应聘者。我通过实验把缺失的信息提供给劳动者、企业，或者双方，然后观察求职、招聘与职业发展会因此发生什么变化。</p>
+<p>我关注劳动力市场中的信息摩擦。求职者并不清楚自己相对于其他应聘者的长处究竟在哪里；雇主也很难判断谁真正合适；双方都在依据常常并不准确的判断行动。结果是一个匹配效率低于其潜力的市场：劳动者进入了并不发挥自身所长的岗位，企业也未必能识别出最合适的人选。我通过实验补上缺失的信息，然后观察求职、招聘与职业发展会因此发生什么变化。</p>
 <p>另一条研究脉络把类似的问题用于政治行为：人们为何参与抗议活动与政治竞选动员，以及他们对同伴与对手的判断如何影响这些决定。</p>
 <p>我在埃塞俄比亚、南非、吉尔吉斯斯坦、中国与越南开展田野工作。</p>
 <p>已发表的论文见<a class="lk" href="/zh/publications">发表论文</a>；工作论文与正在进行的田野项目见<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>
@@ -390,7 +390,7 @@ def home(lang):
 <h1>Field experiments on beliefs, information, and work</h1>
 {portrait(lang)}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses field experiments to study how labor markets in low- and middle-income countries function.</p>
-<p>I focus on the role of information frictions in labor markets. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms recruit through their own networks and never see the candidates they might have hired. I run experiments that supply the missing information &mdash; to workers, to firms, or to both &mdash; and follow what it does to search, to hiring, and to careers.</p>
+<p>I focus on the role of information frictions in labor markets. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms may not recognize the best hires. I run experiments that supply the missing information and follow what it does to search, to hiring, and to careers.</p>
 <p>A second stream asks similar questions of political behavior: why people turn out for protests and political campaigns, and how beliefs about their peers and their opponents shape those decisions.</p>
 <p>I conduct fieldwork in Ethiopia, South Africa, Kyrgyzstan, China, and Vietnam.</p>
 <p>Published articles are on <a class="lk" href="/publications">Publications</a>; drafts and field work still under way are on <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
