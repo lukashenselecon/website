@@ -36,8 +36,6 @@ PUBS = [
   links=[("open access","开放获取","https://www.cambridge.org/core/journals/british-journal-of-political-science/article/political-activists-are-not-driven-by-instrumental-motives-evidence-from-two-natural-field-experiments/48F339234B1B450641A65A420AC6D3FD"),
          ("replication package","复现材料","https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/GDOPMX")]),
 
- # The Economic Journal replication package: the Zenodo DOI here was wrong.
- # Put the real URL in place of REPLICATION_URL_EJ and the chip comes back.
  dict(y="2023", t="Political Activists as Free-Riders",
   a_en="Anselm Hager, Johannes Hermle &amp; Christopher Roth", a_zh="与 Hager、Hermle、Roth 合著",
   authors=["Anselm Hager","Lukas Hensel","Johannes Hermle","Christopher Roth"],
@@ -45,7 +43,7 @@ PUBS = [
   ab="How does a citizen&rsquo;s decision to participate in political activism depend on the participation of others? We conduct a nationwide natural field experiment in collaboration with a major European party during a recent national election. In a party survey, we randomly provide canvassers with true information about the canvassing intentions of their peers. When learning that more peers participate in canvassing than previously believed, canvassers significantly reduce both their canvassing intentions and behaviour. An additional survey among party supporters underscores the importance of free-riding motives and reveals that there is strong heterogeneity in motives underlying supporters&rsquo; behavioural responses.",
   links=[("gated","期刊版本","https://doi.org/10.1093/ej/uead020"),
          ("ungated","免费版本",pdf("political-activists-free-riders.pdf","https://github.com/Luthor113/papers/raw/main/Hensel_Political_Activists.pdf")),
-         ("replication package","复现材料","REPLICATION_URL_EJ")]),
+         ("replication package","复现材料","https://doi.org/10.5281/zenodo.7663389")]),
 
  dict(y="2022", t="Group Size and Protest Mobilization across Movements and Countermovements",
   a_en="Anselm Hager, Johannes Hermle &amp; Christopher Roth", a_zh="与 Hager、Hermle、Roth 合著",

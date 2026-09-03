@@ -436,8 +436,7 @@ def teaching(lang):
 
 <h2 class="sec">论文指导</h2>
 <p>我指导本科、硕士与博士论文。指导过程全部使用英文——我无法指导以中文写作的论文。</p>
-<p>我的学生大多研究广义上的应用微观经济学问题，并且带有较强的实证成分。这个范围比我自己的研究要宽得多：近年的论文题目包括地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、基于世界银行企业调查的企业层面证据，以及人民币成为全球储备货币的前景。只要你的问题能用数据来回答，基本都在范围之内。</p>
-<p>我看重的是你真正关心的问题，以及一条可信的回答路径——而不是题目是否贴近我自己的论文。如果你还不确定自己的想法是否成熟，那通常正是开始交谈的好时机。</p>
+<p>我的学生大多研究应用经济学问题，并且带有较强的实证成分。近年的论文题目包括：地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、肯尼亚创业培训体系的结构，以及人民币成为全球储备货币的前景。我看重的是你真正关心的问题，以及一条可信的回答路径，而不一定要贴近我自己的研究题目。</p>
 <p><b>如何联系我：</b>发邮件给我，说明你大致想研究什么。不需要写成正式的开题报告——一段话，说明你感兴趣的问题、为什么感兴趣，以及你设想可能用到的数据，就足够了。</p>
 <p><b>博士生。</b>如果你考虑由我指导博士论文，请来信预约一次一对一面谈。博士阶段对双方都是长期投入，值得先坐下来谈一次，而不是只交换邮件。</p>
 <p class="meta">邮箱：<a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>。需要推荐信请见<a class="lk" href="/zh/references">推荐信</a>页面。</p>"""
@@ -459,8 +458,7 @@ def teaching(lang):
 
 <h2 class="sec">Supervision</h2>
 <p>I supervise Bachelor, Master, and PhD theses. All supervision is in English &mdash; I am not able to supervise a thesis written in Chinese.</p>
-<p>Most of my students work on applied microeconomics, very broadly defined, with a strong empirical component. That is a wider tent than my own research. Recent theses have looked at how provincial management of local courts shapes labor disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, firm-level evidence from the World Bank Enterprise Surveys, and the renminbi&rsquo;s prospects as a global reserve currency. If your question can be taken to data, it is probably in scope.</p>
-<p>What I look for is a question you care about and a credible way of answering it &mdash; not a topic close to my own papers. If you are not sure whether your idea is far enough along, that is usually a good moment to come and talk.</p>
+<p>Most of my students work on applied economics, with a strong empirical component. Recent theses have looked at how provincial management of local courts shapes labor disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, the structure of the entrepreneurial training landscape in Kenya, and the Renminbi&rsquo;s prospects as a global reserve currency. What I look for is a question you care about and a credible way of answering it, not necessarily a topic close to my own papers.</p>
 <p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal &mdash; a paragraph saying what question interests you, why, and what data you imagine using is sufficient.</p>
 <p><b>PhD students.</b> If you are considering writing your PhD with me, write to arrange a one-on-one meeting. A doctorate is a long commitment on both sides and is worth an hour of conversation rather than an exchange of emails.</p>
 <p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>. If you need a letter of reference, see the <a class="lk" href="/references">Reference letters</a> page.</p>"""
