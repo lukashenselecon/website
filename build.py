@@ -139,11 +139,12 @@ def _profiles(lang):
         return "另见 " + "、".join(links) + "。"
     return "Also on " + ", ".join(links[:-1]) + " and " + links[-1] + "."
 
-def footer(lang):
+def footer(lang, profiles=True):
     if lang=="zh":
         place = "北京大学光华管理学院 · 北京"
     else:
         place = "Guanghua School of Management, Peking University, Beijing"
+    prof = _profiles(lang) if profiles else ""
     return """</main>
 <footer>
 %s &nbsp;·&nbsp; <a href="mailto:%s">%s</a><br>
@@ -168,7 +169,7 @@ def footer(lang):
 })();
 </script>
 </body>
-</html>""" % (place, EMAIL, EMAIL, _profiles(lang))
+</html>""" % (place, EMAIL, EMAIL, prof)
 
 # ---------- citations ----------
 import re, unicodedata, html as _html
@@ -330,14 +331,37 @@ def entry(p,lang):
     out.append('</div></article>')
     return "\n".join(out)
 
-SHOT='<img class="shot" src="/assets/photo.jpg" alt="Lukas Hensel" width="120" height="150">'
+# Portrait plus the profile buttons underneath it.
+# Drop an SVG at assets/icons/<key>.svg (orcid, scholar, twitter, bluesky) and it
+# is used in place of the text label. The official marks are published by each
+# service under its own brand terms, so they are not bundled here.
+PROFILE_BUTTONS = [
+    ("orcid",   "ORCID",   "https://orcid.org/%s"          % ORCID   if ORCID   else ""),
+    ("scholar", "Scholar", SCHOLAR),
+    ("twitter", "Twitter", "https://twitter.com/%s"        % TWITTER if TWITTER else ""),
+    ("bluesky", "Bluesky", "https://bsky.app/profile/%s"   % BLUESKY if BLUESKY else ""),
+]
+
+def portrait(lang):
+    alt = "Lukas Hensel"
+    items = []
+    for key, label, url in PROFILE_BUTTONS:
+        if not url: continue
+        icon = os.path.join("assets", "icons", key + ".svg")
+        inner = ('<img src="/assets/icons/%s.svg" alt="" width="16" height="16">' % key
+                 if os.path.exists(icon) else label)
+        items.append('<li><a href="%s" rel="me noopener" title="%s" aria-label="%s">%s</a></li>'
+                     % (url, label, label, inner))
+    return ('<figure class="portrait">'
+            '<img class="shot" src="/assets/photo.jpg" alt="%s" width="184" height="230">'
+            '<ul class="profiles">%s</ul></figure>' % (alt, "".join(items)))
 
 def home(lang):
     if lang=="zh":
         return f"""<p class="lbl">北京大学 · 光华管理学院</p>
 <h1>关于信念、信息与工作的实地实验</h1>
-{SHOT}
-<p>我是北京大学光华管理学院经济学副教授，同时担任 J-PAL 特邀研究员与 IZA 研究员。我主要采用自然实地实验的方法，研究人们如何形成关于劳动力市场的信念——关于自身的比较优势、关于雇主看重什么、关于其他人正在做什么——以及当这些信念出现偏差时，他们的职业发展会因此付出怎样的代价。</p>
+{portrait(lang)}
+<p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我主要采用自然实地实验的方法，研究人们如何形成关于劳动力市场的信念——关于自身的比较优势、关于雇主看重什么、关于其他人正在做什么——以及当这些信念出现偏差时，他们的职业发展会因此付出怎样的代价。</p>
 <p>我的田野工作主要在埃塞俄比亚、南非、中国与越南展开，研究对象包括求职者、工厂工人与企业。另一条研究脉络关注管理者：你被分配到什么样的直接主管，会在多大程度上影响你多年之后的职业发展。第三条脉络把同样的实验方法用于政治行为：人们为何走上街头参与集会，以及在做出决定之前，他们对人群规模与他人动机的判断起到什么作用。</p>
 <p>已发表的论文见<a class="lk" href="/zh/publications">发表论文</a>；工作论文与正在进行的田野项目见<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>
 
@@ -349,8 +373,8 @@ def home(lang):
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/references">推荐信</a>页面；关于论文指导，请见<a class="lk" href="/zh/teaching">教学与指导</a>页面。</p>"""
     return f"""<p class="lbl">Peking University &middot; Guanghua</p>
 <h1>Field experiments on beliefs, information, and work</h1>
-{SHOT}
-<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a J-PAL Invited Researcher, and an IZA Research Fellow. My work uses natural field experiments to study how people form beliefs about the labour market &mdash; about their own comparative advantage, about what employers want, about what everyone else is doing &mdash; and what happens to their careers when those beliefs are wrong.</p>
+{portrait(lang)}
+<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses natural field experiments to study how people form beliefs about the labour market &mdash; about their own comparative advantage, about what employers want, about what everyone else is doing &mdash; and what happens to their careers when those beliefs are wrong.</p>
 <p>Most of my field work runs in Ethiopia, South Africa, China, and Vietnam, with jobseekers, factory workers, and firms. A second strand is about managers: how much the quality of the manager you happen to be assigned shapes your own career years later. A third asks the same questions of political behaviour &mdash; why people turn out for a protest, and what they believe about the crowd before they do.</p>
 <p>Published articles are on <a class="lk" href="/publications">Publications</a>; drafts and field work still under way are on <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
 
@@ -538,7 +562,7 @@ for slug, fn, t_en, t_zh, d_en, d_zh in PAGES:
     for lang in ("en","zh"):
         title = t_zh if lang=="zh" else t_en
         desc  = d_zh if lang=="zh" else d_en
-        html  = head(lang,slug,title,desc)+header(lang,slug)+fn(lang)+footer(lang)
+        html  = head(lang,slug,title,desc)+header(lang,slug)+fn(lang)+footer(lang, profiles=(slug!=""))
         out = ("zh/" if lang=="zh" else "")+((slug+".html") if slug else "index.html")
         write(out, html); n+=1
 

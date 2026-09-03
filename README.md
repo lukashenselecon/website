@@ -68,6 +68,20 @@ there becomes a link wherever their name appears, in both languages (the Chinese
 pages print surnames only, and those are matched too). Twenty-three are in. Elnura Kazakbaeva and Xinjue Yao have no page for now —
 add a line for each if that changes.
 
+## The portrait and the profile buttons
+
+`assets/photo.jpg` is shown at 184x230 (200x250 on a phone), so keep the file at
+least 560px wide. The four buttons under it come from `PROFILE_BUTTONS` in
+`build.py` and are driven by the `ORCID`, `SCHOLAR`, `TWITTER` and `BLUESKY`
+values at the top of that file — empty a value and the button disappears.
+
+They show text labels rather than the ORCID, Google Scholar, X and Bluesky
+logos, which are trademarks belonging to those services. If you want the real
+marks, download them from each service's brand page and save them as
+`assets/icons/orcid.svg`, `scholar.svg`, `twitter.svg` and `bluesky.svg` — the
+build uses the file automatically when it is there, and falls back to the text
+label when it is not.
+
 ## Coverage
 
 Add `coverage=[("Label","中文标签","https://…")]` to any paper in `data.py` and
