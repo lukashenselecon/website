@@ -387,7 +387,7 @@ def home(lang):
 {portrait(lang)}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses field experiments to study how labor markets in low- and middle-income countries function.</p>
 <p>I focus on the role of information frictions in labor markets. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms may not recognize the best hires. I run experiments that supply the missing information and follow what it does to search, to hiring, and to careers.</p>
-<p>A second stream asks similar questions of political behavior: why people turn out for protests and political campaigns, and how beliefs about their peers and their opponents shape those decisions.</p>
+<p>A second research stream asks similar questions of political behavior: why people turn out for protests and political campaigns, and how beliefs about their peers and their opponents shape those decisions.</p>
 <p>I conduct fieldwork in Ethiopia, South Africa, Kyrgyzstan, China, and Vietnam.</p>
 <p>Published articles are on <a class="lk" href="/publications">Publications</a>; drafts and field work still under way are on <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
 
