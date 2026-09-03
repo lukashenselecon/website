@@ -387,17 +387,20 @@ def teaching(lang):
         return f"""<p class="lbl">北京大学光华管理学院</p>
 <h1>教学与指导</h1>
 
-<p class="group">课程</p>
-<ul class="cvlist">
-  <li><span>发展经济学</span><div>本科生与研究生 · 3 学分 · 2026 年秋季学期</div></li>
-  <li><span>经管学术研讨会</span><div>“未来领导者”国际本科项目 · 2 学分 · 2026 年秋季学期</div></li>
-</ul>
-<p><b>发展经济学。</b>课程从发展、贫困与不平等的基本事实出发，回顾并批判性地讨论经济增长与贫困陷阱的基础理论，然后进入实证研究最活跃的若干领域：教育、迁移、劳动力市场、健康、信贷与企业、农业、扶贫项目、环境与气候，以及性别。在个体决策重要的地方，我们借助行为经济学的视角。贯穿全课程的是发展经济学常用的计量方法——随机对照试验、双重差分与断点回归——并用 Stata 做实际操作。本科生与研究生同堂上课、分别评分；研究生还需撰写并展示一份研究计划。没有硬性先修要求，但计量经济学与微观经济理论的基础会有帮助。</p>
-<p><b>经管学术研讨会。</b>面向“未来领导者”国际本科项目的学生，目标是为本科毕业论文做好准备。课程采用讲授与学生报告相结合的形式，内容包括如何把兴趣转化为可研究的问题、如何使用学术数据库与梳理文献、如何收集与分析数据，以及如何撰写、引用与展示研究成果。多数课时以讨论为主，期末报告占总成绩的一半。</p>
-<p>课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
-<p class="oh"><b>办公时间：</b>{OFFICE_HOURS_ZH}</p>
+<h2 class="sec">课程</h2>
+<div class="courses">
+  <div class="course"><div class="cname">发展经济学</div><div>
+    <p class="cmeta">本科生与研究生 · 3 学分 · 2026 年秋季学期</p>
+    <p>课程从发展、贫困与不平等的基本事实出发，回顾并批判性地讨论经济增长与贫困陷阱的基础理论，然后进入实证研究最活跃的若干领域：教育、迁移、劳动力市场、健康、信贷与企业、农业、扶贫项目、环境与气候，以及性别。贯穿全课程的是发展经济学常用的计量方法——随机对照试验、双重差分与断点回归——并用 Stata 做实际操作。研究生还需撰写并展示一份研究计划。</p>
+  </div></div>
+  <div class="course"><div class="cname">经管学术研讨会</div><div>
+    <p class="cmeta">“未来领导者”国际本科项目 · 2 学分 · 2026 年秋季学期</p>
+    <p>面向“未来领导者”国际本科项目的学生，目标是为本科毕业论文做好准备。课程采用讲授与学生报告相结合的形式，内容包括如何把兴趣转化为可研究的问题、如何使用学术数据库与梳理文献、如何收集与分析数据，以及如何撰写、引用与展示研究成果。</p>
+  </div></div>
+</div>
+<p class="meta">课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
 
-<p class="group">论文指导</p>
+<h2 class="sec">论文指导</h2>
 <p>我指导本科、硕士与博士论文，全程可以用英文完成——不需要用中文写作。</p>
 <p>我的学生大多研究广义上的应用微观经济学问题，并且带有较强的实证成分。这个范围比我自己的研究要宽得多：近年的论文题目包括地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、基于世界银行企业调查的企业层面证据，以及人民币成为全球储备货币的前景。只要你的问题能用数据来回答，基本都在范围之内。</p>
 <p>我看重的是你真正关心的问题，以及一条可信的回答路径——而不是题目是否贴近我自己的论文。如果你还不确定自己的想法是否成熟，那通常正是开始交谈的好时机。</p>
@@ -407,20 +410,23 @@ def teaching(lang):
     return f"""<p class="lbl">Guanghua School of Management</p>
 <h1>Teaching and Supervision</h1>
 
-<p class="group">Courses</p>
-<ul class="cvlist">
-  <li><span>Development Economics</span><div>Undergraduate and graduate &middot; 3 credits &middot; Autumn 2026</div></li>
-  <li><span>Research Seminar</span><div>Future Leaders international undergraduate programme &middot; 2 credits &middot; Autumn 2026</div></li>
-</ul>
-<p><b>Development Economics.</b> The course opens with the facts about development, poverty and inequality, then works through the basic theories of growth and poverty traps before turning to the areas where most of the empirical work happens: education, migration, labour markets, health, credit and firms, agriculture, poverty alleviation programmes, environment and climate, and gender. Behavioural economics comes in where individual decision-making matters. Running alongside is the econometric toolkit development economists actually use &mdash; randomised controlled trials, difference-in-differences, regression discontinuity &mdash; applied in Stata. Undergraduate and graduate students take the course together and are graded differently; graduate students also draft and present a research proposal. There are no formal prerequisites, though econometrics and microeconomic theory help.</p>
-<p><b>Research Seminar.</b> For students in the Future Leaders international undergraduate programme, and built to prepare you for your undergraduate thesis. It runs as a mix of short lectures and student presentations: turning an interest into a research question, finding your way around academic databases and existing literature, collecting and analysing data, and writing, citing and presenting the result. Most sessions are discussion rather than lecture, and the final presentation carries half the grade.</p>
-<p>Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
-<p class="oh"><b>Office hours:</b> {OFFICE_HOURS_EN}</p>
+<h2 class="sec">Courses</h2>
+<div class="courses">
+  <div class="course"><div class="cname">Development Economics</div><div>
+    <p class="cmeta">Undergraduate and graduate &middot; 3 credits &middot; Autumn 2026</p>
+    <p>The course opens with the facts about development, poverty and inequality, then works through the basic theories of growth and poverty traps before turning to the areas where most of the empirical work happens: education, migration, labour markets, health, credit and firms, agriculture, poverty alleviation programmes, environment and climate, and gender. Running alongside is the econometric toolkit development economists actually use &mdash; randomised controlled trials, difference-in-differences, regression discontinuity &mdash; applied in Stata. Graduate students also draft and present a research proposal.</p>
+  </div></div>
+  <div class="course"><div class="cname">Research Seminar</div><div>
+    <p class="cmeta">Future Leaders international undergraduate programme &middot; 2 credits &middot; Autumn 2026</p>
+    <p>For students in the Future Leaders international undergraduate programme, and built to prepare you for your undergraduate thesis. It runs as a mix of short lectures and student presentations: turning an interest into a research question, finding your way around academic databases and existing literature, collecting and analysing data, and writing, citing and presenting the result.</p>
+  </div></div>
+</div>
+<p class="meta">Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
 
-<p class="group">Supervision</p>
+<h2 class="sec">Supervision</h2>
 <p>I supervise Bachelor, Master, and PhD theses, and I am happy to work in English throughout &mdash; you do not need to write in Chinese.</p>
 <p>Most of my students work on applied microeconomics, very broadly defined, with a strong empirical component. That is a wider tent than my own research. Recent theses have looked at how provincial management of local courts shapes labour disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, firm-level evidence from the World Bank Enterprise Surveys, and the renminbi&rsquo;s prospects as a global reserve currency. If your question can be taken to data, it is probably in scope.</p>
-<p>What I look for is a question you care about and a credible way of answering it &mdash; not a topic close to my own papers. If you are not sure whether your idea is far enough along, that is usually a good moment to come and talk rather than a reason to wait.</p>
+<p>What I look for is a question you care about and a credible way of answering it &mdash; not a topic close to my own papers. If you are not sure whether your idea is far enough along, that is usually a good moment to come and talk.</p>
 <p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal &mdash; a paragraph saying what question interests you, why, and what data you imagine using is plenty.</p>
 <p><b>PhD students.</b> If you are considering writing your PhD with me, write to arrange a one-on-one meeting. A doctorate is a long commitment on both sides and is worth an hour of conversation rather than an exchange of emails.</p>
 <p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>. If you need a letter of reference, see the <a class="lk" href="/references">Reference letters</a> page.</p>"""

@@ -154,3 +154,22 @@ footer a:hover{color:var(--accent);border-bottom-color:var(--accent-2)}
 
 .au a.who{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);font-style:inherit}
 .au a.who:hover{color:var(--accent);border-bottom-color:var(--accent-2)}
+
+/* section headings on the teaching page */
+h2.sec{font-size:21px;font-weight:700;letter-spacing:-.015em;margin:38px 0 4px;
+  padding-top:16px;border-top:1px solid var(--rule)}
+h2.sec:first-of-type{margin-top:26px}
+@media (max-width:640px){h2.sec{font-size:19px}}
+
+/* courses */
+.courses{display:flex;flex-direction:column;margin:18px 0 8px}
+.course{display:grid;grid-template-columns:158px minmax(0,1fr);gap:18px;
+  padding:18px 0;border-bottom:1px solid var(--rule-2)}
+.course:first-child{border-top:1px solid var(--rule)}
+.cname{font-weight:600;font-size:16.5px;line-height:1.3;letter-spacing:-.008em;padding-top:1px}
+.cmeta{font-size:13.5px;color:var(--faint);margin:0 0 9px;font-style:italic}
+.course p:last-child{margin:0}
+@media (max-width:640px){
+  .course{grid-template-columns:minmax(0,1fr);gap:0}
+  .cname{font-size:17px;margin-bottom:2px}
+}
