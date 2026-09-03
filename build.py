@@ -21,9 +21,54 @@ BLUESKY = "lukashenselecon.bsky.social"
 SCHOLAR = "https://scholar.google.com/citations?user=_swX_6kAAAAJ"
 # -----------------------------------------------------------------------
 
+# Co-author pages. Add a name here and it becomes a link wherever it appears.
+# Leave someone out and their name simply renders as text.
+PEOPLE = {
+  "Anselm Hager":        "https://anselmhager.com/",
+  "Christopher Roth":    "https://cproth.com/",
+  "Johannes Hermle":     "https://sites.google.com/berkeley.edu/johannes/home",
+  "Andreas Stegmann":    "https://cepr.org/about/people/andreas-stegmann",
+  "Marc Witte":          "https://www.marcwitte.com/",
+  "Tsegay Tekleselassie":"https://sites.google.com/view/tsegaytekleselassie",
+  "Thiemo Fetzer":       "https://www.trfetzer.com/",
+  "Robert Garlick":      "https://www.robgarlick.com/",
+  "Kate Orkin":          "https://sites.google.com/site/kateorkin/home",
+  "François Gerard":     "https://sites.google.com/site/fransgerard/home",
+  "Fran&ccedil;ois Gerard": "https://sites.google.com/site/fransgerard/home",
+  "Girum Abebe":         "https://cepr.org/about/people/girum-abebe",
+  "A. Stefano Caria":    "https://www.stefanocaria.com/",
+  "Stefano Caria":       "https://www.stefanocaria.com/",
+  "Ingo E. Isphording":  "https://sites.google.com/view/ingoeisphording/about-me",
+  "Jonas Radbruch":      "https://sites.google.com/site/jonasradbruch01/",
+  "Maria Balgova":       "https://www.iza.org/people/staff/28631/maria-balgova",
+}
+# Surnames, for the Chinese pages where only the family name is printed.
+SURNAMES = {}
+for _n, _u in PEOPLE.items():
+    _last = _n.split()[-1]
+    if _last not in SURNAMES: SURNAMES[_last] = _u
+
+def linkify(text, lang):
+    """Turn co-author names into links, longest match first."""
+    table = SURNAMES if lang == "zh" else PEOPLE
+    out, i = [], 0
+    keys = sorted(table, key=len, reverse=True)
+    while i < len(text):
+        for k in keys:
+            if text.startswith(k, i):
+                nxt = text[i+len(k):i+len(k)+1]
+                if lang != "zh" and nxt.isalpha():
+                    continue
+                out.append('<a class="who" href="%s" rel="noopener">%s</a>' % (table[k], k))
+                i += len(k)
+                break
+        else:
+            out.append(text[i]); i += 1
+    return "".join(out)
+
 NAV=[("","Home","首页"),("publications","Publications","发表论文"),
      ("work-in-progress","Work in Progress","在研工作"),
-     ("teaching","Teaching &amp; Supervision","教学与指导"),("references","References","推荐信"),
+     ("teaching","Teaching &amp; Supervision","教学与指导"),("references","Reference letters","推荐信"),
      ("cv","CV","个人简历")]
 
 def url(lang,slug):
@@ -230,7 +275,7 @@ def entry(p,lang):
     sep = "，" if zh else " &middot; "
     out=[f'<article class="entry"><div class="yr">{yr}</div><div>',
          f'<h2 class="ti">{p["t"]}</h2>',
-         f'<p class="au">{au}{sep}<b>{ven}</b>{vs}{flag}</p>']
+         f'<p class="au">{linkify(au, lang)}{sep}<b>{ven}</b>{vs}{flag}</p>']
 
     def panel(label, inner, extra=""):
         return (f'<details class="dd"><summary><span class="chip">'
@@ -335,11 +380,11 @@ def teaching(lang):
 
 <p class="group">课程</p>
 <ul class="cvlist">
-  <li><span>发展经济学</span><div>本科生与研究生 · 2026 年秋季学期</div></li>
-  <li><span>研究研讨课</span><div>“未来领导者”国际本科项目 · 2026 年秋季学期</div></li>
+  <li><span>发展经济学</span><div>本科生与研究生 · 3 学分 · 2026 年秋季学期</div></li>
+  <li><span>经管学术研讨会</span><div>“未来领导者”国际本科项目 · 2 学分 · 2026 年秋季学期</div></li>
 </ul>
-<p><b>发展经济学。</b>本课程讨论为什么有些国家和地区比另一些更贫穷，以及哪些政策真正起了作用。课程围绕实证证据展开：贫困、劳动力市场、企业、健康与教育，以及近二十年来用于识别因果效应的方法——尤其是随机对照试验。课程面向本科生与研究生同堂开设。</p>
-<p><b>研究研讨课。</b>面向“未来领导者”国际本科项目的学生。课程的目标是完成一项属于自己的实证研究：从一个真正想回答的问题出发，找到可用的数据，做出可信的识别，并把结果讲清楚。</p>
+<p><b>发展经济学。</b>课程从发展、贫困与不平等的基本事实出发，回顾并批判性地讨论经济增长与贫困陷阱的基础理论，然后进入实证研究最活跃的若干领域：教育、迁移、劳动力市场、健康、信贷与企业、农业、扶贫项目、环境与气候，以及性别。在个体决策重要的地方，我们借助行为经济学的视角。贯穿全课程的是发展经济学常用的计量方法——随机对照试验、双重差分与断点回归——并用 Stata 做实际操作。本科生与研究生同堂上课、分别评分；研究生还需撰写并展示一份研究计划。没有硬性先修要求，但计量经济学与微观经济理论的基础会有帮助。</p>
+<p><b>经管学术研讨会。</b>面向“未来领导者”国际本科项目的学生，目标是为本科毕业论文做好准备。课程采用讲授与学生报告相结合的形式，内容包括如何把兴趣转化为可研究的问题、如何使用学术数据库与梳理文献、如何收集与分析数据，以及如何撰写、引用与展示研究成果。多数课时以讨论为主，期末报告占总成绩的一半。</p>
 <p>课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
 <p class="oh"><b>办公时间：</b>{OFFICE_HOURS_ZH}</p>
 
@@ -348,17 +393,18 @@ def teaching(lang):
 <p>我的学生大多研究广义上的应用微观经济学问题，并且带有较强的实证成分。这个范围比我自己的研究要宽得多：近年的论文题目包括地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、基于世界银行企业调查的企业层面证据，以及人民币成为全球储备货币的前景。只要你的问题能用数据来回答，基本都在范围之内。</p>
 <p>我看重的是你真正关心的问题，以及一条可信的回答路径——而不是题目是否贴近我自己的论文。如果你还不确定自己的想法是否成熟，那通常正是开始交谈的好时机。</p>
 <p><b>如何联系我：</b>发邮件给我，说明你大致想研究什么。不需要写成正式的开题报告——一段话，说明你感兴趣的问题、为什么感兴趣，以及你设想可能用到的数据，就足够了。</p>
+<p><b>博士生。</b>如果你考虑由我指导博士论文，请来信预约一次一对一面谈。博士阶段对双方都是长期投入，值得先坐下来谈一次，而不是只交换邮件。</p>
 <p class="meta">邮箱：<a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>。需要推荐信请见<a class="lk" href="/zh/references">推荐信</a>页面。</p>"""
     return f"""<p class="lbl">Guanghua School of Management</p>
 <h1>Teaching and Supervision</h1>
 
 <p class="group">Courses</p>
 <ul class="cvlist">
-  <li><span>Development Economics</span><div>Undergraduate and graduate &middot; Autumn 2026</div></li>
-  <li><span>Research Seminar</span><div>Future Leaders international undergraduate programme &middot; Autumn 2026</div></li>
+  <li><span>Development Economics</span><div>Undergraduate and graduate &middot; 3 credits &middot; Autumn 2026</div></li>
+  <li><span>Research Seminar</span><div>Future Leaders international undergraduate programme &middot; 2 credits &middot; Autumn 2026</div></li>
 </ul>
-<p><b>Development Economics.</b> Why some places stay poor, and which policies actually change that. The course is built around empirical evidence &mdash; on poverty, labour markets, firms, health and education &mdash; and around the methods economists have used over the past two decades to identify causal effects, randomised trials in particular. Undergraduate and graduate students take it together.</p>
-<p><b>Research Seminar.</b> For students in the Future Leaders international undergraduate programme. The point of the course is to produce a piece of empirical research of your own: to start from a question you actually want answered, find data that can speak to it, make the identification credible, and explain the result clearly.</p>
+<p><b>Development Economics.</b> The course opens with the facts about development, poverty and inequality, then works through the basic theories of growth and poverty traps before turning to the areas where most of the empirical work happens: education, migration, labour markets, health, credit and firms, agriculture, poverty alleviation programmes, environment and climate, and gender. Behavioural economics comes in where individual decision-making matters. Running alongside is the econometric toolkit development economists actually use &mdash; randomised controlled trials, difference-in-differences, regression discontinuity &mdash; applied in Stata. Undergraduate and graduate students take the course together and are graded differently; graduate students also draft and present a research proposal. There are no formal prerequisites, though econometrics and microeconomic theory help.</p>
+<p><b>Research Seminar.</b> For students in the Future Leaders international undergraduate programme, and built to prepare you for your undergraduate thesis. It runs as a mix of short lectures and student presentations: turning an interest into a research question, finding your way around academic databases and existing literature, collecting and analysing data, and writing, citing and presenting the result. Most sessions are discussion rather than lecture, and the final presentation carries half the grade.</p>
 <p>Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
 <p class="oh"><b>Office hours:</b> {OFFICE_HOURS_EN}</p>
 
@@ -367,7 +413,8 @@ def teaching(lang):
 <p>Most of my students work on applied microeconomics, very broadly defined, with a strong empirical component. That is a wider tent than my own research. Recent theses have looked at how provincial management of local courts shapes labour disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, firm-level evidence from the World Bank Enterprise Surveys, and the renminbi&rsquo;s prospects as a global reserve currency. If your question can be taken to data, it is probably in scope.</p>
 <p>What I look for is a question you care about and a credible way of answering it &mdash; not a topic close to my own papers. If you are not sure whether your idea is far enough along, that is usually a good moment to come and talk rather than a reason to wait.</p>
 <p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal &mdash; a paragraph saying what question interests you, why, and what data you imagine using is plenty.</p>
-<p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>. If you need a letter of reference, see the <a class="lk" href="/references">References</a> page.</p>"""
+<p><b>PhD students.</b> If you are considering writing your PhD with me, write to arrange a one-on-one meeting. A doctorate is a long commitment on both sides and is worth an hour of conversation rather than an exchange of emails.</p>
+<p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>. If you need a letter of reference, see the <a class="lk" href="/references">Reference letters</a> page.</p>"""
 
 def references(lang):
     if lang=="zh":

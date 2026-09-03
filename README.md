@@ -61,6 +61,15 @@ control the author line:
 Both panels are formatted to match [econ.bst](https://ctan.org/pkg/econ-bst),
 which the BibTeX panel links to.
 
+## Co-author links
+
+`PEOPLE` at the top of `build.py` maps a name to a URL. Any co-author listed
+there becomes a link wherever their name appears, in both languages (the Chinese
+pages print surnames only, and those are matched too). Sixteen are in. Still
+unlinked because I could not find a page I was confident was theirs: Andrea Kiss,
+Sara Spaziani, Cornelius Christian, Stefano Fiorin, Elnura Kazakbaeva, Damir
+Esenaliev, Yuyu Chen, Xinjue Yao, Jennifer Kades. One line each.
+
 ## Coverage
 
 Add `coverage=[("Label","中文标签","https://…")]` to any paper in `data.py` and
