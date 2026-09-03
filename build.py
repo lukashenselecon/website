@@ -47,6 +47,7 @@ PEOPLE = {
   "Stefano Fiorin":      "https://sites.google.com/site/stefanofiorineconomics/",
   "Damir Esenaliev":     "https://isdc.org/team/damir-esenaliev/",
   "Yuyu Chen":           "https://ideas.repec.org/e/pch138.html",
+  "Jennifer Kades":      "https://jenniferkades.pythonanywhere.com",
 }
 # Surnames, for the Chinese pages where only the family name is printed.
 SURNAMES = {}
