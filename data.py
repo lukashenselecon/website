@@ -49,7 +49,7 @@ PUBS = [
          ("replication package","复现材料","https://doi.org/10.7910/DVN/MUSFYH")]),
 
  dict(y="2022", t="Global Behaviors, Perceptions, and the Emergence of Social Norms at the Onset of the COVID-19 Pandemic",
-  a_en="Marc Witte, Stefano Caria, Thiemo Fetzer, Stefano Fiorin et al.", a_zh="与 Witte、Caria、Fetzer、Fiorin 等合著",
+  a_en="Marc Witte, Stefano Caria, Thiemo Fetzer, Stefano Fiorin et al.", a_zh="与 Witte、Caria、Fetzer、Fiorin 等合著", etal=True,
   v="Journal of Economic Behavior and Organization", vs="193, 473&ndash;496",
   ab="We conducted a large-scale survey covering 58 countries and over 100,000 respondents between late March and early April 2020 to study beliefs and attitudes towards citizens&rsquo; and governments&rsquo; responses at the onset of the COVID-19 pandemic. Most respondents reported holding normative beliefs in support of COVID-19 containment measures, as well as high rates of adherence to these measures. They also believed that their government and their country&rsquo;s citizens were not doing enough and underestimated the degree to which others in their country supported strong behavioral and policy responses to the pandemic. Normative beliefs were strongly associated with adherence, as well as beliefs about others&rsquo; and the government&rsquo;s response. Lockdowns were associated with greater optimism about others&rsquo; and the government&rsquo;s response, and improvements in measures of perceived mental well-being; these effects tended to be larger for those with stronger normative beliefs. Our findings highlight how social norms can arise quickly and effectively to support cooperation at a global scale.",
   links=[("gated","期刊版本","https://www.sciencedirect.com/science/article/pii/S016726812100487X"),

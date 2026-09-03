@@ -129,8 +129,10 @@ def _names(p):
     if p.get("authors"):
         return list(p["authors"])
     raw = _plain(p["a_en"]).replace(" & ", ", ").replace(" and ", ", ")
-    people = [n.strip() for n in raw.split(",") if n.strip()]
-    people = [n for n in people if not n.lower().startswith("et al")]
+    people = []
+    for n in raw.split(","):
+        n = re.sub(r"\s*\bet\s+al\.?\s*$", "", n.strip())
+        if n: people.append(n)
     people.append("Lukas Hensel")
     seen, uniq = set(), []
     for n in people:
@@ -163,7 +165,8 @@ def formatted(p):
     for i, n in enumerate(people):
         first, last = _split(n)
         bits.append(("%s, %s" % (last, first)) if i == 0 else n)
-    if len(bits) == 1: who = bits[0]
+    if p.get("etal"): who = ", ".join(bits) + ", et al"
+    elif len(bits) == 1: who = bits[0]
     elif len(bits) == 2: who = "%s, and %s" % (bits[0], bits[1])
     else: who = ", ".join(bits[:-1]) + ", and " + bits[-1]
     yr = _year(p) or "n.d."
@@ -180,6 +183,7 @@ def formatted(p):
 def bibtex(p):
     people = _names(p)
     auth = " and ".join("%s, %s" % (_split(n)[1], _split(n)[0]) for n in people)
+    if p.get("etal"): auth += " and others"
     yr = _year(p); title = _plain(p["t"]); venue = _plain(p.get("v",""))
     vol, num, pages = _volpages(p.get("vs"))
     word = next((w for w in re.findall(r"[A-Za-z]+", title)
