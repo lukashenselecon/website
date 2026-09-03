@@ -170,7 +170,7 @@ def formatted(p):
     elif len(bits) == 1: who = bits[0]
     elif len(bits) == 2: who = "%s, and %s" % (bits[0], bits[1])
     else: who = ", ".join(bits[:-1]) + ", and " + bits[-1]
-    yr = _year(p) or "n.d."
+    yr = _year(p) or "n.d"          # the format string adds the final period
     out = '%s. %s. “%s.” %s' % (who, yr, _plain(p["t"]), _plain(p.get("v","")))
     vol, num, pages = _volpages(p.get("vs"))
     if vol:
