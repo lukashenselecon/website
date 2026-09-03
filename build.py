@@ -130,7 +130,6 @@ def _profiles(lang):
     zh = lang=="zh"
     out=[('Google Scholar', SCHOLAR),
          ('IZA','https://www.iza.org/en/people/fellows/27501/lukas-hensel'),
-         ('CEPR','https://cepr.org/about/people/lukas-hensel'),
          ('J-PAL','https://www.povertyactionlab.org/invited-researchers')]
     if ORCID:  out.append(('ORCID','https://orcid.org/%s' % ORCID))
     if TWITTER:out.append(('Twitter','https://twitter.com/%s' % TWITTER))
@@ -335,12 +334,11 @@ SHOT='<img class="shot" src="/assets/photo.jpg" alt="Lukas Hensel" width="120" h
 
 def home(lang):
     if lang=="zh":
-        body=f'''<p class="lbl">北京大学 · 光华管理学院</p>
+        return f"""<p class="lbl">北京大学 · 光华管理学院</p>
 <h1>关于信念、信息与工作的实地实验</h1>
 {SHOT}
 <p>我是北京大学光华管理学院经济学副教授，同时担任 J-PAL 特邀研究员与 IZA 研究员。我主要采用自然实地实验的方法，研究人们如何形成关于劳动力市场的信念——关于自身的比较优势、关于雇主看重什么、关于其他人正在做什么——以及当这些信念出现偏差时，他们的职业发展会因此付出怎样的代价。</p>
-<p>我的田野工作主要在埃塞俄比亚、南非、中国与越南展开，研究对象包括求职者、工厂工人与企业。另一条研究脉络将同样的实验方法用于政治行为：人们为何走上街头参与集会，以及在做出决定之前，他们对人群规模与他人动机的判断起到什么作用。</p>
-<p class="oh"><b>办公时间：</b>{OFFICE_HOURS_ZH}</p>
+<p>我的田野工作主要在埃塞俄比亚、南非、中国与越南展开，研究对象包括求职者、工厂工人与企业。另一条研究脉络关注管理者：你被分配到什么样的直接主管，会在多大程度上影响你多年之后的职业发展。第三条脉络把同样的实验方法用于政治行为：人们为何走上街头参与集会，以及在做出决定之前，他们对人群规模与他人动机的判断起到什么作用。</p>
 <hr>
 <p class="lbl">精选研究</p>
 <div class="entries">
@@ -348,15 +346,20 @@ def home(lang):
 {entry(WPS[1],lang)}
 {entry(PUBS[1],lang)}
 </div>
-<hr>
-<p class="meta">完整列表见<a class="lk" href="/zh/publications">发表论文</a>与<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>'''
-        return body
-    body=f'''<p class="lbl">Peking University &middot; Guanghua</p>
+<p class="meta">完整列表见<a class="lk" href="/zh/publications">发表论文</a>与<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>
+
+<h2 class="sec">联系方式</h2>
+<ul class="cvlist">
+  <li><span>邮箱</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
+  <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}</div></li>
+  <li><span>办公室</span><div>北京大学光华管理学院新楼 343 室，北京</div></li>
+</ul>
+<p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/references">推荐信</a>页面；关于论文指导，请见<a class="lk" href="/zh/teaching">教学与指导</a>页面。</p>"""
+    return f"""<p class="lbl">Peking University &middot; Guanghua</p>
 <h1>Field experiments on beliefs, information, and work</h1>
 {SHOT}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a J-PAL Invited Researcher, and an IZA Research Fellow. My work uses natural field experiments to study how people form beliefs about the labour market &mdash; about their own comparative advantage, about what employers want, about what everyone else is doing &mdash; and what happens to their careers when those beliefs are wrong.</p>
-<p>Most of my field work runs in Ethiopia, South Africa, China, and Vietnam, with jobseekers, factory workers, and firms. A second strand of my research asks the same question of political behaviour: why people turn out for a protest, and what they believe about the crowd before they do.</p>
-<p class="oh"><b>Office hours:</b> {OFFICE_HOURS_EN}</p>
+<p>Most of my field work runs in Ethiopia, South Africa, China, and Vietnam, with jobseekers, factory workers, and firms. A second strand is about managers: how much the quality of the manager you happen to be assigned shapes your own career years later. A third asks the same questions of political behaviour &mdash; why people turn out for a protest, and what they believe about the crowd before they do.</p>
 <hr>
 <p class="lbl">Selected work</p>
 <div class="entries">
@@ -364,9 +367,15 @@ def home(lang):
 {entry(WPS[1],lang)}
 {entry(PUBS[1],lang)}
 </div>
-<hr>
-<p class="meta">Full lists on <a class="lk" href="/publications">Publications</a> and <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>'''
-    return body
+<p class="meta">Full lists on <a class="lk" href="/publications">Publications</a> and <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
+
+<h2 class="sec">How to get in touch</h2>
+<ul class="cvlist">
+  <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
+  <li><span>Office hours</span><div>{OFFICE_HOURS_EN}</div></li>
+  <li><span>Office</span><div>Room 343, New Guanghua Building, Peking University, Beijing</div></li>
+</ul>
+<p class="meta">Students asking for a letter should read the <a class="lk" href="/references">Reference letters</a> page first; on thesis supervision, see <a class="lk" href="/teaching">Teaching and Supervision</a>.</p>"""
 
 def pubs(lang):
     lbl="同行评议论文" if lang=="zh" else "Peer-reviewed articles"
@@ -401,7 +410,7 @@ def teaching(lang):
 <p class="meta">课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
 
 <h2 class="sec">论文指导</h2>
-<p>我指导本科、硕士与博士论文，全程可以用英文完成——不需要用中文写作。</p>
+<p>我指导本科、硕士与博士论文。指导过程全部使用英文——我无法指导以中文写作的论文。</p>
 <p>我的学生大多研究广义上的应用微观经济学问题，并且带有较强的实证成分。这个范围比我自己的研究要宽得多：近年的论文题目包括地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、基于世界银行企业调查的企业层面证据，以及人民币成为全球储备货币的前景。只要你的问题能用数据来回答，基本都在范围之内。</p>
 <p>我看重的是你真正关心的问题，以及一条可信的回答路径——而不是题目是否贴近我自己的论文。如果你还不确定自己的想法是否成熟，那通常正是开始交谈的好时机。</p>
 <p><b>如何联系我：</b>发邮件给我，说明你大致想研究什么。不需要写成正式的开题报告——一段话，说明你感兴趣的问题、为什么感兴趣，以及你设想可能用到的数据，就足够了。</p>
@@ -424,10 +433,10 @@ def teaching(lang):
 <p class="meta">Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
 
 <h2 class="sec">Supervision</h2>
-<p>I supervise Bachelor, Master, and PhD theses, and I am happy to work in English throughout &mdash; you do not need to write in Chinese.</p>
+<p>I supervise Bachelor, Master, and PhD theses. All supervision is in English &mdash; I am not able to supervise a thesis written in Chinese.</p>
 <p>Most of my students work on applied microeconomics, very broadly defined, with a strong empirical component. That is a wider tent than my own research. Recent theses have looked at how provincial management of local courts shapes labour disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, firm-level evidence from the World Bank Enterprise Surveys, and the renminbi&rsquo;s prospects as a global reserve currency. If your question can be taken to data, it is probably in scope.</p>
 <p>What I look for is a question you care about and a credible way of answering it &mdash; not a topic close to my own papers. If you are not sure whether your idea is far enough along, that is usually a good moment to come and talk.</p>
-<p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal &mdash; a paragraph saying what question interests you, why, and what data you imagine using is plenty.</p>
+<p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal &mdash; a paragraph saying what question interests you, why, and what data you imagine using is sufficient.</p>
 <p><b>PhD students.</b> If you are considering writing your PhD with me, write to arrange a one-on-one meeting. A doctorate is a long commitment on both sides and is worth an hour of conversation rather than an exchange of emails.</p>
 <p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>. If you need a letter of reference, see the <a class="lk" href="/references">Reference letters</a> page.</p>"""
 
@@ -438,7 +447,7 @@ def references(lang):
 <p>下面写清楚了我可以为谁写推荐信、如何提出请求，以及需要提供哪些材料。事先读一遍，能让我写出更有分量的信。</p>
 
 <p class="group">我可以为谁写</p>
-<p>我为我教过或指导过、并且我能具体谈论其学术表现的学生写推荐信。通常意味着：你修读过我的课程并取得了不错的成绩，或由我指导完成论文，或担任过我的研究助理。</p>
+<p>我为我教过或指导过、并且我能具体谈论其学术表现的学生写推荐信。通常意味着：你修读过我的课程并取得了不错的成绩，或由我指导完成论文，或担任过我的研究助理，或所在年级由我担任班主任。</p>
 <p>如果以上都不适用，我写出来的信会很空泛。一封来自真正了解你工作的老师的信，对你的申请帮助大得多。</p>
 
 <p class="group">如何提出请求</p>
@@ -459,7 +468,7 @@ def references(lang):
 <p>What follows is who I can write for, how to ask, and what to send. Reading it first makes the letter I write a better one.</p>
 
 <p class="group">Who I can write for</p>
-<p>I write letters for students I have taught or supervised and whose work I can speak to concretely. In practice that means you took one of my courses and did well in it, wrote a thesis under my supervision, or worked with me as a research assistant.</p>
+<p>I write letters for students I have taught or supervised and whose work I can speak to concretely. In practice that means you took one of my courses and did well in it, wrote a thesis under my supervision, worked with me as a research assistant, or were in a cohort I looked after as cohort mentor (班主任).</p>
 <p>If none of those apply, anything I write will be thin. A specific letter from someone who knows your work will serve you considerably better than a general one from me.</p>
 
 <p class="group">How to ask</p>
@@ -491,7 +500,6 @@ def cv(lang):
 <ul class="cvlist">
   <li><span>&nbsp;</span><div>J-PAL 特邀研究员</div></li>
   <li><span>&nbsp;</span><div>IZA 劳动经济研究所研究员</div></li>
-  <li><span>&nbsp;</span><div>CEPR 研究成员</div></li>
 </ul>
 <p class="group">教育背景</p>
 <ul class="cvlist">
@@ -512,7 +520,6 @@ def cv(lang):
 <ul class="cvlist">
   <li><span>&nbsp;</span><div>J-PAL Invited Researcher</div></li>
   <li><span>&nbsp;</span><div>IZA Research Fellow</div></li>
-  <li><span>&nbsp;</span><div>CEPR Research Affiliate</div></li>
 </ul>
 <p class="group">Education</p>
 <ul class="cvlist">
