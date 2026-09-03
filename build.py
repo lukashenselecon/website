@@ -11,8 +11,8 @@ EMAIL="lukas.hensel@gsm.pku.edu.cn"
 #   OFFICE_HOURS_EN = "Wednesdays 14:00–16:00, Guanghua Building 2, Room 217"
 #   OFFICE_HOURS_ZH = "每周三 14:00–16:00，光华管理学院 2 号楼 217 室"
 OFFICE_HOURS_EN = ("Tuesdays 10:30–11:45, Guanghua Building 2, Office 343. "
-                   "Email ahead if you want to discuss something specific — otherwise just come by.")
-OFFICE_HOURS_ZH = "每周二 10:30–11:45，光华管理学院 2 号楼 343 室。如需讨论特定问题，请提前发邮件；否则直接过来即可。"
+                   "Email ahead of time if you want to discuss something specific.")
+OFFICE_HOURS_ZH = "每周二 10:30–11:45，光华管理学院 2 号楼 343 室。如需讨论特定问题，请提前发邮件。"
 
 # Profile links. Leave a value empty and the link is left off the page.
 TWITTER = "LukasHenselEcon"
@@ -337,8 +337,8 @@ def entry(p,lang):
 # is used in place of the text label. The official marks are published by each
 # service under its own brand terms, so they are not bundled here.
 PROFILE_BUTTONS = [
+    ("scholar",  "Google Scholar", SCHOLAR),
     ("orcid",    "ORCID",    "https://orcid.org/%s"        % ORCID    if ORCID    else ""),
-    ("scholar",  "Scholar",  SCHOLAR),
     ("twitter",  "Twitter",  "https://twitter.com/%s"      % TWITTER  if TWITTER  else ""),
     ("bluesky",  "Bluesky",  "https://bsky.app/profile/%s" % BLUESKY  if BLUESKY  else ""),
     ("linkedin", "LinkedIn", "https://www.linkedin.com/in/%s/" % LINKEDIN if LINKEDIN else ""),
@@ -375,9 +375,9 @@ def home(lang):
 <h1>关于信念、信息与工作的实地实验</h1>
 {portrait(lang)}
 <p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我用实地实验的方法研究中低收入国家的劳动力市场如何运转。</p>
-<p>反复出现的问题是信息。求职者并不清楚自己相对于其他应聘者的长处究竟在哪里；雇主也很难判断谁真正合适；双方都在依据常常并不准确的判断行动。结果是一个匹配效率低于其潜力的市场：劳动者进入了并不发挥自身所长的岗位，企业则依靠既有的人际网络招聘，从未见到本可以录用的应聘者。我通过实验把缺失的信息提供给劳动者、企业，或者双方，然后观察求职、招聘与职业发展会因此发生什么变化。</p>
+<p>我关注劳动力市场中的信息摩擦。求职者并不清楚自己相对于其他应聘者的长处究竟在哪里；雇主也很难判断谁真正合适；双方都在依据常常并不准确的判断行动。结果是一个匹配效率低于其潜力的市场：劳动者进入了并不发挥自身所长的岗位，企业则依靠既有的人际网络招聘，从未见到本可以录用的应聘者。我通过实验把缺失的信息提供给劳动者、企业，或者双方，然后观察求职、招聘与职业发展会因此发生什么变化。</p>
 <p>另一条研究脉络把类似的问题用于政治行为：人们为何参与抗议活动与政治竞选动员，以及他们对同伴与对手的判断如何影响这些决定。</p>
-<p>我的田野工作在埃塞俄比亚、南非、吉尔吉斯斯坦、中国与越南展开。</p>
+<p>我在埃塞俄比亚、南非、吉尔吉斯斯坦、中国与越南开展田野工作。</p>
 <p>已发表的论文见<a class="lk" href="/zh/publications">发表论文</a>；工作论文与正在进行的田野项目见<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>
 
 <h2 class="sec">联系方式</h2>
@@ -389,13 +389,13 @@ def home(lang):
     return f"""<p class="lbl">Peking University &middot; Guanghua</p>
 <h1>Field experiments on beliefs, information, and work</h1>
 {portrait(lang)}
-<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses field experiments to study how labour markets in low- and middle-income countries function.</p>
-<p>The recurring problem is information. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms recruit through their own networks and never see the candidates they might have hired. I run experiments that supply the missing information &mdash; to workers, to firms, or to both &mdash; and follow what it does to search, to hiring, and to careers.</p>
-<p>A second stream asks similar questions of political behaviour: why people turn out for protests and political campaigns, and how beliefs about their peers and their opponents shape those decisions.</p>
-<p>The field work runs in Ethiopia, South Africa, Kyrgyzstan, China, and Vietnam.</p>
+<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses field experiments to study how labor markets in low- and middle-income countries function.</p>
+<p>I focus on the role of information frictions in labor markets. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms recruit through their own networks and never see the candidates they might have hired. I run experiments that supply the missing information &mdash; to workers, to firms, or to both &mdash; and follow what it does to search, to hiring, and to careers.</p>
+<p>A second stream asks similar questions of political behavior: why people turn out for protests and political campaigns, and how beliefs about their peers and their opponents shape those decisions.</p>
+<p>I conduct fieldwork in Ethiopia, South Africa, Kyrgyzstan, China, and Vietnam.</p>
 <p>Published articles are on <a class="lk" href="/publications">Publications</a>; drafts and field work still under way are on <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
 
-<h2 class="sec">How to get in touch</h2>
+<h2 class="sec">Contact</h2>
 <ul class="cvlist">
   <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
   <li><span>Office hours</span><div>{OFFICE_HOURS_EN}</div></li>
@@ -448,18 +448,18 @@ def teaching(lang):
 <div class="courses">
   <div class="course"><div class="cname">Development Economics</div><div>
     <p class="cmeta">Undergraduate and graduate &middot; 3 credits &middot; Autumn 2026</p>
-    <p>The course opens with the facts about development, poverty and inequality, then works through the basic theories of growth and poverty traps before turning to the areas where most of the empirical work happens: education, migration, labour markets, health, credit and firms, agriculture, poverty alleviation programmes, environment and climate, and gender. Running alongside is the econometric toolkit development economists actually use &mdash; randomised controlled trials, difference-in-differences, regression discontinuity &mdash; applied in Stata. Graduate students also draft and present a research proposal.</p>
+    <p>The course opens with the facts about development, poverty and inequality, then works through the basic theories of growth and poverty traps before turning to the areas where most of the empirical work happens: education, migration, labor markets, health, credit and firms, agriculture, poverty alleviation programs, environment and climate, and gender. Running alongside is the econometric toolkit development economists actually use &mdash; randomized controlled trials, difference-in-differences, regression discontinuity &mdash; applied in Stata. Graduate students also draft and present a research proposal.</p>
   </div></div>
   <div class="course"><div class="cname">Research Seminar</div><div>
-    <p class="cmeta">Future Leaders international undergraduate programme &middot; 2 credits &middot; Autumn 2026</p>
-    <p>For students in the Future Leaders international undergraduate programme, and built to prepare you for your undergraduate thesis. It runs as a mix of short lectures and student presentations: turning an interest into a research question, finding your way around academic databases and existing literature, collecting and analysing data, and writing, citing and presenting the result.</p>
+    <p class="cmeta">Future Leaders international undergraduate program &middot; 2 credits &middot; Autumn 2026</p>
+    <p>For students in the Future Leaders international undergraduate program, and built to prepare you for your undergraduate thesis. It runs as a mix of short lectures and student presentations: turning an interest into a research question, finding your way around academic databases and existing literature, collecting and analyzing data, and writing, citing and presenting the result.</p>
   </div></div>
 </div>
 <p class="meta">Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
 
 <h2 class="sec">Supervision</h2>
 <p>I supervise Bachelor, Master, and PhD theses. All supervision is in English &mdash; I am not able to supervise a thesis written in Chinese.</p>
-<p>Most of my students work on applied microeconomics, very broadly defined, with a strong empirical component. That is a wider tent than my own research. Recent theses have looked at how provincial management of local courts shapes labour disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, firm-level evidence from the World Bank Enterprise Surveys, and the renminbi&rsquo;s prospects as a global reserve currency. If your question can be taken to data, it is probably in scope.</p>
+<p>Most of my students work on applied microeconomics, very broadly defined, with a strong empirical component. That is a wider tent than my own research. Recent theses have looked at how provincial management of local courts shapes labor disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, firm-level evidence from the World Bank Enterprise Surveys, and the renminbi&rsquo;s prospects as a global reserve currency. If your question can be taken to data, it is probably in scope.</p>
 <p>What I look for is a question you care about and a credible way of answering it &mdash; not a topic close to my own papers. If you are not sure whether your idea is far enough along, that is usually a good moment to come and talk.</p>
 <p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal &mdash; a paragraph saying what question interests you, why, and what data you imagine using is sufficient.</p>
 <p><b>PhD students.</b> If you are considering writing your PhD with me, write to arrange a one-on-one meeting. A doctorate is a long commitment on both sides and is worth an hour of conversation rather than an exchange of emails.</p>
@@ -554,7 +554,7 @@ def cv(lang):
 <p class="meta">The PDF carries the date it was last revised.</p>'''
 
 PAGES=[("", home, "Lukas Hensel", "Lukas Hensel — 北京大学光华管理学院 经济学副教授",
-        "Associate Professor of Economics at Guanghua School of Management, Peking University. Field experiments on beliefs, information, and labour markets.",
+        "Associate Professor of Economics at Guanghua School of Management, Peking University. Field experiments on beliefs, information, and labor markets.",
         "北京大学光华管理学院经济学副教授。研究方向为劳动与发展经济学领域的自然实地实验。"),
        ("publications", pubs, "Publications · Lukas Hensel", "发表论文 · Lukas Hensel",
         "Peer-reviewed articles by Lukas Hensel, with abstracts, ungated versions, and replication packages.",

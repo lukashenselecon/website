@@ -62,11 +62,11 @@ h1{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.18;margin:
 @media (max-width:640px){h1{font-size:25px}}
 p{margin:0 0 15px}
 hr{border:0;border-top:1px solid var(--rule);margin:32px 0}
-.portrait{float:right;margin:4px 0 18px 26px;width:184px}
-.shot{display:block;width:184px;height:230px;border:1px solid var(--rule);
+.portrait{float:right;margin:4px 0 18px 28px;width:212px}
+.shot{display:block;width:212px;height:265px;border:1px solid var(--rule);
   object-fit:cover;background:var(--tint)}
 .profiles{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
-  gap:13px;margin:14px 0 0;padding:0;list-style:none}
+  gap:15px;margin:15px 0 0;padding:0;list-style:none;flex-wrap:nowrap}
 .profiles a{display:block;line-height:0;border-radius:4px;
   transition:transform .15s ease,opacity .15s ease;opacity:.92}
 .profiles a:hover{opacity:1;transform:translateY(-1px)}
@@ -75,10 +75,10 @@ hr{border:0;border-top:1px solid var(--rule);margin:32px 0}
   padding:0 10px;border:1px solid #E0CFCF;border-radius:13px;background:var(--accent-bg);
   color:var(--accent);text-decoration:none;font-size:10px;letter-spacing:.1em;
   text-transform:uppercase;font-weight:600;line-height:1;opacity:1}
-.profiles img{width:24px;height:24px;display:block}
+.profiles img{width:26px;height:26px;display:block}
 @media (max-width:640px){
-  .portrait{float:none;margin:0 auto 22px;width:200px}
-  .shot{width:200px;height:250px}
+  .portrait{float:none;margin:0 auto 22px;width:224px}
+  .shot{width:224px;height:280px}
 }
 .drop::first-letter{float:left;font-size:52px;line-height:.82;font-weight:700;padding:5px 9px 0 0;color:var(--accent)}
 :lang(zh) .drop::first-letter{float:none;font-size:inherit;line-height:inherit;font-weight:inherit;padding:0;color:inherit}

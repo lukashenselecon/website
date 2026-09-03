@@ -70,7 +70,7 @@ add a line for each if that changes.
 
 ## The portrait and the profile buttons
 
-`assets/photo.jpg` is shown at 184x230 (200x250 on a phone), so keep the file at
+`assets/photo.jpg` is shown at 212x265 (224x280 on a phone), so keep the file at
 least 560px wide. The four buttons under it come from `PROFILE_BUTTONS` in
 `build.py` and are driven by the `ORCID`, `SCHOLAR`, `TWITTER` and `BLUESKY`
 values at the top of that file — empty a value and the button disappears.
@@ -81,6 +81,12 @@ falls back to a text label if it finds nothing — so replacing a PNG with a
 crisper SVG is just a matter of dropping the file in.
 
 To change the order of the icons, reorder `PROFILE_BUTTONS`.
+
+## House style
+
+American spelling throughout the page copy — labor, behavior, program,
+randomized. Paper titles, abstracts and citations are quoted verbatim and keep
+whatever spelling the source uses, so do not sweep those.
 
 ## Coverage
 
