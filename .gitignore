@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+.dropbox
+.dropbox.attr
+*conflicted copy*
+_site.zip
