@@ -81,30 +81,40 @@ hr{border:0;border-top:1px solid var(--rule);margin:32px 0}
 .au{font-size:14px;color:var(--muted);margin:0 0 10px;font-style:italic}
 .au b{font-style:normal;font-weight:600;color:var(--ink-2)}
 .flag{display:inline-block;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--accent);border:1px solid var(--accent-2);padding:1px 6px;font-style:normal;
-  margin-left:5px;vertical-align:1.5px;white-space:nowrap}
+  color:var(--paper);background:var(--accent);border-radius:2px;padding:1.5px 7px;font-style:normal;
+  font-weight:600;margin-left:6px;vertical-align:1.5px;white-space:nowrap}
 @media (max-width:640px){
   .entry{grid-template-columns:minmax(0,1fr);gap:0}
   .yr{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;padding:0 0 6px}
   .ti{font-size:17px}
 }
-.acts{display:flex;align-items:center;flex-wrap:wrap;font-size:13.5px}
-.acts a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;padding:1px 0}
-.acts a:hover{border-bottom-color:var(--accent-2)}
-.acts .sep{color:#CFC6BA;padding:0 9px}
-
-/* abstracts */
-details.abs{margin:0 0 9px}
-details.abs summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
-  font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:var(--accent);
-  border:1px solid #E0CFCF;border-radius:3px;padding:3px 9px;background:var(--accent-bg)}
-details.abs summary::-webkit-details-marker{display:none}
-details.abs summary::marker{content:""}
-details.abs .car{display:inline-block;font-size:9px;line-height:1;transition:transform .18s}
-details.abs[open] .car{transform:rotate(90deg)}
-details.abs .body{margin-top:11px;padding:14px 17px;background:var(--tint);
-  border-left:2px solid var(--accent-3);font-size:15.5px;line-height:1.6;color:#3D362F}
-details.abs .body p{margin:0}
+/* chips: resource links, then expandables */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 10px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:600;border-radius:3px;padding:3px 9px;
+  text-decoration:none;white-space:nowrap;font-family:inherit;line-height:1.5}
+:lang(zh) .chip{letter-spacing:.06em}
+a.chip{border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+a.chip:hover{border-color:var(--accent-2);color:var(--accent)}
+details.dd{margin:0}
+details.dd summary{list-style:none;cursor:pointer}
+details.dd summary::-webkit-details-marker{display:none}
+details.dd summary::marker{content:""}
+details.dd summary .chip{border:1px solid #E0CFCF;background:var(--accent-bg);color:var(--accent)}
+details.dd[open] summary .chip{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+details.dd .car{display:inline-block;font-size:9px;line-height:1;transition:transform .18s}
+details.dd[open] .car{transform:rotate(90deg)}
+.panel{margin:11px 0 0;padding:14px 17px;background:var(--tint);border-left:2px solid var(--accent-3);
+  font-size:15.5px;line-height:1.6;color:#3D362F}
+.panel p{margin:0}
+.panel.cite{font-size:15px}
+.panel pre{margin:0;font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  font-size:12.5px;line-height:1.6;white-space:pre;overflow-x:auto;color:#3D362F}
+.copy{appearance:none;cursor:pointer;margin-top:10px;font-family:inherit;font-size:11px;
+  letter-spacing:.13em;text-transform:uppercase;font-weight:600;border:1px solid var(--rule);
+  background:var(--paper);color:var(--muted);border-radius:3px;padding:3px 9px}
+.copy:hover{border-color:var(--accent-2);color:var(--accent)}
+.copy[data-done="1"]{border-color:var(--accent-2);color:var(--accent)}
 
 .group{font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--faint);
   font-weight:600;margin:36px 0 12px}
@@ -123,3 +133,7 @@ footer{max-width:730px;margin:0 auto;padding:26px 34px 56px;border-top:1px solid
 @media (max-width:640px){footer{padding:22px 18px 44px}}
 footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--rule)}
 footer a:hover{color:var(--accent);border-bottom-color:var(--accent-2)}
+
+.oh{background:var(--tint);border-left:2px solid var(--accent-3);padding:11px 16px;
+  font-size:15.5px;margin:0 0 15px}
+.oh b{font-weight:600}

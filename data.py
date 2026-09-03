@@ -23,7 +23,7 @@ PUBS = [
   v="Review of Economics and Statistics", vs="107(4), 1149&ndash;1158",
   ab="We conduct a natural field experiment with a major European party to test whether giving party supporters more voice increases their engagement in the party&rsquo;s electoral campaign. In the experiment, the party asked a random subset of supporters for their opinions on the importance of different policy areas. Giving supporters opportunities to voice their opinions increases their engagement in the campaign as measured using behavioral data from the party&rsquo;s smartphone application. Survey data reveals that giving voice also increases other margins of campaign effort as well as perceived voice. Our evidence highlights the importance of voice for increasing political engagement.",
   links=[("gated","期刊版本","https://direct.mit.edu/rest/article/doi/10.1162/rest_a_01320/115256/Voice-and-Political-Engagement-Evidence-from-a"),
-         ("ungated","免费版本","https://www.econtribute.de/RePEc/ajk/ajkdps/ECONtribute_133_2021.pdf"),
+         ("ungated","免费版本",pdf("voice-political-engagement.pdf","https://www.econtribute.de/RePEc/ajk/ajkdps/ECONtribute_133_2021.pdf")),
          ("replication package","复现材料","https://doi.org/10.7910/DVN/WCGYI2")]),
 
  dict(y="2025", t="Political Activists are Not Driven by Instrumental Motives",
@@ -61,7 +61,7 @@ PUBS = [
   v="Review of Economics and Statistics", vs="103(5), 968&ndash;978",
   ab="We provide one of the first systematic assessments of the development and determinants of economic anxiety at the onset of the coronavirus pandemic. Using a global data set on internet searches and two representative surveys from the United States, we document a substantial increase in economic anxiety during and after the arrival of the coronavirus. We also document a large dispersion in beliefs about the pandemic risk factors of the coronavirus and demonstrate that these beliefs causally affect individuals&rsquo; economic anxieties. Finally, we show that individuals&rsquo; mental models of infectious disease spread understate nonlinear growth and shape the extent of economic anxiety.",
   links=[("gated","期刊版本","https://www.mitpressjournals.org/doi/abs/10.1162/rest_a_00946"),
-         ("ungated","免费版本","https://arxiv.org/abs/2003.03848"),
+         ("ungated","免费版本",pdf("coronavirus-perceptions.pdf","https://arxiv.org/abs/2003.03848")),
          ("replication package","复现材料","https://doi.org/10.7910/DVN/NGHYPI")]),
 
  dict(y="2021", t="Does Party Competition Affect Political Activism?",
@@ -75,7 +75,7 @@ PUBS = [
   v="Review of Economics and Statistics", vs="101(5), 905&ndash;920",
   ab="We examine how income shocks affect the suicide rate in Indonesia. We use a difference-in-differences approach, exploiting the cash transfer&rsquo;s nationwide rollout, and corroborate the findings using a randomized experiment. Our estimates show that the cash transfers reduce the yearly suicide rate by 0.36 per 100,000 people, corresponding to an 18% decrease. Moreover, a different type of income shock, variability in agricultural productivity, also affects the suicide rate. The cash transfer program reduces the causal impact of the agricultural productivity shocks, suggesting an important role for policy interventions. Finally, we provide evidence for depression as a psychological mechanism.",
   links=[("gated","期刊版本","https://www.mitpressjournals.org/doi/pdf/10.1162/rest_a_00777"),
-         ("ungated","免费版本","https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2716684")]),
+         ("ungated","免费版本",pdf("income-shocks-suicides.pdf","https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2716684"))]),
 ]
 
 WPS = [
@@ -119,7 +119,7 @@ WPS = [
   a_en="Anselm Hager, Aiganysh Kazakbaeva &amp; Damir Esenaliev", a_zh="与 Hager、Kazakbaeva、Esenaliev 合著",
   v="IZA Discussion Paper 17748 &middot; March 2025 update", vz="IZA 讨论稿 17748 · 2025 年 3 月更新",
   ab="Social norms are crucial drivers of human behavior. However, misperceptions of others&rsquo; opinions may sustain norms and conforming behavior even if a majority opposes the norm. Privately shifting individuals&rsquo; beliefs about true societal support may be insufficient to change behavior if others are perceived to continue to hold incorrect beliefs (&ldquo;lack of mutual knowledge&rdquo;). We conduct a field experiment with 5,201 women in Kyrgyzstan to test whether creating mutual knowledge about social norms affects how perceived social norms influence behavior. We show that providing information about societal support for female political activism alone does not affect women&rsquo;s political engagement. However, when perceived mutual knowledge is created, the effect of information about social norms increases significantly. Using vignette experiments, we show that the effect of mutual knowledge on social punishment is a plausible mechanism behind the behavioral impact. These findings suggest that higher-order beliefs about social norms are an important force linking social norms and behavior.",
-  links=[("draft","工作论文","https://docs.iza.org/dp17748.pdf")]),
+  links=[("draft","工作论文",pdf("mutual-knowledge-social-norms.pdf","https://docs.iza.org/dp17748.pdf"))]),
 ]
 
 WIP = [

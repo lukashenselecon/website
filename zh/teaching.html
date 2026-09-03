@@ -22,29 +22,44 @@
 <header class="head">
 <a class="name" href="/zh/">Lukas Hensel</a>
 <div class="right">
-<nav class="nav" aria-label="主导航"><a href="/zh/">首页</a><a href="/zh/publications">发表论文</a><a href="/zh/work-in-progress">在研工作</a><a href="/zh/teaching" aria-current="page">教学</a><a href="/zh/cv">个人简历</a></nav>
+<nav class="nav" aria-label="主导航"><a href="/zh/">首页</a><a href="/zh/publications">发表论文</a><a href="/zh/work-in-progress">在研工作</a><a href="/zh/teaching" aria-current="page">教学</a><a href="/zh/references">推荐信</a><a href="/zh/cv">个人简历</a></nav>
 <div class="lang"><a href="/teaching" hreflang="en">EN</a><a href="/zh/teaching" hreflang="zh-Hans" aria-current="true">中文</a></div>
 </div>
 </header>
 <main id="main">
 <p class="lbl">北京大学光华管理学院</p>
 <h1>教学</h1>
-<p>我在光华管理学院讲授本科与研究生课程。课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
-<p>有意以我为导师撰写论文的学生，请先阅读<a class="lk" href="/zh/work-in-progress">在研工作</a>页面，再来信说明你希望研究的问题。</p>
-<!-- 课程列表：按下面的格式增加条目即可
-<p class="group">课程</p>
+<p>我在光华管理学院讲授发展经济学，面向本科生与研究生同堂开课；同时主持一门研究研讨课，学生在课上报告并讨论进行中的研究。</p>
+<p class="group">2026 年秋季学期</p>
 <ul class="cvlist">
-  <li><span>2026 春</span><div>课程名称 · 本科 / 硕士 / 博士</div></li>
+  <li><span>发展经济学</span><div>本科生与研究生 · 每周授课</div></li>
+  <li><span>研究研讨课</span><div>研究生 · 在研论文报告与讨论</div></li>
 </ul>
--->
+<p>课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
+<p class="oh"><b>办公时间：</b>邮件预约即可，我会尽量安排在同一周内。</p>
+<p>有意以我为导师撰写论文的学生，请先阅读<a class="lk" href="/zh/work-in-progress">在研工作</a>页面，再来信说明你希望研究的问题。需要推荐信的同学请见<a class="lk" href="/zh/references">推荐信</a>页面。</p>
 <p class="meta">课程相关问题请发送邮件至 <a class="lk" href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a>。</p></main>
 <footer>
 北京大学光华管理学院 · 北京 &nbsp;·&nbsp; <a href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a><br>
-另见 <a href="https://scholar.google.com/citations?user=_swX_6kAAAAJ">Google Scholar</a>、
-<a href="https://www.iza.org/en/people/fellows/27501/lukas-hensel">IZA</a>、
-<a href="https://cepr.org/about/people/lukas-hensel">CEPR</a>、
-<a href="https://www.povertyactionlab.org/invited-researchers">J-PAL</a> 与
-<a href="https://bsky.app/profile/lukashenselecon.bsky.social">Bluesky</a>。
+另见 <a href="https://scholar.google.com/citations?user=_swX_6kAAAAJ" rel="me noopener">Google Scholar</a>、<a href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="me noopener">IZA</a>、<a href="https://cepr.org/about/people/lukas-hensel" rel="me noopener">CEPR</a>、<a href="https://www.povertyactionlab.org/invited-researchers" rel="me noopener">J-PAL</a>、<a href="https://bsky.app/profile/lukashenselecon.bsky.social" rel="me noopener">Bluesky</a>。
 </footer>
+<script>
+/* Copy buttons for citations. No external requests; if this does not run the
+   text is still there to select. */
+(function(){
+  if(!navigator.clipboard) return;
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.hidden=false;
+    b.addEventListener("click",function(){
+      var box=b.parentNode, src=box.querySelector("pre")||box.querySelector("p");
+      navigator.clipboard.writeText(src.innerText).then(function(){
+        var t=b.textContent; b.textContent=b.dataset.done||"Copied"; b.dataset.done2=1;
+        b.setAttribute("data-done","1");
+        setTimeout(function(){b.textContent=t;b.removeAttribute("data-done");},1600);
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>

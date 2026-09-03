@@ -22,7 +22,7 @@
 <header class="head">
 <a class="name" href="/">Lukas Hensel</a>
 <div class="right">
-<nav class="nav" aria-label="Main"><a href="/" aria-current="page">Home</a><a href="/publications">Publications</a><a href="/work-in-progress">Work in Progress</a><a href="/teaching">Teaching</a><a href="/cv">CV</a></nav>
+<nav class="nav" aria-label="Main"><a href="/" aria-current="page">Home</a><a href="/publications">Publications</a><a href="/work-in-progress">Work in Progress</a><a href="/teaching">Teaching</a><a href="/references">References</a><a href="/cv">CV</a></nav>
 <div class="lang"><a href="/" hreflang="en" aria-current="true">EN</a><a href="/zh/" hreflang="zh-Hans">中文</a></div>
 </div>
 </header>
@@ -30,11 +30,25 @@
 <h1>Page not found</h1><p>The page you asked for has moved or never existed. Start again from the <a class="lk" href="/">home page</a>.</p></main>
 <footer>
 Guanghua School of Management, Peking University, Beijing &nbsp;·&nbsp; <a href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a><br>
-Also on <a href="https://scholar.google.com/citations?user=_swX_6kAAAAJ">Google Scholar</a>,
-<a href="https://www.iza.org/en/people/fellows/27501/lukas-hensel">IZA</a>,
-<a href="https://cepr.org/about/people/lukas-hensel">CEPR</a>,
-<a href="https://www.povertyactionlab.org/invited-researchers">J-PAL</a> and
-<a href="https://bsky.app/profile/lukashenselecon.bsky.social">Bluesky</a>.
+Also on <a href="https://scholar.google.com/citations?user=_swX_6kAAAAJ" rel="me noopener">Google Scholar</a>, <a href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="me noopener">IZA</a>, <a href="https://cepr.org/about/people/lukas-hensel" rel="me noopener">CEPR</a>, <a href="https://www.povertyactionlab.org/invited-researchers" rel="me noopener">J-PAL</a> and <a href="https://bsky.app/profile/lukashenselecon.bsky.social" rel="me noopener">Bluesky</a>.
 </footer>
+<script>
+/* Copy buttons for citations. No external requests; if this does not run the
+   text is still there to select. */
+(function(){
+  if(!navigator.clipboard) return;
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.hidden=false;
+    b.addEventListener("click",function(){
+      var box=b.parentNode, src=box.querySelector("pre")||box.querySelector("p");
+      navigator.clipboard.writeText(src.innerText).then(function(){
+        var t=b.textContent; b.textContent=b.dataset.done||"Copied"; b.dataset.done2=1;
+        b.setAttribute("data-done","1");
+        setTimeout(function(){b.textContent=t;b.removeAttribute("data-done");},1600);
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>

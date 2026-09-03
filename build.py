@@ -5,9 +5,25 @@ from data import PUBS, WPS, WIP
 SITE="https://lukashensel.com"
 EMAIL="lukas.hensel@gsm.pku.edu.cn"
 
+# --- things you may want to change -------------------------------------
+# Office hours, shown on the home page and repeated on Teaching.
+# For a fixed slot, write it out, e.g.
+#   OFFICE_HOURS_EN = "Wednesdays 14:00–16:00, Guanghua Building 2, Room 217"
+#   OFFICE_HOURS_ZH = "每周三 14:00–16:00，光华管理学院 2 号楼 217 室"
+OFFICE_HOURS_EN = "By appointment — email me and I will find a slot the same week."
+OFFICE_HOURS_ZH = "邮件预约即可，我会尽量安排在同一周内。"
+
+# Profile links. Leave a value empty and the link is left off the page.
+TWITTER = ""        # handle without the @, e.g. "lukashensel"
+ORCID   = ""        # e.g. "0000-0002-1825-0097"
+BLUESKY = "lukashenselecon.bsky.social"
+SCHOLAR = "https://scholar.google.com/citations?user=_swX_6kAAAAJ"
+# -----------------------------------------------------------------------
+
 NAV=[("","Home","首页"),("publications","Publications","发表论文"),
      ("work-in-progress","Work in Progress","在研工作"),
-     ("teaching","Teaching","教学"),("cv","CV","个人简历")]
+     ("teaching","Teaching","教学"),("references","References","推荐信"),
+     ("cv","CV","个人简历")]
 
 def url(lang,slug):
     base="/zh/" if lang=="zh" else "/"
@@ -57,54 +73,173 @@ def header(lang,slug):
 <main id="main">
 '''
 
+def _profiles(lang):
+    zh = lang=="zh"
+    out=[('Google Scholar', SCHOLAR),
+         ('IZA','https://www.iza.org/en/people/fellows/27501/lukas-hensel'),
+         ('CEPR','https://cepr.org/about/people/lukas-hensel'),
+         ('J-PAL','https://www.povertyactionlab.org/invited-researchers')]
+    if ORCID:  out.append(('ORCID','https://orcid.org/%s' % ORCID))
+    if TWITTER:out.append(('Twitter','https://twitter.com/%s' % TWITTER))
+    if BLUESKY:out.append(('Bluesky','https://bsky.app/profile/%s' % BLUESKY))
+    links=['<a href="%s" rel="me noopener">%s</a>' % (u,n) for n,u in out]
+    if zh:
+        return "另见 " + "、".join(links) + "。"
+    return "Also on " + ", ".join(links[:-1]) + " and " + links[-1] + "."
+
 def footer(lang):
     if lang=="zh":
-        return f'''</main>
+        place = "北京大学光华管理学院 · 北京"
+    else:
+        place = "Guanghua School of Management, Peking University, Beijing"
+    return """</main>
 <footer>
-北京大学光华管理学院 · 北京 &nbsp;·&nbsp; <a href="mailto:{EMAIL}">{EMAIL}</a><br>
-另见 <a href="https://scholar.google.com/citations?user=_swX_6kAAAAJ">Google Scholar</a>、
-<a href="https://www.iza.org/en/people/fellows/27501/lukas-hensel">IZA</a>、
-<a href="https://cepr.org/about/people/lukas-hensel">CEPR</a>、
-<a href="https://www.povertyactionlab.org/invited-researchers">J-PAL</a> 与
-<a href="https://bsky.app/profile/lukashenselecon.bsky.social">Bluesky</a>。
+%s &nbsp;·&nbsp; <a href="mailto:%s">%s</a><br>
+%s
 </footer>
+<script>
+/* Copy buttons for citations. No external requests; if this does not run the
+   text is still there to select. */
+(function(){
+  if(!navigator.clipboard) return;
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.hidden=false;
+    b.addEventListener("click",function(){
+      var box=b.parentNode, src=box.querySelector("pre")||box.querySelector("p");
+      navigator.clipboard.writeText(src.innerText).then(function(){
+        var t=b.textContent; b.textContent=b.dataset.done||"Copied"; b.dataset.done2=1;
+        b.setAttribute("data-done","1");
+        setTimeout(function(){b.textContent=t;b.removeAttribute("data-done");},1600);
+      });
+    });
+  });
+})();
+</script>
 </body>
-</html>'''
-    return f'''</main>
-<footer>
-Guanghua School of Management, Peking University, Beijing &nbsp;·&nbsp; <a href="mailto:{EMAIL}">{EMAIL}</a><br>
-Also on <a href="https://scholar.google.com/citations?user=_swX_6kAAAAJ">Google Scholar</a>,
-<a href="https://www.iza.org/en/people/fellows/27501/lukas-hensel">IZA</a>,
-<a href="https://cepr.org/about/people/lukas-hensel">CEPR</a>,
-<a href="https://www.povertyactionlab.org/invited-researchers">J-PAL</a> and
-<a href="https://bsky.app/profile/lukashenselecon.bsky.social">Bluesky</a>.
-</footer>
-</body>
-</html>'''
+</html>""" % (place, EMAIL, EMAIL, _profiles(lang))
 
+# ---------- citations ----------
+import re, unicodedata, html as _html
+
+def _plain(t):
+    return _html.unescape(t)
+
+def _names(p):
+    """Ordered author list, Lukas included, alphabetical by surname (econ convention)."""
+    if p.get("authors"):
+        return list(p["authors"])
+    raw = _plain(p["a_en"]).replace(" & ", ", ").replace(" and ", ", ")
+    people = [n.strip() for n in raw.split(",") if n.strip()]
+    people = [n for n in people if not n.lower().startswith("et al")]
+    people.append("Lukas Hensel")
+    seen, uniq = set(), []
+    for n in people:
+        if n not in seen:
+            seen.add(n); uniq.append(n)
+    return sorted(uniq, key=lambda n: n.split()[-1].lower())
+
+def _split(n):
+    parts = n.split()
+    return " ".join(parts[:-1]), parts[-1]
+
+def _ascii(t):
+    return "".join(c for c in unicodedata.normalize("NFKD", t) if c.isalnum()).lower()
+
+def _volpages(vs):
+    if not vs: return ("","","")
+    m = re.match(r"\s*(\d+)\s*(?:\((\d+)\))?\s*(?:,\s*(.+))?$", _plain(vs))
+    if not m: return ("","","")
+    vol, num = m.group(1) or "", m.group(2) or ""
+    pages = (m.group(3) or "").strip().replace("–","--").replace("—","--")
+    return (vol, num, pages)
+
+def _year(p):
+    y = _plain(p["y"])
+    return y if y.isdigit() else ""
+
+def formatted(p):
+    people = _names(p)
+    bits = []
+    for i, n in enumerate(people):
+        first, last = _split(n)
+        bits.append(("%s, %s" % (last, first)) if i == 0 else n)
+    if len(bits) == 1: who = bits[0]
+    elif len(bits) == 2: who = "%s, and %s" % (bits[0], bits[1])
+    else: who = ", ".join(bits[:-1]) + ", and " + bits[-1]
+    yr = _year(p) or "n.d."
+    out = '%s. %s. “%s.” %s' % (who, yr, _plain(p["t"]), _plain(p.get("v","")))
+    vol, num, pages = _volpages(p.get("vs"))
+    if vol:
+        out += " %s" % vol
+        if num: out += " (%s)" % num
+        if pages: out += ": %s" % pages.replace("--", "–")
+    elif p.get("flag"):
+        out += ", forthcoming"
+    return out + "."
+
+def bibtex(p):
+    people = _names(p)
+    auth = " and ".join("%s, %s" % (_split(n)[1], _split(n)[0]) for n in people)
+    yr = _year(p); title = _plain(p["t"]); venue = _plain(p.get("v",""))
+    vol, num, pages = _volpages(p.get("vs"))
+    word = next((w for w in re.findall(r"[A-Za-z]+", title)
+                 if w.lower() not in ("the","a","an","and","of","in","on","for","from","to","about","evidence")), "paper")
+    key = "%s%s%s" % (_ascii(_split(people[0])[1]), yr or "wp", _ascii(word))
+    forthcoming = bool(p.get("flag"))
+    kind = "article" if (vol or forthcoming) else ("techreport" if "Discussion Paper" in venue else "unpublished")
+    f = [("author", auth), ("title", "{%s}" % title)]
+    note = None
+    if kind == "article":
+        f.append(("journal", venue))
+        if vol: f.append(("volume", vol))
+        if num: f.append(("number", num))
+        if pages: f.append(("pages", pages))
+        if forthcoming: note = "Forthcoming"
+    elif kind == "techreport":
+        m = re.search(r"(\d{4,6})", venue)
+        f += [("institution", "IZA Institute of Labor Economics"), ("type", "IZA Discussion Paper")]
+        if m: f.append(("number", m.group(1)))
+    else:
+        note = venue or "Working paper"
+    if yr: f.append(("year", yr))
+    if note: f.append(("note", note))
+    w = max(len(k) for k,_ in f)
+    return "@%s{%s,\n%s\n}" % (kind, key, ",\n".join("  %-*s = {%s}" % (w,k,v) for k,v in f))
+
+# ---------- one entry ----------
 def entry(p,lang):
     yr = p.get("yz",p["y"]) if lang=="zh" else p["y"]
     au = p["a_zh"] if lang=="zh" else "with "+p["a_en"]
     ven = p.get("vz",p["v"]) if lang=="zh" else p["v"]
     vs = (" &middot; "+p["vs"]) if p.get("vs") and lang=="en" else (", "+p["vs"] if p.get("vs") else "")
-    flag=""
-    if p.get("flag"):
-        flag=f'<span class="flag">{"即将发表" if lang=="zh" else "Forthcoming"}</span>'
+    flag = f'<span class="flag">{"即将发表" if lang=="zh" else "Forthcoming"}</span>' if p.get("flag") else ""
     sep = "，" if lang=="zh" else " &middot; "
-    line=f'{au}{sep}<b>{ven}</b>{vs}{flag}'
     out=[f'<article class="entry"><div class="yr">{yr}</div><div>',
          f'<h2 class="ti">{p["t"]}</h2>',
-         f'<p class="au">{line}</p>']
-    if p.get("ab"):
-        lab="摘要" if lang=="zh" else "Abstract"
-        out.append(f'<details class="abs"><summary><span class="car">&#9656;</span>{lab}</summary>'
-                   f'<div class="body"><p>{p["ab"]}</p></div></details>')
+         f'<p class="au">{au}{sep}<b>{ven}</b>{vs}{flag}</p>']
     if p["links"]:
-        parts=[]
+        row=[]
         for en,zh,u in p["links"]:
             ext=' rel="noopener"' if u.startswith("http") else ""
-            parts.append(f'<a href="{u}"{ext}>{zh if lang=="zh" else en}</a>')
-        out.append('<div class="acts">'+'<span class="sep">·</span>'.join(parts)+'</div>')
+            row.append(f'<a class="chip" href="{u}"{ext}>{zh if lang=="zh" else en}</a>')
+        out.append('<div class="chips">'+"".join(row)+'</div>')
+    def panel(label, inner, extra=""):
+        return (f'<details class="dd"><summary><span class="chip">'
+                f'<span class="car">&#9656;</span>{label}</span></summary>'
+                f'<div class="panel{extra}">{inner}</div></details>')
+    dd=[]
+    if p.get("ab"):
+        dd.append(panel("摘要" if lang=="zh" else "Abstract", f'<p>{p["ab"]}</p>'))
+    if p.get("v"):
+        copy_c = "复制" if lang=="zh" else "Copy"
+        dd.append(panel("引用格式" if lang=="zh" else "Citation",
+                        f'<p>{_html.escape(formatted(p))}</p>'
+                        f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>', " cite"))
+        dd.append(panel("BibTeX",
+                        f'<pre>{_html.escape(bibtex(p))}</pre>'
+                        f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>'))
+    if dd:
+        out.append('<div class="chips">'+"".join(dd)+'</div>')
     out.append('</div></article>')
     return "\n".join(out)
 
@@ -117,6 +252,7 @@ def home(lang):
 {SHOT}
 <p>我是北京大学光华管理学院经济学副教授，同时担任 J-PAL 特邀研究员与 IZA 研究员。我主要采用自然实地实验的方法，研究人们如何形成关于劳动力市场的信念——关于自身的比较优势、关于雇主看重什么、关于其他人正在做什么——以及当这些信念出现偏差时，他们的职业发展会因此付出怎样的代价。</p>
 <p>我的田野工作主要在埃塞俄比亚、南非、中国与越南展开，研究对象包括求职者、工厂工人与企业。另一条研究脉络将同样的实验方法用于政治行为：人们为何走上街头参与集会，以及在做出决定之前，他们对人群规模与他人动机的判断起到什么作用。</p>
+<p class="oh"><b>办公时间：</b>{OFFICE_HOURS_ZH}</p>
 <hr>
 <p class="lbl">精选研究</p>
 <div class="entries">
@@ -132,6 +268,7 @@ def home(lang):
 {SHOT}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a J-PAL Invited Researcher, and an IZA Research Fellow. My work uses natural field experiments to study how people form beliefs about the labour market &mdash; about their own comparative advantage, about what employers want, about what everyone else is doing &mdash; and what happens to their careers when those beliefs are wrong.</p>
 <p>Most of my field work runs in Ethiopia, South Africa, China, and Vietnam, with jobseekers, factory workers, and firms. A second strand of my research asks the same question of political behaviour: why people turn out for a protest, and what they believe about the crowd before they do.</p>
+<p class="oh"><b>Office hours:</b> {OFFICE_HOURS_EN}</p>
 <hr>
 <p class="lbl">Selected work</p>
 <div class="entries">
@@ -159,28 +296,75 @@ def wip(lang):
 
 def teaching(lang):
     if lang=="zh":
-        return '''<p class="lbl">北京大学光华管理学院</p>
+        return f"""<p class="lbl">北京大学光华管理学院</p>
 <h1>教学</h1>
-<p>我在光华管理学院讲授本科与研究生课程。课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
-<p>有意以我为导师撰写论文的学生，请先阅读<a class="lk" href="/zh/work-in-progress">在研工作</a>页面，再来信说明你希望研究的问题。</p>
-<!-- 课程列表：按下面的格式增加条目即可
-<p class="group">课程</p>
+<p>我在光华管理学院讲授发展经济学，面向本科生与研究生同堂开课；同时主持一门研究研讨课，学生在课上报告并讨论进行中的研究。</p>
+<p class="group">2026 年秋季学期</p>
 <ul class="cvlist">
-  <li><span>2026 春</span><div>课程名称 · 本科 / 硕士 / 博士</div></li>
+  <li><span>发展经济学</span><div>本科生与研究生 · 每周授课</div></li>
+  <li><span>研究研讨课</span><div>研究生 · 在研论文报告与讨论</div></li>
 </ul>
--->
-<p class="meta">课程相关问题请发送邮件至 <a class="lk" href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a>。</p>'''
-    return '''<p class="lbl">Guanghua School of Management</p>
+<p>课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
+<p class="oh"><b>办公时间：</b>{OFFICE_HOURS_ZH}</p>
+<p>有意以我为导师撰写论文的学生，请先阅读<a class="lk" href="/zh/work-in-progress">在研工作</a>页面，再来信说明你希望研究的问题。需要推荐信的同学请见<a class="lk" href="/zh/references">推荐信</a>页面。</p>
+<p class="meta">课程相关问题请发送邮件至 <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>。</p>"""
+    return f"""<p class="lbl">Guanghua School of Management</p>
 <h1>Teaching</h1>
-<p>I teach undergraduate and graduate courses at Guanghua. Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
-<p>Students interested in writing a thesis with me should read the <a class="lk" href="/work-in-progress">Work in Progress</a> page first, then write to me with the question they want to work on.</p>
-<!-- Course list: add entries in this format
-<p class="group">Courses</p>
+<p>I teach Development Economics, taken together by undergraduate and graduate students, and run a research seminar in which students present and discuss work in progress.</p>
+<p class="group">Autumn 2026</p>
 <ul class="cvlist">
-  <li><span>Spring 2026</span><div>Course title &middot; undergraduate / MSc / PhD</div></li>
+  <li><span>Development Economics</span><div>Undergraduate and graduate &middot; weekly lectures</div></li>
+  <li><span>Research Seminar</span><div>Graduate &middot; presentations and discussion of work in progress</div></li>
 </ul>
--->
-<p class="meta">Questions about a course: <a class="lk" href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a>.</p>'''
+<p>Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
+<p class="oh"><b>Office hours:</b> {OFFICE_HOURS_EN}</p>
+<p>Students interested in writing a thesis with me should read the <a class="lk" href="/work-in-progress">Work in Progress</a> page first, then write to me with the question they want to work on. If you need a letter of reference, the <a class="lk" href="/references">References</a> page says what to send.</p>
+<p class="meta">Questions about a course: <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>.</p>"""
+
+def references(lang):
+    if lang=="zh":
+        return f"""<p class="lbl">致学生</p>
+<h1>推荐信</h1>
+<p>下面写清楚了我可以为谁写推荐信、如何提出请求，以及需要提供哪些材料。事先读一遍，能让我写出更有分量的信。</p>
+
+<p class="group">我可以为谁写</p>
+<p>我为我教过或指导过、并且我能具体谈论其学术表现的学生写推荐信。通常意味着：你修读过我的课程并取得了不错的成绩，或由我指导完成论文，或担任过我的研究助理。</p>
+<p>如果以上都不适用，我写出来的信会很空泛。一封来自真正了解你工作的老师的信，对你的申请帮助大得多。</p>
+
+<p class="group">如何提出请求</p>
+<p>请发邮件至 <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>，邮件主题写明「推荐信申请」，<b>至少提前两周</b>，以最早的截止日期为准。邮件中请说明：申请的项目或职位、每一封信的截止日期，以及提交方式（在线系统、邮件或上传）。</p>
+
+<p class="group">请随邮件附上</p>
+<ul class="cvlist">
+  <li><span>简历</span><div>最新版本</div></li>
+  <li><span>成绩单</span><div>非正式版本即可</div></li>
+  <li><span>个人陈述</span><div>草稿也可以，我需要知道你打算如何介绍自己</div></li>
+  <li><span>希望我强调的内容</span><div>你在我课上写的论文、参与的项目、获得的奖项，或任何材料中看不出、但你希望我提到的背景</div></li>
+</ul>
+
+<p class="group">之后</p>
+<p>我会在几天内回复是否能写。如果我认为自己写不出一封有力的推荐信，我会直接告诉你，而不是写一封平淡的信——这对你更有利。一旦答应，请在临近截止日期时提醒我一次，这样的提醒我一向欢迎。</p>"""
+    return f"""<p class="lbl">For students</p>
+<h1>Reference letters</h1>
+<p>What follows is who I can write for, how to ask, and what to send. Reading it first makes the letter I write a better one.</p>
+
+<p class="group">Who I can write for</p>
+<p>I write letters for students I have taught or supervised and whose work I can speak to concretely. In practice that means you took one of my courses and did well in it, wrote a thesis under my supervision, or worked with me as a research assistant.</p>
+<p>If none of those apply, anything I write will be thin. A specific letter from someone who knows your work will serve you considerably better than a general one from me.</p>
+
+<p class="group">How to ask</p>
+<p>Email me at <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a> with &ldquo;Reference request&rdquo; in the subject line, <b>at least two weeks</b> before your earliest deadline. Tell me what you are applying for, the deadline for each letter, and how it is submitted &mdash; a portal, an email address, or a file you upload yourself.</p>
+
+<p class="group">What to send with the request</p>
+<ul class="cvlist">
+  <li><span>CV</span><div>Current version</div></li>
+  <li><span>Transcript</span><div>An unofficial copy is fine</div></li>
+  <li><span>Letter of motivation</span><div>A draft is fine &mdash; I need to see how you are describing yourself</div></li>
+  <li><span>Anything to highlight</span><div>A paper you wrote for me, a project, an award, or context the rest of the file does not show</div></li>
+</ul>
+
+<p class="group">What happens then</p>
+<p>I will tell you within a few days whether I can write. If I do not think I can write you a strong letter I will say so rather than send a lukewarm one, which is the better outcome for you. Once I have agreed, a single reminder as the deadline approaches is always welcome.</p>"""
 
 def cv(lang):
     if lang=="zh":
@@ -237,6 +421,9 @@ PAGES=[("", home, "Lukas Hensel", "Lukas Hensel — 北京大学光华管理学�
         "Working papers and field projects in progress.", "工作论文与正在进行的田野项目。"),
        ("teaching", teaching, "Teaching · Lukas Hensel", "教学 · Lukas Hensel",
         "Courses taught at Guanghua School of Management, Peking University.", "在北京大学光华管理学院讲授的课程。"),
+       ("references", references, "Reference letters · Lukas Hensel", "推荐信 · Lukas Hensel",
+        "How to request a letter of reference: who I can write for, how to ask, and what to send.",
+        "如何申请推荐信：我可以为谁写、如何提出请求、需要提供哪些材料。"),
        ("cv", cv, "CV · Lukas Hensel", "个人简历 · Lukas Hensel",
         "Positions, affiliations, and education. Full CV as a PDF.", "任职经历、学术兼职与教育背景，完整简历见 PDF。")]
 

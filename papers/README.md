@@ -1,30 +1,30 @@
 # papers/
 
-Drop your own PDFs here and the site links to them automatically.
+Your own PDFs live here and are served from lukashensel.com, not from GitHub or
+Dropbox — both of which are slow or blocked from mainland China.
 
-The build checks whether each filename below exists in this folder. If it does,
-the link points at `lukashensel.com/papers/<name>` — served from your own domain,
-fast in China, and permanent. If it doesn't, the link falls back to wherever the
-PDF lives today (GitHub or Dropbox), so nothing is ever broken.
+`data.py` links each paper through `pdf("name.pdf", "https://fallback")`: if the
+file exists in this folder the link points at `/papers/name.pdf`, otherwise it
+falls back to the external copy. So nothing is ever broken, and dropping a file
+in here is the whole of the change.
 
-**Why bother:** GitHub is slow and intermittently unreachable from mainland
-China, and Dropbox is blocked outright. Right now most of your ungated PDFs and
-working papers sit on one or the other, so a reader in Beijing can see the paper
-listed but not open it.
+Filenames the build looks for:
 
-Use exactly these filenames:
+| File | Paper |
+|---|---|
+| `formalized-employee-search.pdf` | Formalized Employee Search and Labor Demand |
+| `voice-political-engagement.pdf` | Voice and Political Engagement |
+| `political-activists-free-riders.pdf` | Political Activists as Free-Riders |
+| `global-behaviors-covid.pdf` | Global Behaviors, Perceptions and Social Norms |
+| `coronavirus-perceptions.pdf` | Coronavirus Perceptions and Economic Anxiety |
+| `income-shocks-suicides.pdf` | Income Shocks and Suicides |
+| `comparative-advantage-beliefs.pdf` | Jobseekers' Beliefs about Comparative Advantage |
+| `mitigating-job-loss-ethiopia.pdf` | Mitigating the Consequences of Job Loss |
+| `feedback-confidence-job-search.pdf` | Feedback, Confidence, and Job Search Behavior |
+| `followers-to-leaders.pdf` | From Followers to Leaders |
+| `wage-information-applicant-selection.pdf` | Wage Information and Applicant Selection |
+| `mutual-knowledge-social-norms.pdf` | Mutual Knowledge of Social Norms |
+| `designing-severance-insurance.pdf` | Designing Severance Insurance |
 
-| File to add                              | Currently served from |
-|------------------------------------------|-----------------------|
-| `formalized-employee-search.pdf`         | GitHub                |
-| `political-activists-free-riders.pdf`    | GitHub                |
-| `global-behaviors-covid.pdf`             | GitHub                |
-| `comparative-advantage-beliefs.pdf`      | GitHub                |
-| `mitigating-job-loss-ethiopia.pdf`       | GitHub                |
-| `feedback-confidence-job-search.pdf`     | GitHub                |
-| `followers-to-leaders.pdf`               | GitHub                |
-| `designing-severance-insurance.pdf`      | afosterri.org         |
-| `wage-information-applicant-selection.pdf` | Dropbox             |
-
-Upload them through github.com — **Add file → Upload files** — into this folder.
-Commit, and they're live about forty seconds later.
+The three open-access articles (BJPS, APSR, Journal of Politics) keep pointing at
+the publisher — that is already the canonical free version.
