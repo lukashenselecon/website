@@ -129,9 +129,9 @@ WPS = [
   a_en="Yuyu Chen &amp; Xinjue Yao", a_zh="与 Chen、Yao 合著",
   authors=["Yuyu Chen","Lukas Hensel","Xinjue Yao"],
   ab="How does manager quality affect subordinates&rsquo; career progression? We leverage frequent worker-manager reassignments to identify the causal effect of manager quality on workers&rsquo; career outcomes in the context of managerial teams at a large construction firm. Using both difference-in-differences and instrumental variable approaches, we find that exposure to a high-quality manager increases workers&rsquo; subsequent promotion rates by 9 to 13 percentage points. We provide evidence in support of managerial human capital transmission as the primary mechanism: effects are concentrated among workers and positions that require most managerial skills, and exposed workers earn significantly higher performance-based bonuses.",
-  v="IZA Discussion Paper 17848 &middot; January 2026 update", vz="IZA 讨论稿 17848 · 2026 年 1 月更新",
-  links=[("draft","工作论文",pdf("followers-to-leaders.pdf","https://www.iza.org/publications/dp/17848/from-followers-to-leaders-the-career-impact-of-high-quality-managers")),
-         ("IZA discussion paper","IZA 讨论稿","https://www.iza.org/publications/dp/17848/from-followers-to-leaders-the-career-impact-of-high-quality-managers")]),
+  v="IZA Discussion Paper 17848, superseded by the January 2026 draft",
+  vz="IZA 讨论稿 17848，已由 2026 年 1 月稿替代",
+  links=[("draft","工作论文",pdf("followers-to-leaders.pdf","https://www.iza.org/publications/dp/17848/from-followers-to-leaders-the-career-impact-of-high-quality-managers"))]),
 
  dict(y="2025", t="Wage Information and Applicant Selection",
   a_en="Maria Balgova, Tsegay Tekleselassie &amp; Marc Witte", a_zh="与 Balgova、Tekleselassie、Witte 合著",
@@ -146,7 +146,8 @@ WPS = [
   authors=["Anselm Hager","Elnura Kazakbaeva","Lukas Hensel","Damir Esenaliev"], random_order=True,
   v="IZA Discussion Paper 17748 &middot; March 2025 update", vz="IZA 讨论稿 17748 · 2025 年 3 月更新",
   ab="Social norms are crucial drivers of human behavior. However, misperceptions of others&rsquo; opinions may sustain norms and conforming behavior even if a majority opposes the norm. Privately shifting individuals&rsquo; beliefs about true societal support may be insufficient to change behavior if others are perceived to continue to hold incorrect beliefs (&ldquo;lack of mutual knowledge&rdquo;). We conduct a field experiment with 5,201 women in Kyrgyzstan to test whether creating mutual knowledge about social norms affects how perceived social norms influence behavior. We show that providing information about societal support for female political activism alone does not affect women&rsquo;s political engagement. However, when perceived mutual knowledge is created, the effect of information about social norms increases significantly. Using vignette experiments, we show that the effect of mutual knowledge on social punishment is a plausible mechanism behind the behavioral impact. These findings suggest that higher-order beliefs about social norms are an important force linking social norms and behavior.",
-  links=[("draft","工作论文",pdf("mutual-knowledge-social-norms.pdf","https://docs.iza.org/dp17748.pdf"))]),
+  links=[("draft","工作论文",pdf("mutual-knowledge-social-norms.pdf","https://docs.iza.org/dp17748.pdf")),
+         ("IZA discussion paper","IZA 讨论稿","https://www.iza.org/publications/dp/17748")]),
 ]
 
 WIP = [
