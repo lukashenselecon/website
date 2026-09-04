@@ -60,7 +60,7 @@ PUBS = [
   ab="We conducted a large-scale survey covering 58 countries and over 100,000 respondents between late March and early April 2020 to study beliefs and attitudes towards citizens&rsquo; and governments&rsquo; responses at the onset of the COVID-19 pandemic. Most respondents reported holding normative beliefs in support of COVID-19 containment measures, as well as high rates of adherence to these measures. They also believed that their government and their country&rsquo;s citizens were not doing enough and underestimated the degree to which others in their country supported strong behavioral and policy responses to the pandemic. Normative beliefs were strongly associated with adherence, as well as beliefs about others&rsquo; and the government&rsquo;s response. Lockdowns were associated with greater optimism about others&rsquo; and the government&rsquo;s response, and improvements in measures of perceived mental well-being; these effects tended to be larger for those with stronger normative beliefs. Our findings highlight how social norms can arise quickly and effectively to support cooperation at a global scale.",
   links=[("gated","期刊版本","https://www.sciencedirect.com/science/article/pii/S016726812100487X"),
          ("ungated","免费版本",pdf("global-behaviors-covid.pdf","https://github.com/Luthor113/papers/raw/main/Hensel_etal_2022_Global_COVID.pdf")),
-         ("data and analysis files","数据与分析文件","https://osf.io/3sn2k/")]),
+         ("replication package","复现材料","https://osf.io/3sn2k/")]),
 
  dict(y="2021", t="Coronavirus Perceptions and Economic Anxiety",
   a_en="Thiemo Fetzer, Johannes Hermle &amp; Christopher Roth", a_zh="与 Fetzer、Hermle、Roth 合著",
