@@ -58,12 +58,25 @@ PEOPLE = {
   "Yuyu Chen":           "https://en.gsm.pku.edu.cn/faculty/chenyuyu/",
   "Jennifer Kades":      "https://jenniferkades.pythonanywhere.com",
   "Stefan Dercon":       "https://www.bsg.ox.ac.uk/people/stefan-dercon",
+  "Pieter Gautier":      "https://research.vu.nl/en/persons/pieter-gautier/",
+  "Francesco Losma":     "https://www.economics.ox.ac.uk/people/francesco-losma",
+  "Juanjuan Meng":       "https://en.gsm.pku.edu.cn/faculty/jumeng/",
+  "Yiting Chen":         "https://www.ln.edu.hk/econ/people/faculty-economics/professor-chen-yiting",
+  "Haoran He":           "https://bs.bnu.edu.cn/englishversion/facultyresearch/fulltimefaculty/azmsy/119708.html",
+  "Qian Weng":           "https://ideas.repec.org/f/pwe240.html",
 }
 # Surnames, for the Chinese pages where only the family name is printed.
-SURNAMES = {}
+# Full names stay available in zh too, so an ambiguous surname (two Chens) can
+# be disambiguated by writing the full name in a_zh. A surname is only linked
+# when it belongs to exactly one person.
+SURNAMES = dict(PEOPLE)
+_owners = {}
+for _n, _u in PEOPLE.items():
+    _owners.setdefault(_n.split()[-1], set()).add(_u)
 for _n, _u in PEOPLE.items():
     _last = _n.split()[-1]
-    if _last not in SURNAMES: SURNAMES[_last] = _u
+    if len(_owners[_last]) == 1 and _last not in SURNAMES:
+        SURNAMES[_last] = _u
 
 def linkify(text, lang):
     """Turn co-author names into links, longest match first."""
@@ -74,7 +87,7 @@ def linkify(text, lang):
         for k in keys:
             if text.startswith(k, i):
                 nxt = text[i+len(k):i+len(k)+1]
-                if lang != "zh" and nxt.isalpha():
+                if nxt.isalpha():
                     continue
                 out.append('<a class="who" href="%s" rel="noopener">%s</a>' % (table[k], k))
                 i += len(k)
@@ -294,7 +307,7 @@ def entry(p,lang,cite=True):
     sep = "，" if zh else " &middot; "
     out=[f'<article class="entry"><div class="yr">{yr}</div><div>',
          f'<h2 class="ti">{p["t"]}</h2>',
-         f'<p class="au">{(linkify(au, lang)+sep) if au else ""}<b>{ven}</b>{vs}{flag}</p>']
+         f'<p class="au">{(linkify(au, lang)+(sep if ven else "")) if au else ""}<b>{ven}</b>{vs}{flag}</p>']
 
     def panel(label, inner, extra=""):
         return (f'<details class="dd"><summary><span class="chip">'
