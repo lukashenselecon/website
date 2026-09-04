@@ -601,7 +601,7 @@ for lang in ("en","zh"):
     write(("zh/404.html" if lang=="zh" else "404.html"), html); n+=1
 
 # robots + sitemap
-write("robots.txt", "User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n" % SITE)
+write("robots.txt", "User-agent: *\nAllow: /\nDisallow: /stats/\n\nSitemap: %s/sitemap.xml\n" % SITE)
 urls=[]
 for slug,_,_,_,_,_ in PAGES:
     for lang in ("en","zh"):

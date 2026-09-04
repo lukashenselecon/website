@@ -36,6 +36,7 @@ jobs:
             --exclude '.git' --exclude '.github' \
             --exclude 'build.py' --exclude 'data.py' \
             --exclude '__pycache__' --exclude 'README.md' \
+            --exclude 'deploy' --exclude 'START-HERE.md' \
             -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes" \
             ./ root@${{ secrets.SERVER_IP }}:/var/www/lukashensel.com/
 

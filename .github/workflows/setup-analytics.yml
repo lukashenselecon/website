@@ -1,0 +1,65 @@
+name: Set up analytics
+
+# Run this by hand from the Actions tab. It installs GoAccess on the web server
+# and publishes a password-protected report at https://lukashensel.com/stats/.
+# Safe to run again later, for example to change the password or the mail
+# settings.
+#
+# Required repository secret:
+#   STATS_PASSWORD   password for the stats page
+# Optional, for the weekly email digest:
+#   MSMTP_CONFIG     an msmtp configuration file (see deploy/analytics/README.md)
+#   DIGEST_MAIL_TO   where the weekly summary should go
+
+on:
+  workflow_dispatch:
+    inputs:
+      stats_user:
+        description: 'Username for the stats page'
+        required: true
+        default: 'lukas'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Load the deploy key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Copy the scripts to the server
+        run: |
+          tar cz -C deploy analytics \
+            | ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+                root@${{ secrets.SERVER_IP }} \
+                'rm -rf /root/site-analytics && mkdir -p /root/site-analytics \
+                 && tar xz -C /root/site-analytics --strip-components=1'
+
+      - name: Run the setup script on the server
+        env:
+          STATS_USER: ${{ inputs.stats_user }}
+          STATS_PASS: ${{ secrets.STATS_PASSWORD }}
+          MSMTP_CONFIG: ${{ secrets.MSMTP_CONFIG }}
+          MAIL_TO: ${{ secrets.DIGEST_MAIL_TO }}
+        run: |
+          if [ -z "$STATS_PASS" ]; then
+            echo "Add a repository secret called STATS_PASSWORD first."
+            exit 1
+          fi
+          # Everything sensitive travels inside the script on stdin, so none of
+          # it shows up in the server's process list.
+          b64() { printf '%s' "$1" | base64 -w0; }
+          {
+            echo "STATS_USER=\$(echo $(b64 "$STATS_USER") | base64 -d)"
+            echo "STATS_PASS=\$(echo $(b64 "$STATS_PASS") | base64 -d)"
+            echo "MSMTP_CONFIG=\$(echo $(b64 "$MSMTP_CONFIG") | base64 -d)"
+            echo "MAIL_TO=\$(echo $(b64 "$MAIL_TO") | base64 -d)"
+            echo 'export STATS_USER STATS_PASS MSMTP_CONFIG MAIL_TO'
+            echo 'bash /root/site-analytics/setup-analytics.sh'
+          } | ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+                root@${{ secrets.SERVER_IP }} 'bash -s'
