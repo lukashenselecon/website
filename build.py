@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os, io, shutil
-from data import PUBS, WPS, WIP
+from data import PUBS, WPS, WIP, NPR
 
 SITE="https://lukashensel.com"
 EMAIL="lukas.hensel@gsm.pku.edu.cn"
@@ -276,14 +276,15 @@ BST = "https://ctan.org/pkg/econ-bst"
 def entry(p,lang,cite=True):
     zh = lang=="zh"
     yr = p.get("yz",p["y"]) if zh else p["y"]
-    au = p["a_zh"] if zh else "with "+p["a_en"]
+    a  = p.get("a_zh","") if zh else p.get("a_en","")
+    au = (a if zh else "with "+a) if a else ""
     ven = p.get("vz",p["v"]) if zh else p["v"]
     vs = (" &middot; "+p["vs"]) if p.get("vs") and not zh else (", "+p["vs"] if p.get("vs") else "")
     flag = f'<span class="flag">{"即将发表" if zh else "Forthcoming"}</span>' if p.get("flag") else ""
     sep = "，" if zh else " &middot; "
     out=[f'<article class="entry"><div class="yr">{yr}</div><div>',
          f'<h2 class="ti">{p["t"]}</h2>',
-         f'<p class="au">{linkify(au, lang)}{sep}<b>{ven}</b>{vs}{flag}</p>']
+         f'<p class="au">{(linkify(au, lang)+sep) if au else ""}<b>{ven}</b>{vs}{flag}</p>']
 
     def panel(label, inner, extra=""):
         return (f'<details class="dd"><summary><span class="chip">'
@@ -367,8 +368,8 @@ def portrait(lang):
 
 def home(lang):
     if lang=="zh":
-        return f"""<p class="lbl">北京大学 · 光华管理学院</p>
-<h1>关于信念、劳动力市场与政治行为的实地实验</h1>
+        return f"""<p class="lbl lead">北京大学 · 光华管理学院</p>
+<h1 class="vh">关于信念、劳动力市场与政治行为的实地实验</h1>
 {portrait(lang)}
 <p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我用实地实验的方法研究中低收入国家的劳动力市场如何运转。</p>
 <p>我关注劳动力市场中的信息摩擦。求职者并不清楚自己相对于其他应聘者的长处究竟在哪里；雇主也很难判断谁真正合适；双方都在依据常常并不准确的判断行动。结果是一个匹配效率低于其潜力的市场：劳动者进入了并不发挥自身所长的岗位，企业也未必能识别出最合适的人选。我通过实验补上缺失的信息，然后观察求职、招聘与职业发展会因此发生什么变化。</p>
@@ -382,8 +383,8 @@ def home(lang):
   <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}</div></li>
 </ul>
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/references">推荐信</a>页面；关于论文指导，请见<a class="lk" href="/zh/teaching">教学与指导</a>页面。</p>"""
-    return f"""<p class="lbl">Peking University &middot; Guanghua</p>
-<h1>Field Experiments on Beliefs, Labor Markets, and Political Behavior</h1>
+    return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
+<h1 class="vh">Field Experiments on Beliefs, Labor Markets, and Political Behavior</h1>
 {portrait(lang)}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses field experiments to study how labor markets in low- and middle-income countries function.</p>
 <p>I focus on the role of information frictions in labor markets. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms may not recognize the best hires. I run experiments that supply the missing information and follow what it does to search, to hiring, and to careers.</p>
@@ -399,9 +400,13 @@ def home(lang):
 <p class="meta">Students asking for a letter should read the <a class="lk" href="/references">Reference letters</a> page first; on thesis supervision, see <a class="lk" href="/teaching">Teaching and Supervision</a>.</p>"""
 
 def pubs(lang):
-    lbl="同行评议论文" if lang=="zh" else "Peer-reviewed articles"
+    lbl="期刊论文与其他写作" if lang=="zh" else "Journal articles and other writing"
     h="发表论文" if lang=="zh" else "Publications"
-    return f'<p class="lbl">{lbl}</p>\n<h1>{h}</h1>\n<div class="entries">\n'+"\n".join(entry(p,lang) for p in PUBS)+"\n</div>"
+    g1="同行评议论文" if lang=="zh" else "Peer-reviewed"
+    g2="非同行评议" if lang=="zh" else "Non-peer-reviewed"
+    return (f'<p class="lbl">{lbl}</p>\n<h1>{h}</h1>\n'
+            f'<p class="group">{g1}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang) for p in PUBS)+"\n</div>\n"
+            f'<p class="group">{g2}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang,cite=False) for p in NPR)+"\n</div>")
 
 def wip(lang):
     lbl="审稿中与田野进行中" if lang=="zh" else "Under review and in the field"

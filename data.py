@@ -158,3 +158,41 @@ WIP = [
   v="EGAP Metaketa V", vz="EGAP Metaketa V 项目",
   links=[("project page","项目主页","http://egap.org/metaketa/metaketa-v-womens-action-committees-and-local-services")]),
 ]
+
+# Non-peer-reviewed writing: blog posts, policy briefs, methods notes and
+# non-refereed working papers. Rendered on the Publications page under its own
+# heading. Same shape as PUBS/WPS; a_en/a_zh may be omitted for solo pieces.
+NPR = [
+ dict(y="2023", t="Bridging the Skills Mismatches between Job Seekers and Firms in Ethiopia",
+  a_en="Tsegay Tekleselassie &amp; Marc Witte", a_zh="与 Tekleselassie、Witte 合著",
+  v="Blog &middot; International Growth Centre", vz="博客 · International Growth Centre",
+  ab="Vacancy and applicant data from Addis Ababa show a two-sided mismatch: 75% of applicants hold a university degree while only 39% of postings require one, and 82% of postings ask for work experience while only 41% of applicants have any. The post traces this to three barriers &ndash; limited practical experience despite formal credentials, poorly specified job adverts, and sectoral imbalance between an oversupply of computer science and engineering graduates and unmet demand in education and administration &ndash; and argues for education&ndash;industry partnerships, stronger career guidance, and better labour market information.",
+  links=[("blog post","博客原文","https://www.theigc.org/blogs/bridging-skills-mismatches-between-job-seekers-and-firms-ethiopia")]),
+
+ dict(y="2021", t="Measuring Income Expectations Using Phone Surveys",
+  v="Methods note &middot; Mind &amp; Behaviour Research Group, Oxford",
+  vz="方法说明 · 牛津大学 Mind &amp; Behaviour 研究组",
+  ab="A phone-survey protocol for eliciting jobseekers&rsquo; earnings expectations, developed with young jobseekers in Johannesburg. Respondents give probabilities over three states &ndash; formal permanent work, informal or temporary work, and unemployment &ndash; followed by mean, minimum and maximum expected earnings and a question on distributional shape. Fitted uniform and triangular distributions correlate 0.86&ndash;0.92 with direct elicitation, so the short version recovers mean expectations at much lower respondent burden.",
+  links=[("methods note","方法说明","https://mbrg.bsg.ox.ac.uk/method/measuring-income-expectations-using-phone-surveys")]),
+
+ dict(y="2021", t="The Determinants and Implications of Worker Turnover in a Nascent Industry",
+  a_en="Girum Abebe, Stefano Caria &amp; Stefan Dercon", a_zh="与 Abebe、Caria、Dercon 合著",
+  v="Working paper &middot; International Growth Centre", vz="工作论文 · International Growth Centre",
+  ab="We study the drivers of worker exit in Ethiopia&rsquo;s nascent garment industry. Comparing retention incentives against unconditional payments, we find no statistically significant difference in three-month retention rates between the two, which points to low wage levels rather than bonus design as the main driver of the industry&rsquo;s high turnover.",
+  links=[("working paper","工作论文",pdf("igc-worker-turnover.pdf","https://www.theigc.org/sites/default/files/2021/05/Abebe-et-al-2019-Working-paper-2.pdf")),
+         ("IGC page","IGC 页面","https://www.theigc.org/publications/determinants-and-implications-worker-turnover-nascent-industry")]),
+
+ dict(y="2020", t="Incorporating Social Norms-based Messaging Strategies into Programmes",
+  v="Policy brief &middot; Mind &amp; Behaviour Research Group, Oxford",
+  vz="政策简报 · 牛津大学 Mind &amp; Behaviour 研究组",
+  ab="How social norms messaging &ndash; information about how most people behave, or about their approval of a behaviour &ndash; can be folded into cash transfer and other programmes to raise adherence to public health guidance, and what the evidence says about when such messages work.",
+  links=[("policy brief","政策简报",pdf("mbrg-social-norms-messaging.pdf","https://mbrg.bsg.ox.ac.uk/sites/default/files/2020-09/social_norms_mbrg_brief_2.pdf")),
+         ("MBRG page","MBRG 页面","https://mbrg.bsg.ox.ac.uk/node/232")]),
+
+ dict(y="2020", t="The Role of Cash Transfers in Preventing Suicides in Low- and Middle-Income Countries",
+  v="Policy brief &middot; Mind &amp; Behaviour Research Group, Oxford",
+  vz="政策简报 · 牛津大学 Mind &amp; Behaviour 研究组",
+  ab="Evidence from Indonesia and Brazil that conditional cash transfers reduce suicide rates, with effects that are large, long-lasting and concentrated among poorer individuals. The brief sets out what this implies for the design of anti-poverty programmes as mental health policy.",
+  links=[("policy brief","政策简报",pdf("mbrg-cash-transfers-suicides.pdf","https://mbrg.bsg.ox.ac.uk/sites/default/files/2020-09/the_role_of_cash_transfers_in_preventing_suicides_in_lmics_1.pdf")),
+         ("MBRG page","MBRG 页面","https://mbrg.bsg.ox.ac.uk/node/224")]),
+]
