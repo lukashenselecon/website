@@ -380,10 +380,10 @@ def home(lang):
     if lang=="zh":
         return f"""<p class="lbl lead">北京大学 · 光华管理学院</p>
 {portrait(lang)}
-<p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我用实地实验的方法研究中低收入国家的劳动力市场如何运转。</p>
-<p>我关注劳动力市场中的信息摩擦。求职者并不清楚自己相对于其他应聘者的长处究竟在哪里；雇主也很难判断谁真正合适；双方都在依据常常并不准确的判断行动。结果是一个匹配效率低于其潜力的市场：劳动者进入了并不发挥自身所长的岗位，企业也未必能识别出最合适的人选。我通过实验补上缺失的信息，然后观察求职、招聘与职业发展会因此发生什么变化。</p>
-<p>另一条研究脉络把类似的问题用于政治行为：人们为何参与抗议活动与政治竞选动员，以及他们对同伴与对手的判断如何影响这些决定。</p>
-<p>我在埃塞俄比亚、南非、吉尔吉斯斯坦、中国与越南开展田野工作。</p>
+<p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我的研究关注人们如何找到工作、如何留在工作岗位上，以及在失去工作之后如何应对。</p>
+<p>我通过实地实验与大规模调查，通常与政府、企业和公益组织合作，研究三个方面的问题：求职者如何求职、雇主如何招聘；劳动者及其家庭如何承受失业带来的冲击，以及经济补偿金能在多大程度上缓解这种冲击；工作本身的条件，从管理者的水平到工作时间与工作稳定性，如何影响职业发展与身心状态。</p>
+<p>另一条研究脉络关注政治参与，以及人们对同伴与对手的判断如何影响这些决定。</p>
+<p>我的田野工作主要在埃塞俄比亚、南非、吉尔吉斯斯坦、中国与越南开展。</p>
 <p>已发表的论文见<a class="lk" href="/zh/publications">发表论文</a>；工作论文与正在进行的田野项目见<a class="lk" href="/zh/work-in-progress">在研工作</a>。</p>
 
 <h2 class="sec">联系方式</h2>
@@ -394,10 +394,10 @@ def home(lang):
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/references">推荐信</a>页面；关于论文指导，请见<a class="lk" href="/zh/teaching">教学与指导</a>页面。</p>"""
     return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
 {portrait(lang)}
-<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses field experiments to study how labor markets in low- and middle-income countries function.</p>
-<p>I focus on the role of information frictions in labor markets. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms may not recognize the best hires. I run experiments that supply the missing information and follow what it does to search, to hiring, and to careers.</p>
-<p>A second research stream asks similar questions of political behavior: why people turn out for protests and political campaigns, and how beliefs about their peers and their opponents shape those decisions.</p>
-<p>I conduct fieldwork in Ethiopia, South Africa, Kyrgyzstan, China, and Vietnam.</p>
+<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My research is about how people find work, stay in it, and cope when they lose it.</p>
+<p>I run field experiments and large surveys, usually together with governments, firms, and NGOs, to study three things: how jobseekers search and how employers hire, how workers and their families absorb the shock of losing a job and how severance pay can soften it, and how workplace conditions, from the quality of managers to working hours and job security, shape careers and wellbeing.</p>
+<p>A second strand of my work looks at political participation and how beliefs about peers and opponents shape it.</p>
+<p>Most of my fieldwork is in Ethiopia, South Africa, Kyrgyzstan, China, and Vietnam.</p>
 <p>Published articles are on <a class="lk" href="/publications">Publications</a>; drafts and field work still under way are on <a class="lk" href="/work-in-progress">Work in Progress</a>.</p>
 
 <h2 class="sec">Contact</h2>
@@ -561,8 +561,8 @@ def cv(lang):
 <p class="meta">The PDF carries the date it was last revised.</p>'''
 
 PAGES=[("", home, "Lukas Hensel", "Lukas Hensel — 北京大学光华管理学院 经济学副教授",
-        "Associate Professor of Economics at Guanghua School of Management, Peking University. Field experiments on beliefs, information, and labor markets.",
-        "北京大学光华管理学院经济学副教授。研究方向为劳动与发展经济学领域的自然实地实验。"),
+        "Associate Professor of Economics at Guanghua School of Management, Peking University. Field experiments on job search, hiring, job loss, and working conditions.",
+        "北京大学光华管理学院经济学副教授。以实地实验研究求职与招聘、失业冲击与工作条件。"),
        ("publications", pubs, "Publications · Lukas Hensel", "发表论文 · Lukas Hensel",
         "Peer-reviewed articles by Lukas Hensel, with abstracts, ungated versions, and replication packages.",
         "Lukas Hensel 的同行评议论文，附摘要、免费版本与复现材料。"),
