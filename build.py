@@ -306,7 +306,7 @@ def entry(p,lang,cite=True):
     if p.get("ab"):
         row.append(panel("摘要" if zh else "Abstract", f'<p>{p["ab"]}</p>'))
     for en, zh_lab, u in p["links"]:
-        if u.startswith("REPLICATION_URL"):     # not supplied yet — see README
+        if u.startswith("REPLICATION_URL"):     # not supplied yet, see README
             continue
         ext = ' rel="noopener"' if u.startswith("http") else ""
         row.append(f'<a class="chip" href="{u}"{ext}>{zh_lab if zh else en}</a>')
@@ -424,7 +424,7 @@ def wip(lang):
     g1="工作论文" if lang=="zh" else "Working papers"
     g2="进行中" if lang=="zh" else "In progress"
     return (f'<p class="lbl">{lbl}</p>\n<h1>{h}</h1>\n'
-            f'<p class="group">{g1}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang,cite=False) for p in WPS)+"\n</div>\n"
+            f'<p class="group">{g1}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang) for p in WPS)+"\n</div>\n"
             f'<p class="group">{g2}</p>\n<div class="entries">\n'+"\n".join(entry(p,lang,cite=False) for p in WIP)+"\n</div>")
 
 def teaching(lang):
@@ -436,7 +436,7 @@ def teaching(lang):
 <div class="courses">
   <div class="course"><div class="cname">发展经济学</div><div>
     <p class="cmeta">本科生与研究生 · 3 学分 · 2026 年秋季学期</p>
-    <p>课程从发展、贫困与不平等的基本事实出发，回顾并批判性地讨论经济增长与贫困陷阱的基础理论，然后进入实证研究最活跃的若干领域：教育、迁移、劳动力市场、健康、信贷与企业、农业、扶贫项目、环境与气候，以及性别。贯穿全课程的是发展经济学常用的计量方法——随机对照试验、双重差分与断点回归——并用 Stata 做实际操作。研究生还需撰写并展示一份研究计划。</p>
+    <p>课程从发展、贫困与不平等的基本事实出发，回顾并批判性地讨论经济增长与贫困陷阱的基础理论，然后进入实证研究最活跃的若干领域：教育、迁移、劳动力市场、健康、信贷与企业、农业、扶贫项目、环境与气候，以及性别。贯穿全课程的是发展经济学常用的计量方法：随机对照试验、双重差分与断点回归，并用 Stata 做实际操作。研究生还需撰写并展示一份研究计划。</p>
   </div></div>
   <div class="course"><div class="cname">经管学术研讨会</div><div>
     <p class="cmeta">“未来领导者”国际本科项目 · 2 学分 · 2026 年秋季学期</p>
@@ -446,9 +446,9 @@ def teaching(lang):
 <p class="meta">课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
 
 <h2 class="sec">论文指导</h2>
-<p>我指导本科、硕士与博士论文。指导过程全部使用英文——我无法指导以中文写作的论文。</p>
+<p>我指导本科、硕士与博士论文。指导过程全部使用英文。我无法指导以中文写作的论文。</p>
 <p>我的学生大多研究应用经济学问题，并且带有较强的实证成分。近年的论文题目包括：地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、肯尼亚创业培训体系的结构，以及人民币成为全球储备货币的前景。我看重的是你真正关心的问题，以及一条可信的回答路径，而不一定要贴近我自己的研究题目。</p>
-<p><b>如何联系我：</b>发邮件给我，说明你大致想研究什么。不需要写成正式的开题报告——一段话，说明你感兴趣的问题、为什么感兴趣，以及你设想可能用到的数据，就足够了。</p>
+<p><b>如何联系我：</b>发邮件给我，说明你大致想研究什么。不需要写成正式的开题报告；一段话，说明你感兴趣的问题、为什么感兴趣，以及你设想可能用到的数据，就足够了。</p>
 <p><b>博士生。</b>如果你考虑由我指导博士论文，请来信预约一次一对一面谈。博士阶段对双方都是长期投入，值得先坐下来谈一次，而不是只交换邮件。</p>
 <p class="meta">邮箱：<a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>。需要推荐信请见<a class="lk" href="/zh/references">推荐信</a>页面。</p>"""
     return f"""<p class="lbl">Guanghua School of Management</p>
@@ -458,7 +458,7 @@ def teaching(lang):
 <div class="courses">
   <div class="course"><div class="cname">Development Economics</div><div>
     <p class="cmeta">Undergraduate and graduate &middot; 3 credits &middot; Autumn 2026</p>
-    <p>The course opens with the facts about development, poverty and inequality, then works through the basic theories of growth and poverty traps before turning to the areas where most of the empirical work happens: education, migration, labor markets, health, credit and firms, agriculture, poverty alleviation programs, environment and climate, and gender. Running alongside is the econometric toolkit development economists actually use &mdash; randomized controlled trials, difference-in-differences, regression discontinuity &mdash; applied in Stata. Graduate students also draft and present a research proposal.</p>
+    <p>The course opens with the facts about development, poverty and inequality, then works through the basic theories of growth and poverty traps before turning to the areas where most of the empirical work happens: education, migration, labor markets, health, credit and firms, agriculture, poverty alleviation programs, environment and climate, and gender. Running alongside is the econometric toolkit development economists actually use, applied in Stata: randomized controlled trials, difference-in-differences, and regression discontinuity. Graduate students also draft and present a research proposal.</p>
   </div></div>
   <div class="course"><div class="cname">Research Seminar</div><div>
     <p class="cmeta">Future Leaders international undergraduate program &middot; 2 credits &middot; Autumn 2026</p>
@@ -468,9 +468,9 @@ def teaching(lang):
 <p class="meta">Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
 
 <h2 class="sec">Supervision</h2>
-<p>I supervise Bachelor, Master, and PhD theses. All supervision is in English &mdash; I am not able to supervise a thesis written in Chinese.</p>
+<p>I supervise Bachelor, Master, and PhD theses. All supervision is in English. I am not able to supervise a thesis written in Chinese.</p>
 <p>Most of my students work on applied economics, with a strong empirical component. Recent theses have looked at how provincial management of local courts shapes labor disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, the structure of the entrepreneurial training landscape in Kenya, and the Renminbi&rsquo;s prospects as a global reserve currency. What I look for is a question you care about and a credible way of answering it, not necessarily a topic close to my own papers.</p>
-<p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal &mdash; a paragraph saying what question interests you, why, and what data you imagine using is sufficient.</p>
+<p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal. A paragraph saying what question interests you, why, and what data you imagine using is sufficient.</p>
 <p><b>PhD students.</b> If you are considering writing your PhD with me, write to arrange a one-on-one meeting. A doctorate is a long commitment on both sides and is worth an hour of conversation rather than an exchange of emails.</p>
 <p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>. If you need a letter of reference, see the <a class="lk" href="/references">Reference letters</a> page.</p>"""
 
@@ -496,7 +496,7 @@ def references(lang):
 </ul>
 
 <p class="group">之后</p>
-<p>我会在几天内回复是否能写。如果我认为自己写不出一封有力的推荐信，我会直接告诉你，而不是写一封平淡的信——这对你更有利。一旦答应，请在临近截止日期时提醒我一次，这样的提醒我一向欢迎。</p>"""
+<p>我会在几天内回复是否能写。如果我认为自己写不出一封有力的推荐信，我会直接告诉你，而不是写一封平淡的信；这对你更有利。一旦答应，请在临近截止日期时提醒我一次，这样的提醒我一向欢迎。</p>"""
     return f"""<p class="lbl">For students</p>
 <h1>Reference letters</h1>
 <p>What follows is who I can write for, how to ask, and what to send. Reading it first makes the letter I write a better one.</p>
@@ -506,13 +506,13 @@ def references(lang):
 <p>If none of those apply, anything I write will be thin. A specific letter from someone who knows your work will serve you considerably better than a general one from me.</p>
 
 <p class="group">How to ask</p>
-<p>Email me at <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a> with &ldquo;Reference request&rdquo; in the subject line, <b>at least two weeks</b> before your earliest deadline. Tell me what you are applying for, the deadline for each letter, and how it is submitted &mdash; a portal, an email address, or a file you upload yourself.</p>
+<p>Email me at <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a> with &ldquo;Reference request&rdquo; in the subject line, <b>at least two weeks</b> before your earliest deadline. Tell me what you are applying for, the deadline for each letter, and how it is submitted: a portal, an email address, or a file you upload yourself.</p>
 
 <p class="group">What to send with the request</p>
 <ul class="cvlist">
   <li><span>CV</span><div>Current version</div></li>
   <li><span>Transcript</span><div>An unofficial copy is fine</div></li>
-  <li><span>Letter of motivation</span><div>A draft is fine &mdash; I need to see how you are describing yourself</div></li>
+  <li><span>Letter of motivation</span><div>A draft is fine; I need to see how you are describing yourself</div></li>
   <li><span>Anything to highlight</span><div>A paper you wrote for me, a project, an award, or context the rest of the file does not show</div></li>
 </ul>
 
@@ -526,9 +526,9 @@ def cv(lang):
 <p><a class="cta" href="/cv.pdf">下载完整简历（PDF）</a></p>
 <p class="group">现任职务</p>
 <ul class="cvlist">
-  <li><span>2026 —</span><div>经济学副教授，北京大学光华管理学院</div></li>
-  <li><span>2023 — 2026</span><div>经济学助理教授，北京大学光华管理学院</div></li>
-  <li><span>2021 — 2023</span><div>博士后研究员，北京大学光华管理学院</div></li>
+  <li><span>2026–</span><div>经济学副教授，北京大学光华管理学院</div></li>
+  <li><span>2023–2026</span><div>经济学助理教授，北京大学光华管理学院</div></li>
+  <li><span>2021–2023</span><div>博士后研究员，北京大学光华管理学院</div></li>
 </ul>
 <p class="group">学术兼职</p>
 <ul class="cvlist">
@@ -546,9 +546,9 @@ def cv(lang):
 <p><a class="cta" href="/cv.pdf">Download the full CV (PDF)</a></p>
 <p class="group">Positions</p>
 <ul class="cvlist">
-  <li><span>2026 —</span><div>Associate Professor of Economics, Guanghua School of Management, Peking University</div></li>
-  <li><span>2023 &ndash; 2026</span><div>Assistant Professor of Economics, Guanghua School of Management</div></li>
-  <li><span>2021 &ndash; 2023</span><div>Postdoctoral Researcher, Guanghua School of Management</div></li>
+  <li><span>2026–</span><div>Associate Professor of Economics, Guanghua School of Management, Peking University</div></li>
+  <li><span>2023–2026</span><div>Assistant Professor of Economics, Guanghua School of Management</div></li>
+  <li><span>2021–2023</span><div>Postdoctoral Researcher, Guanghua School of Management</div></li>
 </ul>
 <p class="group">Affiliations</p>
 <ul class="cvlist">
@@ -562,7 +562,7 @@ def cv(lang):
 </ul>
 <p class="meta">The PDF carries the date it was last revised.</p>'''
 
-PAGES=[("", home, "Lukas Hensel", "Lukas Hensel — 北京大学光华管理学院 经济学副教授",
+PAGES=[("", home, "Lukas Hensel", "Lukas Hensel，北京大学光华管理学院经济学副教授",
         "Associate Professor of Economics at Guanghua School of Management, Peking University. Field experiments on job search, hiring, job loss, and working conditions.",
         "北京大学光华管理学院经济学副教授。以实地实验研究求职与招聘、失业冲击与工作条件。"),
        ("publications", pubs, "Publications · Lukas Hensel", "发表论文 · Lukas Hensel",

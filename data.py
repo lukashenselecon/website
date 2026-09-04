@@ -150,10 +150,10 @@ WPS = [
 ]
 
 WIP = [
- dict(y="&mdash;", t="Hiring on Soft Skills or Qualifications",
+ dict(y="", t="Hiring on Soft Skills or Qualifications",
   a_en="Robert Garlick, Kate Orkin &amp; Jennifer Kades", a_zh="与 Garlick、Orkin、Kades 合著",
   v="South Africa &middot; analysis underway", vz="南非 · 数据分析中", links=[]),
- dict(y="&mdash;", t="Women&rsquo;s Group Empowerment Can Increase Political Participation: Evidence from Five Coordinated Field Experiments",
+ dict(y="", t="Women&rsquo;s Group Empowerment Can Increase Political Participation: Evidence from Five Coordinated Field Experiments",
   a_en="Damir Esenaliev, Anselm Hager &amp; Elnura Kazakbaeva", a_zh="与 Esenaliev、Hager、Kazakbaeva 合著",
   v="EGAP Metaketa V", vz="EGAP Metaketa V 项目",
   links=[("project page","项目主页","http://egap.org/metaketa/metaketa-v-womens-action-committees-and-local-services")]),
