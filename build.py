@@ -74,10 +74,11 @@ def linkify(text, lang):
             out.append(text[i]); i += 1
     return "".join(out)
 
-NAV=[("","Home","首页"),("publications","Publications","发表论文"),
+NAV=[("","Home","首页"),("cv","CV","个人简历"),
+     ("publications","Publications","发表论文"),
      ("work-in-progress","Work in Progress","在研工作"),
-     ("teaching","Teaching &amp; Supervision","教学与指导"),("references","Reference letters","推荐信"),
-     ("cv","CV","个人简历")]
+     ("teaching","Teaching &amp; Supervision","教学与指导"),
+     ("references","Reference letters","推荐信")]
 
 def url(lang,slug):
     base="/zh/" if lang=="zh" else "/"
