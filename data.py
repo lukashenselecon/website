@@ -130,8 +130,8 @@ WPS = [
   authors=["Yuyu Chen","Lukas Hensel","Xinjue Yao"],
   ab="How does manager quality affect subordinates&rsquo; career progression? We leverage frequent worker-manager reassignments to identify the causal effect of manager quality on workers&rsquo; career outcomes in the context of managerial teams at a large construction firm. Using both difference-in-differences and instrumental variable approaches, we find that exposure to a high-quality manager increases workers&rsquo; subsequent promotion rates by 9 to 13 percentage points. We provide evidence in support of managerial human capital transmission as the primary mechanism: effects are concentrated among workers and positions that require most managerial skills, and exposed workers earn significantly higher performance-based bonuses.",
   v="IZA Discussion Paper 17848 &middot; January 2026 update", vz="IZA 讨论稿 17848 · 2026 年 1 月更新",
-  links=[("draft","工作论文",pdf("followers-to-leaders.pdf","https://www.iza.org/publications/dp/17848")),
-         ("IZA discussion paper","IZA 讨论稿","https://www.iza.org/publications/dp/17848")]),
+  links=[("draft","工作论文",pdf("followers-to-leaders.pdf","https://www.iza.org/publications/dp/17848/from-followers-to-leaders-the-career-impact-of-high-quality-managers")),
+         ("IZA discussion paper","IZA 讨论稿","https://www.iza.org/publications/dp/17848/from-followers-to-leaders-the-career-impact-of-high-quality-managers")]),
 
  dict(y="2025", t="Wage Information and Applicant Selection",
   a_en="Maria Balgova, Tsegay Tekleselassie &amp; Marc Witte", a_zh="与 Balgova、Tekleselassie、Witte 合著",
