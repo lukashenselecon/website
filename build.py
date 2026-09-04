@@ -1,5 +1,14 @@
 # -*- coding: utf-8 -*-
-import os, io, shutil
+import os, io, shutil, hashlib
+
+def _v(path):
+    """Short content hash, so a changed file is never served from cache."""
+    try:
+        return hashlib.md5(io.open(path, "rb").read()).hexdigest()[:8]
+    except OSError:
+        return "1"
+
+CSS_V = _v("assets/style.css")
 from data import PUBS, WPS, WIP, NPR
 
 SITE="https://lukashensel.com"
@@ -104,7 +113,7 @@ def head(lang,slug,title,desc):
 <meta property="og:url" content="{can}">
 <meta property="og:image" content="{SITE}/assets/photo.jpg">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v={CSS_V}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -370,7 +379,6 @@ def portrait(lang):
 def home(lang):
     if lang=="zh":
         return f"""<p class="lbl lead">北京大学 · 光华管理学院</p>
-<h1 class="vh">关于信念、劳动力市场与政治行为的实地实验</h1>
 {portrait(lang)}
 <p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我用实地实验的方法研究中低收入国家的劳动力市场如何运转。</p>
 <p>我关注劳动力市场中的信息摩擦。求职者并不清楚自己相对于其他应聘者的长处究竟在哪里；雇主也很难判断谁真正合适；双方都在依据常常并不准确的判断行动。结果是一个匹配效率低于其潜力的市场：劳动者进入了并不发挥自身所长的岗位，企业也未必能识别出最合适的人选。我通过实验补上缺失的信息，然后观察求职、招聘与职业发展会因此发生什么变化。</p>
@@ -385,7 +393,6 @@ def home(lang):
 </ul>
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/references">推荐信</a>页面；关于论文指导，请见<a class="lk" href="/zh/teaching">教学与指导</a>页面。</p>"""
     return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
-<h1 class="vh">Field Experiments on Beliefs, Labor Markets, and Political Behavior</h1>
 {portrait(lang)}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My work uses field experiments to study how labor markets in low- and middle-income countries function.</p>
 <p>I focus on the role of information frictions in labor markets. Jobseekers do not know what they are good at relative to everyone else applying; employers cannot easily tell who is good; and both sides act on beliefs that are frequently wrong. The result is a market that matches people to jobs worse than it could: workers sort into jobs that do not use what they are best at, and firms may not recognize the best hires. I run experiments that supply the missing information and follow what it does to search, to hiring, and to careers.</p>
