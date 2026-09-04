@@ -322,9 +322,11 @@ def entry(p,lang,cite=True):
         row.append(panel("引用格式" if zh else "Citation",
                          f'<p>{_html.escape(formatted(p))}</p>{rnd}'
                          f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>', " cite"))
+        # econ.bst is only worth pointing at where the randomized order needs it
+        bst_line = f'<p class="fine">{bst_note}</p>' if p.get("random_order") else ""
         row.append(panel("BibTeX",
                          f'<pre>{_html.escape(bibtex(p))}</pre>'
-                         f'<p class="fine">{bst_note}</p>'
+                         f'{bst_line}'
                          f'<button class="copy" type="button" hidden data-copy>{copy_c}</button>'))
     if row:
         out.append('<div class="chips">'+"".join(row)+'</div>')
