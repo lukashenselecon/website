@@ -109,8 +109,7 @@ def linkify(text, lang):
 NAV=[("","Home","首页"),("cv","CV","个人简历"),
      ("publications","Publications","发表论文"),
      ("work-in-progress","Work in Progress","在研工作"),
-     ("teaching","Teaching &amp; Supervision","教学与指导"),
-     ("references","Reference letters","推荐信")]
+     ("teaching","Teaching","教学")]
 
 def url(lang,slug):
     base="/zh/" if lang=="zh" else "/"
@@ -416,7 +415,7 @@ def home(lang):
   <li><span>邮箱</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
   <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}</div></li>
 </ul>
-<p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/references">推荐信</a>页面；关于论文指导，请见<a class="lk" href="/zh/teaching">教学与指导</a>页面。</p>"""
+<p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/teaching#references">推荐信</a>一节；关于论文指导，请见<a class="lk" href="/zh/teaching#supervision">论文指导</a>一节。</p>"""
     return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
 {portrait(lang)}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk nb" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My research is about how people find work, stay in it, and cope when they lose it.</p>
@@ -430,7 +429,7 @@ def home(lang):
   <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
   <li><span>Office hours</span><div>{OFFICE_HOURS_EN}</div></li>
 </ul>
-<p class="meta">Students asking for a letter should read the <a class="lk" href="/references">Reference letters</a> page first; on thesis supervision, see <a class="lk" href="/teaching">Teaching and Supervision</a>.</p>"""
+<p class="meta">Students asking for a letter should read the <a class="lk" href="/teaching#references">Reference letters</a> section first; on thesis supervision, see <a class="lk" href="/teaching#supervision">Thesis supervision</a>.</p>"""
 
 def pubs(lang):
     lbl="期刊论文与其他写作" if lang=="zh" else "Journal articles and other writing"
@@ -454,8 +453,10 @@ def teaching(lang):
     if lang=="zh":
         return f"""<p class="lbl">北京大学光华管理学院</p>
 <h1>教学与指导</h1>
+<p>本页说明我在光华管理学院讲授的课程、论文指导的方式与要求，以及申请推荐信的流程。来信之前，请先阅读相关部分。</p>
+<p class="meta"><a class="lk" href="#courses">课程</a> · <a class="lk" href="#supervision">论文指导</a> · <a class="lk" href="#references">推荐信</a></p>
 
-<h2 class="sec">课程</h2>
+<h2 class="sec" id="courses">课程</h2>
 <div class="courses">
   <div class="course"><div class="cname">发展经济学</div><div>
     <p class="cmeta">本科生与研究生 · 3 学分 · 2026 年秋季学期</p>
@@ -468,16 +469,37 @@ def teaching(lang):
 </div>
 <p class="meta">课程大纲、阅读材料与作业通过北京大学教学网发布，选课学生可直接登录查看。</p>
 
-<h2 class="sec">论文指导</h2>
-<p>我指导本科、硕士与博士论文。指导过程全部使用英文。我无法指导以中文写作的论文。</p>
-<p>我的学生大多研究应用经济学问题，并且带有较强的实证成分。近年的论文题目包括：地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、肯尼亚创业培训体系的结构，以及人民币成为全球储备货币的前景。我看重的是你真正关心的问题，以及一条可信的回答路径，而不一定要贴近我自己的研究题目。</p>
-<p><b>如何联系我：</b>发邮件给我，说明你大致想研究什么。不需要写成正式的开题报告；一段话，说明你感兴趣的问题、为什么感兴趣，以及你设想可能用到的数据，就足够了。</p>
-<p><b>博士生。</b>如果你考虑由我指导博士论文，请来信预约一次一对一面谈。博士阶段对双方都是长期投入，值得先坐下来谈一次，而不是只交换邮件。</p>
-<p class="meta">邮箱：<a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>。需要推荐信请见<a class="lk" href="/zh/references">推荐信</a>页面。</p>"""
+<h2 class="sec" id="supervision">论文指导</h2>
+<p>我指导本科、硕士与博士论文。指导全程使用英文，无法指导以中文写作的论文。</p>
+<p>我的学生多研究应用经济学问题，并有较强的实证成分。近年的论文题目包括：地方法院的省级管理如何影响劳动争议与企业存续、工会如何影响企业减税红利的分配、美国医保扩大 GLP-1 药物覆盖的财政影响、肯尼亚创业培训体系的结构，以及人民币成为全球储备货币的前景。我看重的是你真正关心的问题，以及一条可信的回答路径，而不必贴近我自己的研究方向。</p>
+<p><b>如何与我联系。</b>请来信说明你大致希望研究的方向。不必写成正式的开题报告；一段话，说明问题、你感兴趣的原因，以及设想使用的数据，即已足够。</p>
+<p><b>拟申请博士生。</b>如果你考虑由我指导博士论文，请来信预约一次单独面谈。博士阶段对双方都是长期投入，值得当面谈一次，而非仅以邮件往来。</p>
+<p class="meta">邮箱：<a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>。</p>
+
+<h2 class="sec" id="references">推荐信</h2>
+<p class="group">我可以为谁写</p>
+<p>我为我教过或指导过、并且能够具体评价其学术表现的学生撰写推荐信：修读过我的课程并取得良好成绩、由我指导完成论文、担任过我的研究助理，或所在年级由我担任班主任。</p>
+<p>若以上均不适用，我所能写出的推荐信会失之空泛。一封来自真正了解你工作的老师的推荐信，对你的申请更有帮助。</p>
+
+<p class="group">如何提出申请</p>
+<p>请发邮件至 <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>，主题注明「推荐信申请」，<b>至少提前两周</b>，以最早的截止日期为准。请说明申请的项目或职位、每一封信的截止日期，以及提交方式：在线系统、邮件地址，或由你本人上传的文件。</p>
+
+<p class="group">请随信附上</p>
+<ul class="cvlist">
+  <li><span>简历</span><div>最新版本</div></li>
+  <li><span>成绩单</span><div>非正式版本即可</div></li>
+  <li><span>个人陈述</span><div>草稿亦可；我需要了解你打算如何介绍自己</div></li>
+  <li><span>希望我强调的内容</span><div>你在我课上完成的论文、参与的项目、获得的奖项，或其他材料中无法体现、而你希望我提及的背景</div></li>
+</ul>
+
+<p class="group">之后的流程</p>
+<p>我会在数日内答复能否撰写。若我认为无法写出一封有分量的推荐信，我会直言相告，而不会写一封平淡的信；这对你更为有利。一旦应允，请在临近截止日期时提醒我一次，这样的提醒始终欢迎。</p>"""
     return f"""<p class="lbl">Guanghua School of Management</p>
 <h1>Teaching and Supervision</h1>
+<p>This page sets out the courses I teach at Guanghua, the terms on which I supervise theses, and the procedure for requesting a reference letter. Students are asked to read the relevant section before writing to me.</p>
+<p class="meta"><a class="lk" href="#courses">Courses</a> &middot; <a class="lk" href="#supervision">Thesis supervision</a> &middot; <a class="lk" href="#references">Reference letters</a></p>
 
-<h2 class="sec">Courses</h2>
+<h2 class="sec" id="courses">Courses</h2>
 <div class="courses">
   <div class="course"><div class="cname">Development Economics</div><div>
     <p class="cmeta">Undergraduate and graduate &middot; 3 credits &middot; Autumn 2026</p>
@@ -490,48 +512,22 @@ def teaching(lang):
 </div>
 <p class="meta">Syllabi, readings, and problem sets are distributed through Peking University&rsquo;s course platform, which enrolled students can access directly.</p>
 
-<h2 class="sec">Supervision</h2>
-<p>I supervise Bachelor, Master, and PhD theses. All supervision is in English. I am not able to supervise a thesis written in Chinese.</p>
-<p>Most of my students work on applied economics, with a strong empirical component. Recent theses have looked at how provincial management of local courts shapes labor disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal impact of expanding Medicare coverage of GLP-1 drugs, the structure of the entrepreneurial training landscape in Kenya, and the Renminbi&rsquo;s prospects as a global reserve currency. What I look for is a question you care about and a credible way of answering it, not necessarily a topic close to my own papers.</p>
-<p><b>How to approach me:</b> email me with a rough idea of what you would like to work on. It does not need to be a formal proposal. A paragraph saying what question interests you, why, and what data you imagine using is sufficient.</p>
-<p><b>PhD students.</b> If you are considering writing your PhD with me, write to arrange a one-on-one meeting. A doctorate is a long commitment on both sides and is worth an hour of conversation rather than an exchange of emails.</p>
-<p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>. If you need a letter of reference, see the <a class="lk" href="/references">Reference letters</a> page.</p>"""
+<h2 class="sec" id="supervision">Thesis supervision</h2>
+<p>I supervise Bachelor, Master, and PhD theses. All supervision is conducted in English; I am not able to supervise a thesis written in Chinese.</p>
+<p>Most of my students work on applied economics with a substantial empirical component. Recent theses have examined how provincial management of local courts shapes labor disputes and firm survival, how trade unions affect the distribution of corporate tax cut windfalls, the fiscal implications of extending Medicare coverage to GLP-1 drugs, the structure of the entrepreneurial training landscape in Kenya, and the prospects of the Renminbi as a global reserve currency. What matters is a question you care about and a credible strategy for answering it, not proximity to my own work.</p>
+<p><b>Making contact.</b> Write to me with an outline of what you would like to work on. A formal proposal is not required; a paragraph stating the question, why it interests you, and the data you envisage using is sufficient.</p>
+<p><b>Prospective PhD students.</b> If you are considering writing your doctorate under my supervision, please write to arrange an individual meeting. A doctorate is a long commitment on both sides and warrants a conversation rather than an exchange of emails.</p>
+<p class="meta">Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 
-def references(lang):
-    if lang=="zh":
-        return f"""<p class="lbl">致学生</p>
-<h1>推荐信</h1>
-<p>下面写清楚了我可以为谁写推荐信、如何提出请求，以及需要提供哪些材料。事先读一遍，能让我写出更有分量的信。</p>
+<h2 class="sec" id="references">Reference letters</h2>
+<p class="group">Whom I can write for</p>
+<p>I write for students I have taught or supervised and whose work I can describe concretely: those who took one of my courses and performed well, wrote a thesis under my supervision, worked with me as a research assistant, or belonged to a cohort for which I served as cohort mentor (班主任).</p>
+<p>Where none of these applies, any letter I could write would be thin. A specific letter from someone familiar with your work will serve you considerably better.</p>
 
-<p class="group">我可以为谁写</p>
-<p>我为我教过或指导过、并且我能具体谈论其学术表现的学生写推荐信。通常意味着：你修读过我的课程并取得了不错的成绩，或由我指导完成论文，或担任过我的研究助理，或所在年级由我担任班主任。</p>
-<p>如果以上都不适用，我写出来的信会很空泛。一封来自真正了解你工作的老师的信，对你的申请帮助大得多。</p>
+<p class="group">How to request one</p>
+<p>Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a> with &ldquo;Reference request&rdquo; in the subject line, <b>at least two weeks</b> before your earliest deadline. State what you are applying for, the deadline for each letter, and the method of submission: a portal, an email address, or a file you upload yourself.</p>
 
-<p class="group">如何提出请求</p>
-<p>请发邮件至 <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>，邮件主题写明「推荐信申请」，<b>至少提前两周</b>，以最早的截止日期为准。邮件中请说明：申请的项目或职位、每一封信的截止日期，以及提交方式（在线系统、邮件或上传）。</p>
-
-<p class="group">请随邮件附上</p>
-<ul class="cvlist">
-  <li><span>简历</span><div>最新版本</div></li>
-  <li><span>成绩单</span><div>非正式版本即可</div></li>
-  <li><span>个人陈述</span><div>草稿也可以，我需要知道你打算如何介绍自己</div></li>
-  <li><span>希望我强调的内容</span><div>你在我课上写的论文、参与的项目、获得的奖项，或任何材料中看不出、但你希望我提到的背景</div></li>
-</ul>
-
-<p class="group">之后</p>
-<p>我会在几天内回复是否能写。如果我认为自己写不出一封有力的推荐信，我会直接告诉你，而不是写一封平淡的信；这对你更有利。一旦答应，请在临近截止日期时提醒我一次，这样的提醒我一向欢迎。</p>"""
-    return f"""<p class="lbl">For students</p>
-<h1>Reference letters</h1>
-<p>What follows is who I can write for, how to ask, and what to send. Reading it first makes the letter I write a better one.</p>
-
-<p class="group">Who I can write for</p>
-<p>I write letters for students I have taught or supervised and whose work I can speak to concretely. In practice that means you took one of my courses and did well in it, wrote a thesis under my supervision, worked with me as a research assistant, or were in a cohort I looked after as cohort mentor (班主任).</p>
-<p>If none of those apply, anything I write will be thin. A specific letter from someone who knows your work will serve you considerably better than a general one from me.</p>
-
-<p class="group">How to ask</p>
-<p>Email me at <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a> with &ldquo;Reference request&rdquo; in the subject line, <b>at least two weeks</b> before your earliest deadline. Tell me what you are applying for, the deadline for each letter, and how it is submitted: a portal, an email address, or a file you upload yourself.</p>
-
-<p class="group">What to send with the request</p>
+<p class="group">What to enclose</p>
 <ul class="cvlist">
   <li><span>CV</span><div>Current version</div></li>
   <li><span>Transcript</span><div>An unofficial copy is fine</div></li>
@@ -539,8 +535,8 @@ def references(lang):
   <li><span>Anything to highlight</span><div>A paper you wrote for me, a project, an award, or context the rest of the file does not show</div></li>
 </ul>
 
-<p class="group">What happens then</p>
-<p>I will tell you within a few days whether I can write. If I do not think I can write you a strong letter I will say so rather than send a lukewarm one, which is the better outcome for you. Once I have agreed, a single reminder as the deadline approaches is always welcome.</p>"""
+<p class="group">What follows</p>
+<p>I will respond within a few days as to whether I am able to write. If I do not believe I can write a strong letter I will say so rather than send a lukewarm one, which serves you better. Once I have agreed, a single reminder as the deadline approaches is welcome.</p>"""
 
 def cv(lang):
     if lang=="zh":
@@ -594,11 +590,8 @@ PAGES=[("", home, "Lukas Hensel", "Lukas Hensel，北京大学光华管理学院
        ("work-in-progress", wip, "Work in Progress · Lukas Hensel", "在研工作 · Lukas Hensel",
         "Working papers and field projects in progress.", "工作论文与正在进行的田野项目。"),
        ("teaching", teaching, "Teaching and Supervision · Lukas Hensel", "教学与指导 · Lukas Hensel",
-        "Courses at Guanghua, and how to approach me about a Bachelor, Master or PhD thesis.",
-        "在光华管理学院讲授的课程，以及如何就本科、硕士与博士论文指导与我联系。"),
-       ("references", references, "Reference letters · Lukas Hensel", "推荐信 · Lukas Hensel",
-        "How to request a letter of reference: who I can write for, how to ask, and what to send.",
-        "如何申请推荐信：我可以为谁写、如何提出请求、需要提供哪些材料。"),
+        "Courses at Guanghua, thesis supervision, and how to request a reference letter.",
+        "在光华管理学院讲授的课程、论文指导，以及推荐信的申请流程。"),
        ("cv", cv, "CV · Lukas Hensel", "个人简历 · Lukas Hensel",
         "Positions, affiliations, and education. Full CV as a PDF.", "任职经历、学术兼职与教育背景，完整简历见 PDF。")]
 
@@ -622,6 +615,25 @@ for lang in ("en","zh"):
            "<h1>Page not found</h1><p>The page you asked for has moved or never existed. Start again from the <a class=\"lk\" href=\"/\">home page</a>.</p>")
     html = head(lang,"","Page not found · Lukas Hensel" if lang=="en" else "页面不存在 · Lukas Hensel","")+header(lang,"")+msg+footer(lang)
     write(("zh/404.html" if lang=="zh" else "404.html"), html); n+=1
+
+# /references was folded into /teaching#references. The old URL stays alive as a
+# redirect stub so links already given to students keep working.
+def redirect_stub(lang):
+    target = "/zh/teaching#references" if lang=="zh" else "/teaching#references"
+    title  = "推荐信 · Lukas Hensel" if lang=="zh" else "Reference letters · Lukas Hensel"
+    body   = ('<p>本页已并入<a href="%s">教学与指导</a>页面。</p>' % target if lang=="zh"
+              else '<p>This page has moved to <a href="%s">Teaching and Supervision</a>.</p>' % target)
+    return ('<!doctype html>\n<html lang="%s">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="robots" content="noindex">\n'
+            '<meta http-equiv="refresh" content="0; url=%s">\n'
+            '<link rel="canonical" href="%s%s">\n<title>%s</title>\n</head>\n<body>\n%s\n'
+            '<script>location.replace("%s")</script>\n</body>\n</html>\n'
+            % ("zh-Hans" if lang=="zh" else "en", target,
+               SITE, url(lang,"teaching"), title, body, target))
+
+write("references.html", redirect_stub("en"))
+write("zh/references.html", redirect_stub("zh"))
+n+=2
 
 # robots + sitemap
 write("robots.txt", "User-agent: *\nAllow: /\nDisallow: /stats/\n\nSitemap: %s/sitemap.xml\n" % SITE)
