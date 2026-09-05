@@ -560,8 +560,8 @@ def cv(lang):
 </ul>
 <p class="group">教育背景</p>
 <ul class="cvlist">
-  <li><span>牛津大学</span><div>经济学博士（DPhil）与硕士（MPhil）；曾访学于加州大学伯克利分校</div></li>
-  <li><span>图宾根大学</span><div>国际经济学学士；曾交换于美国塔夫茨大学</div></li>
+  <li><span>牛津大学</span><div>经济学博士（DPhil）与硕士（MPhil）</div></li>
+  <li><span>图宾根大学</span><div>国际经济学学士</div></li>
 </ul>
 <p class="meta">简历最后更新日期见 PDF 首页。</p>'''
     return '''<p class="lbl">Curriculum vitae</p>
@@ -580,8 +580,8 @@ def cv(lang):
 </ul>
 <p class="group">Education</p>
 <ul class="cvlist">
-  <li><span>Oxford</span><div>DPhil and MPhil in Economics; visiting researcher at UC Berkeley</div></li>
-  <li><span>T&uuml;bingen</span><div>BSc in International Economics; exchange at Tufts University</div></li>
+  <li><span>Oxford</span><div>DPhil and MPhil in Economics</div></li>
+  <li><span>T&uuml;bingen</span><div>BSc in International Economics</div></li>
 </ul>
 <p class="meta">The PDF carries the date it was last revised.</p>'''
 

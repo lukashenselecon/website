@@ -166,7 +166,7 @@ WIP = [
   v="", vz="", links=[]),
  dict(y="", t="Women&rsquo;s Group Empowerment Can Increase Political Participation: Evidence from Five Coordinated Field Experiments",
   a_en="Damir Esenaliev, Anselm Hager &amp; Elnura Kazakbaeva", a_zh="与 Esenaliev、Hager、Kazakbaeva 合著",
-  v="EGAP Metaketa V", vz="EGAP Metaketa V 项目",
+  v="Kyrgyzstan &middot; EGAP Metaketa V", vz="吉尔吉斯斯坦 · EGAP Metaketa V 项目",
   links=[("project page","项目主页","http://egap.org/metaketa/metaketa-v-womens-action-committees-and-local-services")]),
 ]
 
