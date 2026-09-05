@@ -58,12 +58,12 @@ PEOPLE = {
   "Yuyu Chen":           "https://en.gsm.pku.edu.cn/faculty/chenyuyu/",
   "Jennifer Kades":      "https://jenniferkades.pythonanywhere.com",
   "Stefan Dercon":       "https://www.bsg.ox.ac.uk/people/stefan-dercon",
-  "Pieter Gautier":      "https://research.vu.nl/en/persons/pieter-gautier/",
-  "Francesco Losma":     "https://www.economics.ox.ac.uk/people/francesco-losma",
-  "Juanjuan Meng":       "https://en.gsm.pku.edu.cn/faculty/jumeng/",
-  "Yiting Chen":         "https://www.ln.edu.hk/econ/people/faculty-economics/professor-chen-yiting",
+  "Pieter Gautier":      "https://sites.google.com/site/pietgautier/",
+  "Francesco Losma":     "https://francescolosma.github.io",
+  "Juanjuan Meng":       "https://sites.google.com/site/juanjuanmeng/research",
+  "Yiting Chen":         "https://ycyitingchen.weebly.com",
   "Haoran He":           "https://bs.bnu.edu.cn/englishversion/facultyresearch/fulltimefaculty/azmsy/119708.html",
-  "Qian Weng":           "https://ideas.repec.org/f/pwe240.html",
+  "Qian Weng":           "http://slhr.ruc.edu.cn/English/Teacher_Home/WENG_Qian/index.htm",
 }
 # Surnames, for the Chinese pages where only the family name is printed.
 # Full names stay available in zh too, so an ambiguous surname (two Chens) can
@@ -77,6 +77,16 @@ for _n, _u in PEOPLE.items():
     _last = _n.split()[-1]
     if len(_owners[_last]) == 1 and _last not in SURNAMES:
         SURNAMES[_last] = _u
+
+# Chinese coauthors are printed under their Chinese names on the zh pages.
+ZH_NAMES = {
+  "陈玉宇": PEOPLE["Yuyu Chen"],
+  "孟涓涓": PEOPLE["Juanjuan Meng"],
+  "陈依婷": PEOPLE["Yiting Chen"],
+  "何浩然": PEOPLE["Haoran He"],
+  "翁茜": PEOPLE["Qian Weng"],
+}
+SURNAMES.update(ZH_NAMES)
 
 def linkify(text, lang):
     """Turn co-author names into links, longest match first."""
@@ -154,7 +164,7 @@ def _profiles(lang):
     zh = lang=="zh"
     out=[('Google Scholar', SCHOLAR),
          ('IZA','https://www.iza.org/en/people/fellows/27501/lukas-hensel'),
-         ('J-PAL','https://www.povertyactionlab.org/invited-researchers')]
+         ('<span class="nb">J-PAL</span>','https://www.povertyactionlab.org/invited-researchers')]
     if ORCID:  out.append(('ORCID','https://orcid.org/%s' % ORCID))
     if TWITTER:out.append(('Twitter','https://twitter.com/%s' % TWITTER))
     if BLUESKY:out.append(('Bluesky','https://bsky.app/profile/%s' % BLUESKY))
@@ -395,7 +405,7 @@ def home(lang):
     if lang=="zh":
         return f"""<p class="lbl lead">北京大学 · 光华管理学院</p>
 {portrait(lang)}
-<p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我的研究关注人们如何找到工作、如何留在工作岗位上，以及在失去工作之后如何应对。</p>
+<p>我是北京大学光华管理学院经济学副教授，同时担任 <a class="lk nb" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> 特邀研究员与 <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> 研究员。我的研究关注人们如何找到工作、如何留在工作岗位上，以及在失去工作之后如何应对。</p>
 <p>我通过实地实验与大规模调查，通常与政府、企业和公益组织合作，研究三个方面的问题：求职者如何求职、雇主如何招聘；劳动者及其家庭如何承受失业带来的冲击，以及经济补偿金能在多大程度上缓解这种冲击；工作本身的条件，从管理者的水平到工作时间与工作稳定性，如何影响职业发展与身心状态。</p>
 <p>另一条研究脉络关注政治参与，以及人们对同伴与对手的判断如何影响这些决定。</p>
 <p>我的田野工作主要在埃塞俄比亚、南非、吉尔吉斯斯坦、中国与越南开展。</p>
@@ -409,7 +419,7 @@ def home(lang):
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/references">推荐信</a>页面；关于论文指导，请见<a class="lk" href="/zh/teaching">教学与指导</a>页面。</p>"""
     return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
 {portrait(lang)}
-<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My research is about how people find work, stay in it, and cope when they lose it.</p>
+<p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk nb" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My research is about how people find work, stay in it, and cope when they lose it.</p>
 <p>I run field experiments and large surveys, usually together with governments, firms, and NGOs, to study three things: how jobseekers search and how employers hire, how workers and their families absorb the shock of losing a job and how severance pay can soften it, and how workplace conditions, from the quality of managers to working hours and job security, shape careers and wellbeing.</p>
 <p>A second strand of my work looks at political participation and how beliefs about peers and opponents shape it.</p>
 <p>Most of my fieldwork is in Ethiopia, South Africa, Kyrgyzstan, China, and Vietnam.</p>
@@ -545,7 +555,7 @@ def cv(lang):
 </ul>
 <p class="group">学术兼职</p>
 <ul class="cvlist">
-  <li><span>&nbsp;</span><div>J-PAL 特邀研究员</div></li>
+  <li><span>&nbsp;</span><div><span class="nb">J-PAL</span> 特邀研究员</div></li>
   <li><span>&nbsp;</span><div>IZA 劳动经济研究所研究员</div></li>
 </ul>
 <p class="group">教育背景</p>
@@ -565,7 +575,7 @@ def cv(lang):
 </ul>
 <p class="group">Affiliations</p>
 <ul class="cvlist">
-  <li><span>&nbsp;</span><div>J-PAL Invited Researcher</div></li>
+  <li><span>&nbsp;</span><div><span class="nb">J-PAL</span> Invited Researcher</div></li>
   <li><span>&nbsp;</span><div>IZA Research Fellow</div></li>
 </ul>
 <p class="group">Education</p>
