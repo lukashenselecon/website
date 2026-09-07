@@ -39,7 +39,7 @@ PUBS = [
  dict(y="2023", t="Political Activists as Free-Riders",
   a_en="Anselm Hager, Johannes Hermle &amp; Christopher Roth", a_zh="与 Hager、Hermle、Roth 合著",
   authors=["Anselm Hager","Lukas Hensel","Johannes Hermle","Christopher Roth"],
-  v="The Economic Journal", vs="133, 2068&ndash;2084",
+  v="The Economic Journal", vs="133(653), 2068&ndash;2084",
   ab="How does a citizen&rsquo;s decision to participate in political activism depend on the participation of others? We conduct a nationwide natural field experiment in collaboration with a major European party during a recent national election. In a party survey, we randomly provide canvassers with true information about the canvassing intentions of their peers. When learning that more peers participate in canvassing than previously believed, canvassers significantly reduce both their canvassing intentions and behaviour. An additional survey among party supporters underscores the importance of free-riding motives and reveals that there is strong heterogeneity in motives underlying supporters&rsquo; behavioural responses.",
   links=[("gated","期刊版本","https://doi.org/10.1093/ej/uead020"),
          ("ungated","免费版本",pdf("political-activists-free-riders.pdf","https://github.com/Luthor113/papers/raw/main/Hensel_Political_Activists.pdf")),
