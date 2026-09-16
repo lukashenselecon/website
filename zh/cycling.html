@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>骑行活动报名 · Lukas Hensel</title>
+<meta name="description" content="">
+<link rel="canonical" href="https://lukashensel.com/zh/cycling">
+<link rel="alternate" hreflang="en" href="https://lukashensel.com/cycling">
+<link rel="alternate" hreflang="zh-Hans" href="https://lukashensel.com/zh/cycling">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="骑行活动报名 · Lukas Hensel">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://lukashensel.com/zh/cycling">
+<meta property="og:image" content="https://lukashensel.com/assets/photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/assets/style.css?v=80eff721">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+<a class="name" href="/zh/">Lukas Hensel</a>
+<div class="right">
+<nav class="nav" aria-label="主导航"><a href="/zh/">首页</a><a href="/zh/cv">个人简历</a><a href="/zh/publications">发表论文</a><a href="/zh/work-in-progress">在研工作</a><a href="/zh/teaching">教学</a></nav>
+<div class="lang"><a href="/cycling" hreflang="en">EN</a><a href="/zh/cycling" hreflang="zh-Hans" aria-current="true">中文</a></div>
+</div>
+</header>
+<main id="main">
+<p class="lbl lead">未来领导者国际班 &middot; 第七届</p>
+<h1>城市骑行：雍和宫至景山公园</h1>
+<ul class="cvlist">
+  <li><span>时间</span><div>2026年9月26日（周六）13:00 出发，全程约四小时，途中安排咖啡休息。</div></li>
+  <li><span>出发</span><div>雍和宫</div></li>
+  <li><span>终点</span><div>景山公园，俯瞰故宫及北京城全景</div></li>
+  <li><span>车辆</span><div>使用共享单车。请提前准备好已完成认证、可正常使用的单车应用（如美团、哈啰）。</div></li>
+  <li><span>报名截止</span><div><b>9月23日（周三）23:59（北京时间）</b></div></li>
+</ul>
+<p>骑行节奏轻松，不需要骑得很快。如有时间，欢迎提前到达，逛逛雍和宫周边，特别推荐马路对面的五道营胡同。</p>
+<h2 class="sec">报名</h2>
+<form class="form" method="post" action="/api/signup/cycling" accept-charset="utf-8">
+<input type="hidden" name="lang" value="zh">
+<div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<label class="field">姓名 <input type="text" name="name" required maxlength="80" autocomplete="name"></label>
+<label class="field">邮箱 <input type="email" name="email" required maxlength="120" autocomplete="email"></label>
+<label class="field">微信号（选填） <input type="text" name="wechat" maxlength="60"></label>
+<fieldset class="field"><legend>共享单车应用是否已可以使用？</legend>
+<label class="choice"><input type="radio" name="bike" value="ready" required> 是，已可使用</label>
+<label class="choice"><input type="radio" name="bike" value="not-yet"> 还没有，周六前会准备好</label>
+<label class="choice"><input type="radio" name="bike" value="help"> 需要帮助设置</label>
+</fieldset>
+<fieldset class="field"><legend>是否会提前到达，逛逛雍和宫周边？（选填）</legend>
+<label class="choice"><input type="radio" name="early" value="yes"> 会</label>
+<label class="choice"><input type="radio" name="early" value="maybe"> 可能</label>
+<label class="choice"><input type="radio" name="early" value="no"> 不会</label>
+</fieldset>
+<label class="field">其他需要说明的事项（选填） <textarea name="note" rows="3" maxlength="500"></textarea></label>
+<button type="submit">提交报名</button>
+</form>
+<p class="meta">如需修改信息，请用同一邮箱重新提交。如无法参加，请在班级微信群告知。</p></main>
+<footer>
+北京大学光华管理学院 · 北京 &nbsp;·&nbsp; <a href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a><br>
+
+</footer>
+<script>
+/* Copy buttons for citations. No external requests; if this does not run the
+   text is still there to select. */
+(function(){
+  if(!navigator.clipboard) return;
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.hidden=false;
+    b.addEventListener("click",function(){
+      var box=b.parentNode, src=box.querySelector("pre")||box.querySelector("p");
+      navigator.clipboard.writeText(src.innerText).then(function(){
+        var t=b.textContent; b.textContent=b.dataset.done||"Copied"; b.dataset.done2=1;
+        b.setAttribute("data-done","1");
+        setTimeout(function(){b.textContent=t;b.removeAttribute("data-done");},1600);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

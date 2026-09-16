@@ -199,3 +199,18 @@ footer{max-width:730px;margin:0 auto;padding:26px 34px 56px;border-top:1px solid
 @media (max-width:640px){footer{padding:22px 18px 44px}}
 footer a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 footer a:hover{color:var(--ink);border-bottom-color:var(--rule-2)}
+
+/* sign-up forms (event pages) */
+.form{margin:14px 0 22px}
+.form .field{display:block;margin:0 0 16px;font-size:14.5px;font-weight:600;color:var(--ink-2)}
+.form fieldset.field{border:0;padding:0}
+.form legend{padding:0;margin-bottom:6px}
+.form input[type=text],.form input[type=email],.form textarea{display:block;width:100%;margin-top:5px;
+  padding:9px 11px;font:inherit;font-weight:400;color:var(--ink);background:var(--card);
+  border:1px solid var(--rule-2);border-radius:3px}
+.form input:focus,.form textarea:focus{outline:2px solid var(--ink);outline-offset:1px}
+.form .choice{display:flex;gap:8px;align-items:baseline;font-weight:400;margin:3px 0;cursor:pointer}
+.form button{font:inherit;font-weight:600;padding:10px 22px;border:0;border-radius:3px;
+  background:var(--ink);color:var(--card);cursor:pointer}
+.form button:hover{background:var(--ink-2)}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}

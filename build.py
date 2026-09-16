@@ -635,8 +635,68 @@ write("references.html", redirect_stub("en"))
 write("zh/references.html", redirect_stub("zh"))
 n+=2
 
+# Event sign-up pages. Unlisted: not in the menu or the sitemap, and marked
+# noindex. The form posts to the small service in deploy/signup/.
+def cycling(lang):
+    zh = lang=="zh"
+    T = (lambda e,z: z if zh else e)
+    opt = lambda name, val, label, req="": (
+        f'<label class="choice"><input type="radio" name="{name}" value="{val}"{req}> {label}</label>')
+    return f'''<p class="lbl lead">{T("Future Leaders &middot; Cohort 7","未来领导者国际班 &middot; 第七届")}</p>
+<h1>{T("Cycling trip: Lama Temple to Jingshan Park","城市骑行：雍和宫至景山公园")}</h1>
+<ul class="cvlist">
+  <li><span>{T("When","时间")}</span><div>{T("Saturday, September 26, 2026, starting at 1:00 pm. About 4 hours, including a coffee break.","2026年9月26日（周六）13:00 出发，全程约四小时，途中安排咖啡休息。")}</div></li>
+  <li><span>{T("Start","出发")}</span><div>{T("Yonghegong (Lama Temple)","雍和宫")}</div></li>
+  <li><span>{T("Finish","终点")}</span><div>{T("Jingshan Park, with a view over the Forbidden City and Beijing","景山公园，俯瞰故宫及北京城全景")}</div></li>
+  <li><span>{T("Bikes","车辆")}</span><div>{T("Shared bikes. Please have a working, verified bike app (for example Meituan or Hellobike) before the day.","使用共享单车。请提前准备好已完成认证、可正常使用的单车应用（如美团、哈啰）。")}</div></li>
+  <li><span>{T("Sign up by","报名截止")}</span><div><b>{T("Wednesday, September 23, 23:59 Beijing time","9月23日（周三）23:59（北京时间）")}</b></div></li>
+</ul>
+<p>{T("The pace is relaxed, so no need to be a fast cyclist. If you can, come early and explore the area around the Lama Temple first. I especially recommend a stroll down Wudaoying Hutong, just across the street.","骑行节奏轻松，不需要骑得很快。如有时间，欢迎提前到达，逛逛雍和宫周边，特别推荐马路对面的五道营胡同。")}</p>
+<h2 class="sec">{T("Sign up","报名")}</h2>
+<form class="form" method="post" action="/api/signup/cycling" accept-charset="utf-8">
+<input type="hidden" name="lang" value="{lang}">
+<div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<label class="field">{T("Full name","姓名")} <input type="text" name="name" required maxlength="80" autocomplete="name"></label>
+<label class="field">{T("Email","邮箱")} <input type="email" name="email" required maxlength="120" autocomplete="email"></label>
+<label class="field">{T("WeChat ID (optional)","微信号（选填）")} <input type="text" name="wechat" maxlength="60"></label>
+<fieldset class="field"><legend>{T("Is your shared-bike app set up?","共享单车应用是否已可以使用？")}</legend>
+{opt("bike","ready",T("Yes, ready to ride","是，已可使用")," required")}
+{opt("bike","not-yet",T("Not yet, I will set it up before Saturday","还没有，周六前会准备好"))}
+{opt("bike","help",T("I would like some help setting it up","需要帮助设置"))}
+</fieldset>
+<fieldset class="field"><legend>{T("Will you come early to explore around the Lama Temple? (optional)","是否会提前到达，逛逛雍和宫周边？（选填）")}</legend>
+{opt("early","yes",T("Yes","会"))}
+{opt("early","maybe",T("Maybe","可能"))}
+{opt("early","no",T("No","不会"))}
+</fieldset>
+<label class="field">{T("Anything I should know? (optional)","其他需要说明的事项（选填）")} <textarea name="note" rows="3" maxlength="500"></textarea></label>
+<button type="submit">{T("Sign up","提交报名")}</button>
+</form>
+<p class="meta">{T("To change your details, submit the form again with the same email address. If you can no longer come, please let me know in the class WeChat group.","如需修改信息，请用同一邮箱重新提交。如无法参加，请在班级微信群告知。")}</p>'''
+
+def cycling_thanks(lang):
+    zh = lang=="zh"
+    if zh:
+        return ('<p class="lbl lead">未来领导者国际班 &middot; 第七届</p><h1>报名成功</h1>'
+                '<p>感谢报名！9月26日（周六）13:00 雍和宫见。更多细节将稍后在班级微信群发布。</p>'
+                '<p class="meta">如需修改信息，请用同一邮箱<a class="lk" href="/zh/cycling">重新提交</a>。</p>')
+    return ('<p class="lbl lead">Future Leaders &middot; Cohort 7</p><h1>You are signed up</h1>'
+            '<p>Thanks for signing up! See you on Saturday, September 26 at 1:00 pm at the Lama Temple. '
+            'More details will follow in the class WeChat group.</p>'
+            '<p class="meta">To change your details, <a class="lk" href="/cycling">submit the form again</a> with the same email address.</p>')
+
+EVENT_PAGES=[("cycling", cycling, "Cycling trip sign-up · Lukas Hensel", "骑行活动报名 · Lukas Hensel"),
+             ("cycling-thanks", cycling_thanks, "Signed up · Lukas Hensel", "报名成功 · Lukas Hensel")]
+for slug, fn, t_en, t_zh in EVENT_PAGES:
+    for lang in ("en","zh"):
+        title = t_zh if lang=="zh" else t_en
+        page = head(lang,slug,title,"").replace('<meta charset="utf-8">',
+                                                '<meta charset="utf-8">\n<meta name="robots" content="noindex">',1)
+        page += header(lang,slug)+fn(lang)+footer(lang, profiles=False)
+        write(("zh/" if lang=="zh" else "")+slug+".html", page); n+=1
+
 # robots + sitemap
-write("robots.txt", "User-agent: *\nAllow: /\nDisallow: /stats/\n\nSitemap: %s/sitemap.xml\n" % SITE)
+write("robots.txt", "User-agent: *\nAllow: /\nDisallow: /stats/\nDisallow: /signups/\n\nSitemap: %s/sitemap.xml\n" % SITE)
 urls=[]
 for slug,_,_,_,_,_ in PAGES:
     for lang in ("en","zh"):

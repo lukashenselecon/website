@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cycling trip sign-up · Lukas Hensel</title>
+<meta name="description" content="">
+<link rel="canonical" href="https://lukashensel.com/cycling">
+<link rel="alternate" hreflang="en" href="https://lukashensel.com/cycling">
+<link rel="alternate" hreflang="zh-Hans" href="https://lukashensel.com/zh/cycling">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Cycling trip sign-up · Lukas Hensel">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://lukashensel.com/cycling">
+<meta property="og:image" content="https://lukashensel.com/assets/photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/assets/style.css?v=80eff721">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+<a class="name" href="/">Lukas Hensel</a>
+<div class="right">
+<nav class="nav" aria-label="Main"><a href="/">Home</a><a href="/cv">CV</a><a href="/publications">Publications</a><a href="/work-in-progress">Work in Progress</a><a href="/teaching">Teaching</a></nav>
+<div class="lang"><a href="/cycling" hreflang="en" aria-current="true">EN</a><a href="/zh/cycling" hreflang="zh-Hans">中文</a></div>
+</div>
+</header>
+<main id="main">
+<p class="lbl lead">Future Leaders &middot; Cohort 7</p>
+<h1>Cycling trip: Lama Temple to Jingshan Park</h1>
+<ul class="cvlist">
+  <li><span>When</span><div>Saturday, September 26, 2026, starting at 1:00 pm. About 4 hours, including a coffee break.</div></li>
+  <li><span>Start</span><div>Yonghegong (Lama Temple)</div></li>
+  <li><span>Finish</span><div>Jingshan Park, with a view over the Forbidden City and Beijing</div></li>
+  <li><span>Bikes</span><div>Shared bikes. Please have a working, verified bike app (for example Meituan or Hellobike) before the day.</div></li>
+  <li><span>Sign up by</span><div><b>Wednesday, September 23, 23:59 Beijing time</b></div></li>
+</ul>
+<p>The pace is relaxed, so no need to be a fast cyclist. If you can, come early and explore the area around the Lama Temple first. I especially recommend a stroll down Wudaoying Hutong, just across the street.</p>
+<h2 class="sec">Sign up</h2>
+<form class="form" method="post" action="/api/signup/cycling" accept-charset="utf-8">
+<input type="hidden" name="lang" value="en">
+<div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<label class="field">Full name <input type="text" name="name" required maxlength="80" autocomplete="name"></label>
+<label class="field">Email <input type="email" name="email" required maxlength="120" autocomplete="email"></label>
+<label class="field">WeChat ID (optional) <input type="text" name="wechat" maxlength="60"></label>
+<fieldset class="field"><legend>Is your shared-bike app set up?</legend>
+<label class="choice"><input type="radio" name="bike" value="ready" required> Yes, ready to ride</label>
+<label class="choice"><input type="radio" name="bike" value="not-yet"> Not yet, I will set it up before Saturday</label>
+<label class="choice"><input type="radio" name="bike" value="help"> I would like some help setting it up</label>
+</fieldset>
+<fieldset class="field"><legend>Will you come early to explore around the Lama Temple? (optional)</legend>
+<label class="choice"><input type="radio" name="early" value="yes"> Yes</label>
+<label class="choice"><input type="radio" name="early" value="maybe"> Maybe</label>
+<label class="choice"><input type="radio" name="early" value="no"> No</label>
+</fieldset>
+<label class="field">Anything I should know? (optional) <textarea name="note" rows="3" maxlength="500"></textarea></label>
+<button type="submit">Sign up</button>
+</form>
+<p class="meta">To change your details, submit the form again with the same email address. If you can no longer come, please let me know in the class WeChat group.</p></main>
+<footer>
+Guanghua School of Management, Peking University, Beijing &nbsp;·&nbsp; <a href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a><br>
+
+</footer>
+<script>
+/* Copy buttons for citations. No external requests; if this does not run the
+   text is still there to select. */
+(function(){
+  if(!navigator.clipboard) return;
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.hidden=false;
+    b.addEventListener("click",function(){
+      var box=b.parentNode, src=box.querySelector("pre")||box.querySelector("p");
+      navigator.clipboard.writeText(src.innerText).then(function(){
+        var t=b.textContent; b.textContent=b.dataset.done||"Copied"; b.dataset.done2=1;
+        b.setAttribute("data-done","1");
+        setTimeout(function(){b.textContent=t;b.removeAttribute("data-done");},1600);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+name: Set up sign-up forms
+
+# Run this by hand from the Actions tab. It installs the small sign-up service
+# on the web server (see deploy/signup/README.md). Safe to run again, for
+# example after adding a new event; existing sign-ups are kept.
+#
+# Uses the same secrets as the other workflows:
+#   SERVER_SSH_KEY, SERVER_IP, STATS_PASSWORD (login for /signups/, same as /stats/)
+
+on:
+  workflow_dispatch:
+    inputs:
+      stats_user:
+        description: 'Username for the sign-up list'
+        required: true
+        default: 'lukas'
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Load the deploy key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Copy the scripts to the server
+        run: |
+          tar cz --exclude '__pycache__' -C deploy signup \
+            | ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+                root@${{ secrets.SERVER_IP }} \
+                'rm -rf /root/site-signup && mkdir -p /root/site-signup \
+                 && tar xz -C /root/site-signup --strip-components=1'
+
+      - name: Run the setup script on the server
+        env:
+          STATS_USER: ${{ inputs.stats_user }}
+          STATS_PASS: ${{ secrets.STATS_PASSWORD }}
+        run: |
+          b64() { printf '%s' "$1" | base64 -w0; }
+          {
+            echo "STATS_USER=\$(echo $(b64 "$STATS_USER") | base64 -d)"
+            echo "STATS_PASS=\$(echo $(b64 "$STATS_PASS") | base64 -d)"
+            echo 'export STATS_USER STATS_PASS'
+            echo 'bash /root/site-signup/setup-signup.sh'
+          } | ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+                root@${{ secrets.SERVER_IP }} 'bash -s'

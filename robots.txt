@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /stats/
+Disallow: /signups/
 
 Sitemap: https://lukashensel.com/sitemap.xml
