@@ -9,7 +9,7 @@ Beijing time).
 * Responses: **https://lukashensel.com/signups/**, same login as `/stats/`,
   with a CSV download that opens cleanly in Excel.
 
-Signing up again with the same email address replaces the earlier entry.
+Only a name is asked. Submitting the same name twice keeps one entry.
 After the deadline the form answers with a "sign-up has closed" page.
 
 ## First-time setup

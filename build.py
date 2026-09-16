@@ -657,33 +657,20 @@ def cycling(lang):
 <input type="hidden" name="lang" value="{lang}">
 <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 <label class="field">{T("Full name","姓名")} <input type="text" name="name" required maxlength="80" autocomplete="name"></label>
-<label class="field">{T("Email","邮箱")} <input type="email" name="email" required maxlength="120" autocomplete="email"></label>
-<label class="field">{T("WeChat ID (optional)","微信号（选填）")} <input type="text" name="wechat" maxlength="60"></label>
-<fieldset class="field"><legend>{T("Is your shared-bike app set up?","共享单车应用是否已可以使用？")}</legend>
-{opt("bike","ready",T("Yes, ready to ride","是，已可使用")," required")}
-{opt("bike","not-yet",T("Not yet, I will set it up before Saturday","还没有，周六前会准备好"))}
-{opt("bike","help",T("I would like some help setting it up","需要帮助设置"))}
-</fieldset>
-<fieldset class="field"><legend>{T("Will you come early to explore around the Lama Temple? (optional)","是否会提前到达，逛逛雍和宫周边？（选填）")}</legend>
-{opt("early","yes",T("Yes","会"))}
-{opt("early","maybe",T("Maybe","可能"))}
-{opt("early","no",T("No","不会"))}
-</fieldset>
-<label class="field">{T("Anything I should know? (optional)","其他需要说明的事项（选填）")} <textarea name="note" rows="3" maxlength="500"></textarea></label>
 <button type="submit">{T("Sign up","提交报名")}</button>
 </form>
-<p class="meta">{T("To change your details, submit the form again with the same email address. If you can no longer come, please let me know in the class WeChat group.","如需修改信息，请用同一邮箱重新提交。如无法参加，请在班级微信群告知。")}</p>'''
+<p class="meta">{T("If you can no longer come, please let me know in the class WeChat group.","如无法参加，请在班级微信群告知。")}</p>'''
 
 def cycling_thanks(lang):
     zh = lang=="zh"
     if zh:
         return ('<p class="lbl lead">未来领导者国际班 &middot; 第七届</p><h1>报名成功</h1>'
                 '<p>感谢报名！9月26日（周六）13:00 雍和宫见。更多细节将稍后在班级微信群发布。</p>'
-                '<p class="meta">如需修改信息，请用同一邮箱<a class="lk" href="/zh/cycling">重新提交</a>。</p>')
+                '')
     return ('<p class="lbl lead">Future Leaders &middot; Cohort 7</p><h1>You are signed up</h1>'
             '<p>Thanks for signing up! See you on Saturday, September 26 at 1:00 pm at the Lama Temple. '
             'More details will follow in the class WeChat group.</p>'
-            '<p class="meta">To change your details, <a class="lk" href="/cycling">submit the form again</a> with the same email address.</p>')
+            '')
 
 EVENT_PAGES=[("cycling", cycling, "Cycling trip sign-up · Lukas Hensel", "骑行活动报名 · Lukas Hensel"),
              ("cycling-thanks", cycling_thanks, "Signed up · Lukas Hensel", "报名成功 · Lukas Hensel")]

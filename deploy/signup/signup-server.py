@@ -6,9 +6,8 @@ Standard library only. nginx forwards two things here:
   POST /api/signup/<event>   the public form (see cycling.html)
   GET  /signups/...          the password-protected list (auth is done by nginx)
 
-Responses are kept in one CSV per event under $SIGNUP_DIR. A second sign-up
-with the same email address replaces the earlier one, so students can correct
-their details by simply submitting the form again.
+Responses are kept in one CSV per event under $SIGNUP_DIR. Submitting the same
+name twice (ignoring case and extra spaces) keeps a single entry.
 """
 import csv, html, io, os, sys, threading
 from datetime import datetime, timezone, timedelta
@@ -28,12 +27,7 @@ EVENTS = {
         "page": "/cycling",
         "fields": [
             # (name, label, required, max length, allowed values or None)
-            ("name",   "Name",              True,  80,  None),
-            ("email",  "Email",             True,  120, None),
-            ("wechat", "WeChat ID",         False, 60,  None),
-            ("bike",   "Shared-bike app",   True,  20,  ("ready", "not-yet", "help")),
-            ("early",  "Exploring before",  False, 10,  ("yes", "maybe", "no")),
-            ("note",   "Note",              False, 500, None),
+            ("name", "Name", True, 80, None),
         ],
     },
 }
@@ -145,19 +139,17 @@ class Handler(BaseHTTPRequestHandler):
             if allowed and v and v not in allowed:
                 problems.append(label)
             row[name] = v
-        email = row.get("email", "")
-        if email and ("@" not in email or " " in email or "." not in email.split("@")[-1]):
-            problems.append("Email")
         if problems:
             return self.message(400, lang, "请检查表格" if zh else "Please check the form",
                                 ("以下内容缺失或有误：" if zh else "Missing or invalid: ")
                                 + html.escape(", ".join(dict.fromkeys(problems))), back)
 
-        row["email"] = email.lower()
+        row["name"] = " ".join(row["name"].split())
         row["lang"] = lang
         row["submitted_bj"] = datetime.now(BJ).strftime("%Y-%m-%d %H:%M")
         with LOCK:
-            rows = [r for r in load(slug) if r.get("email", "").lower() != row["email"]]
+            key = row["name"].casefold()
+            rows = [r for r in load(slug) if " ".join(r.get("name", "").split()).casefold() != key]
             rows.append(row)
             save(slug, ev, rows)
         self.send(303, "", extra={"Location": back + "-thanks"})
@@ -191,7 +183,7 @@ class Handler(BaseHTTPRequestHandler):
             out.append('<p><b>%d signed up</b> &middot; sign-up %s (deadline %s Beijing time) &middot; '
                        '<a class="lk" href="/signups/%s.csv">Download CSV</a></p>'
                        % (len(rows), state, ev["deadline"].strftime("%a %d %b, %H:%M"), slug))
-            if rows:
+            if rows and "bike" in [f[0] for f in ev["fields"]]:
                 out.append('<p class="meta">Shared-bike app: %s</p>' % ", ".join(
                     "%s %d" % (LABELS.get(k, k or "?"), v) for k, v in bikes.items()))
                 heads = ["#", "Signed up"] + [f[1] for f in ev["fields"]]
