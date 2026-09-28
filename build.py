@@ -10,6 +10,7 @@ def _v(path):
 
 CSS_V = _v("assets/style.css")
 from data import PUBS, WPS, WIP, NPR
+from cyclemap import map_html
 
 SITE="https://lukashensel.com"
 EMAIL="lukas.hensel@gsm.pku.edu.cn"
@@ -640,39 +641,58 @@ n+=2
 def cycling(lang):
     zh = lang=="zh"
     T = (lambda e,z: z if zh else e)
-    opt = lambda name, val, label, req="": (
-        f'<label class="choice"><input type="radio" name="{name}" value="{val}"{req}> {label}</label>')
+    stops = [
+        ("13:00", T("Lama Temple (Yonghegong)","雍和宫"),
+                  T("Meet at the main gate, bikes ready.","主门集合，准备好单车。")),
+        ("13:15", T("Wudaoying Hutong","五道营胡同"),
+                  T("West through the hutong.","沿胡同向西骑行。")),
+        ("13:35", T("Confucius Temple and Guozijian","孔庙与国子监"),
+                  T("Short stop under the old archways.","在牌楼下短暂停留。")),
+        ("14:00", T("Drum and Bell Towers","鼓楼与钟楼"),
+                  T("Along Gulou Dong Dajie.","沿鼓楼东大街骑行。")),
+        ("14:10", T("Houhai and Qianhai","后海与前海"),
+                  T("Yandai Xiejie, Silver Ingot Bridge, and the lake shore.","烟袋斜街、银锭桥，沿湖骑行。")),
+        ("14:30", T("Coffee at Voyage Coffee","Voyage Coffee 咖啡休息"),
+                  T("Di'anmen Dong Dajie 97, at the south end of Nanluoguxiang. Half an hour off the bikes.","地安门东大街97号（南锣鼓巷南口）。休息约半小时。")),
+        ("15:15", T("PKU Red Building","北大红楼"),
+                  T("Free entry, no booking needed, but bring your passport for the security check. Last admission 16:30.","免费参观，无需预约，但须携带护照通过安检。16:30 停止入馆。")),
+        ("16:30", T("Jingshan Park","景山公园"),
+                  T("2 yuan at the gate, then up to Wanchun Pavilion for the view.","门票2元，登万春亭俯瞰全城。")),
+    ]
+    dots = "①②③④⑤⑥⑦⑧"
+    rows = "".join('<li><span>%s %s</span><div><b>%s</b><br><span class="meta">%s</span></div></li>'
+                   % (dots[i], s_[0], s_[1], s_[2]) for i, s_ in enumerate(stops))
     return f'''<p class="lbl lead">{T("Future Leaders &middot; Cohort 7","未来领导者国际班 &middot; 第七届")}</p>
 <h1>{T("Cycling trip: Lama Temple to Jingshan Park","城市骑行：雍和宫至景山公园")}</h1>
 <ul class="cvlist">
-  <li><span>{T("When","时间")}</span><div>{T("Saturday, September 26, 2026, starting at 1:00 pm. About 4 hours, including a coffee break.","2026年9月26日（周六）13:00 出发，全程约四小时，途中安排咖啡休息。")}</div></li>
-  <li><span>{T("Start","出发")}</span><div>{T("Yonghegong (Lama Temple)","雍和宫")}</div></li>
+  <li><span>{T("When","时间")}</span><div>{T("<b>Sunday, September 27, 2026</b>, starting at 1:00 pm. About four and a half hours, including a coffee break and the Red Building.","<b>2026年9月27日（周日）</b>13:00 出发，全程约四个半小时，含咖啡休息与北大红楼参观。")}</div></li>
+  <li><span>{T("Start","出发")}</span><div>{T("Yonghegong (Lama Temple), main gate","雍和宫主门")}</div></li>
   <li><span>{T("Finish","终点")}</span><div>{T("Jingshan Park, with a view over the Forbidden City and Beijing","景山公园，俯瞰故宫及北京城全景")}</div></li>
+  <li><span>{T("Distance","距离")}</span><div>{T("About 11 km, at a relaxed pace","约11公里，节奏轻松")}</div></li>
   <li><span>{T("Bikes","车辆")}</span><div>{T("Shared bikes. Please have a working, verified bike app (for example Meituan or Hellobike) before the day.","使用共享单车。请提前准备好已完成认证、可正常使用的单车应用（如美团、哈啰）。")}</div></li>
-  <li><span>{T("Sign up by","报名截止")}</span><div><b>{T("Wednesday, September 23, 23:59 Beijing time","9月23日（周三）23:59（北京时间）")}</b></div></li>
+  <li><span>{T("Bring","携带")}</span><div>{T("Your passport, for the Red Building security check, and a few yuan for the Jingshan ticket.","护照（北大红楼安检需要）以及少量现金或手机支付（景山门票）。")}</div></li>
 </ul>
 <p>{T("The pace is relaxed, so no need to be a fast cyclist. If you can, come early and explore the area around the Lama Temple first. I especially recommend a stroll down Wudaoying Hutong, just across the street.","骑行节奏轻松，不需要骑得很快。如有时间，欢迎提前到达，逛逛雍和宫周边，特别推荐马路对面的五道营胡同。")}</p>
-<h2 class="sec">{T("Sign up","报名")}</h2>
-<form class="form" method="post" action="/api/signup/cycling" accept-charset="utf-8">
-<input type="hidden" name="lang" value="{lang}">
-<div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-<label class="field">{T("Full name","姓名")} <input type="text" name="name" required maxlength="80" autocomplete="name"></label>
-<button type="submit">{T("Sign up","提交报名")}</button>
-</form>
-<p class="meta">{T("If you can no longer come, please let me know in the class WeChat group.","如无法参加，请在班级微信群告知。")}</p>'''
+<h2 class="sec">{T("The route","路线")}</h2>
+<figure class="mapfig">
+{map_html(lang)}
+<figcaption>{T('Swipe or scroll the map sideways on a phone. Basemap &#169; AutoNavi (Amap); route drawn with OpenStreetMap data.','手机上可左右滑动查看地图。底图 &#169; 高德地图；路线基于 OpenStreetMap 数据绘制。')}</figcaption>
+</figure>
+<ul class="cvlist">{rows}</ul>
+<p class="meta">{T("Plans can shift on the day. If you can no longer come, or you are running late, let me know in the class WeChat group.","当天安排可能略有调整。如无法参加或迟到，请在班级微信群告知。")}</p>'''
 
 def cycling_thanks(lang):
     zh = lang=="zh"
     if zh:
         return ('<p class="lbl lead">未来领导者国际班 &middot; 第七届</p><h1>报名成功</h1>'
-                '<p>感谢报名！9月26日（周六）13:00 雍和宫见。更多细节将稍后在班级微信群发布。</p>'
+                '<p>感谢报名！9月27日（周日）13:00 雍和宫见。更多细节将稍后在班级微信群发布。</p>'
                 '')
     return ('<p class="lbl lead">Future Leaders &middot; Cohort 7</p><h1>You are signed up</h1>'
-            '<p>Thanks for signing up! See you on Saturday, September 26 at 1:00 pm at the Lama Temple. '
+            '<p>Thanks for signing up! See you on Sunday, September 27 at 1:00 pm at the Lama Temple. '
             'More details will follow in the class WeChat group.</p>'
             '')
 
-EVENT_PAGES=[("cycling", cycling, "Cycling trip sign-up · Lukas Hensel", "骑行活动报名 · Lukas Hensel"),
+EVENT_PAGES=[("cycling", cycling, "Cycling trip · Lukas Hensel", "骑行活动 · Lukas Hensel"),
              ("cycling-thanks", cycling_thanks, "Signed up · Lukas Hensel", "报名成功 · Lukas Hensel")]
 for slug, fn, t_en, t_zh in EVENT_PAGES:
     for lang in ("en","zh"):
@@ -681,6 +701,86 @@ for slug, fn, t_en, t_zh in EVENT_PAGES:
                                                 '<meta charset="utf-8">\n<meta name="robots" content="noindex">',1)
         page += header(lang,slug)+fn(lang)+footer(lang, profiles=False)
         write(("zh/" if lang=="zh" else "")+slug+".html", page); n+=1
+
+# Travel notes for visiting academics. English only and unlisted for now: not in
+# the menu or the sitemap, and marked noindex. /zh/visiting redirects here.
+def visiting(lang):
+    return f"""<p class="lbl lead">For visiting academics</p>
+<h1>Visiting Beijing</h1>
+<p>Colleagues who come to Guanghua for a seminar or a longer visit tend to ask me the same questions, so I have collected my answers here. Most of this is about the first 48 hours: getting paid, getting online, and getting around. Rules change often, so please double-check anything official before you travel.</p>
+<p class="meta"><b>The working visit:</b> <a class="lk" href="#entry">Entry</a> &middot; <a class="lk" href="#apps">Apps</a> &middot; <a class="lk" href="#phone">Phone number</a> &middot; <a class="lk" href="#online">Getting online</a> &middot; <a class="lk" href="#booking">Booking</a> &middot; <a class="lk" href="#talks">Other places to present</a><br><b>Tourism:</b> <a class="lk" href="#sights">Sightseeing</a> &middot; <a class="lk" href="#food">Food</a></p>
+
+<h2 class="part" id="work">The working visit</h2>
+<h2 class="sec" id="entry">Entry</h2>
+<p>Citizens of a long list of countries, including most of the EU, the UK, Switzerland, Norway, Japan, Korea, Australia, New Zealand and Canada, can currently enter China without a visa for up to 30 days for business, tourism, visits and exchanges. Giving a seminar falls under this. The policy currently runs until the end of 2026 and has been extended several times, but check before you book.</p>
+<p>US citizens are not on that list, but can use the 240-hour (10-day) visa-free transit if they arrive from one country and leave for a different third country, for example flying in from Tokyo and out to Singapore. Otherwise a regular visa is needed. If you need an invitation letter from Guanghua, let me know early.</p>
+<p class="meta">Official source: <a class="lk" href="https://en.nia.gov.cn/">National Immigration Administration</a>.</p>
+
+<h2 class="sec" id="apps">Apps to set up before you leave</h2>
+<ul class="cvlist">
+  <li><span>WeChat</span><div>How everyone here communicates. Colleagues, students and hosts will ask to add you rather than exchange emails or phone numbers. Create the account at home; new accounts sometimes need an existing user to confirm them.</div></li>
+  <li><span>Alipay</span><div>How everyone here pays. Link your Visa or Mastercard, verify your identity with your passport, and make a small test payment before you fly. Street food, taxis, museum shops and vending machines all work with it. Payments with a foreign card may carry a small fee on larger amounts. WeChat Pay works the same way and is a good backup.</div></li>
+  <li><span>DiDi</span><div>For taxis. Available as its own app with an English interface, or inside Alipay, and it charges your linked card.</div></li>
+  <li><span>Maps</span><div>Google Maps is unreliable here. Apple Maps works well in Beijing; Amap (高德地图) is what locals use.</div></li>
+</ul>
+<p><b>Real-name verification is mandatory.</b> Both WeChat and Alipay require you to verify your identity, usually by uploading your passport and completing a face scan, before you can pay or use most features. For foreigners this step sometimes fails, for example because the name on the passport is formatted differently or the face match does not go through, and it can take a day or two to resolve through customer service. Do it at home well before you leave, and set up both apps so that one still works if the other gets stuck.</p>
+<p>Hotels and larger restaurants still take international cards, and a little cash never hurts, but small shops and stalls often only have a QR code.</p>
+
+<h2 class="sec" id="phone">A local phone number</h2>
+<p>Many services in China verify your identity through a Chinese mobile number, and a roaming or travel eSIM number will not pass. You will notice this sooner than you think: some vending machines at the airport, shared bikes, and a number of ticketing and delivery apps all ask for one.</p>
+<p>If you stay for more than a few days, it is worth picking up a prepaid SIM from China Mobile or China Unicom. Both have counters in the arrivals halls at Capital (PEK) and Daxing (PKX) airports, and you need only your passport. Most phones take a second SIM or eSIM, so you can keep your home number running alongside.</p>
+
+<h2 class="sec" id="online">Getting online</h2>
+<p>Google (including Gmail, Scholar and Drive), Slack, WhatsApp and many news sites are blocked in mainland China, and a Chinese SIM or hotel wifi will not reach them. This matters more than people expect for a working visit: slides in Google Drive, co-author chats, and journal portals that load Google scripts.</p>
+<ul class="cvlist">
+  <li><span>Home university</span><div>Most universities offer a VPN for staff. Install it and test it before you leave, and make sure you can log in without a code sent to an app you cannot reach from here.</div></li>
+  <li><span>Roaming</span><div>Mobile data roaming on your home SIM is routed through your home network, so it generally works as it would at home. It is the simplest fallback. Many travel eSIMs behave the same way.</div></li>
+</ul>
+<p>A combination works well: a local SIM for verification codes and local apps, and roaming or a travel eSIM for everything else. Download what you need (slides, papers, offline maps) before you board.</p>
+
+<h2 class="sec" id="booking">Booking</h2>
+<p><a class="lk" href="https://www.trip.com/">Trip.com</a> is reliable for hotels, domestic flights, high-speed trains and many attraction tickets. It is in English, takes foreign cards, and handles the passport details that train and museum tickets require.</p>
+
+<h2 class="sec" id="talks">Other places to present</h2>
+<p>If you are coming all this way, it is worth adding a talk or two. Economics departments and business schools in China host many international speakers and are generally glad to add a seminar on short notice. I am happy to put you in touch.</p>
+<ul class="cvlist">
+  <li><span>Beijing</span><div>Tsinghua University and Renmin University are both a short taxi ride from Guanghua, so two talks in a day or two are easy to arrange.</div></li>
+  <li><span>Shenzhen</span><div>Peking University HSBC Business School (PHBS), about three and a half hours by plane.</div></li>
+  <li><span>Shanghai</span><div>Fudan University, Shanghai Jiao Tong University and the Shanghai University of Finance and Economics. The high-speed train from Beijing takes four and a half to six hours and is often more pleasant than flying.</div></li>
+</ul>
+
+<h2 class="part" id="tourism">Tourism</h2>
+<p>If you have a free day or two, these are the things I recommend to every visitor.</p>
+
+<h2 class="sec" id="sights">Sightseeing</h2>
+<ul class="cvlist">
+  <li><span>Forbidden City</span><div>Tickets are real-name, bought online in advance with your passport number, and sell out for weekends and holidays, so book as soon as your dates are fixed. Closed on Mondays. I strongly recommend booking a guide: the palace is vast, the signage explains little, and a good guide turns a long walk through courtyards into the story of how the empire was run. English-speaking guides can be booked through Trip.com or your hotel. Afterwards, climb the hill in Jingshan Park just to the north for the view back over the palace roofs.</div></li>
+  <li><span>Great Wall</span><div>Go to Mutianyu rather than Badaling. It is about 90 minutes by car, far less crowded, beautifully restored and set in wooded hills. A cable car takes you up, and a toboggan takes you down if you like. Leave early and book a car for the day through DiDi or your hotel.</div></li>
+  <li><span>Summer Palace</span><div>The imperial gardens around Kunming Lake, a short taxi ride from Peking University. Plan half a day.</div></li>
+  <li><span>Old Summer Palace</span><div>Yuanmingyuan, right next to campus. Lakes, willows and the ruins of the European-style palaces. Quieter than the Summer Palace and my recommendation for a stroll on a free morning before a seminar.</div></li>
+</ul>
+
+<h2 class="sec" id="food">Food</h2>
+<ul class="cvlist">
+  <li><span>Peking duck</span><div>The one meal not to miss. Siji Minfu (四季民福) is popular with locals and visitors alike; expect a queue or book ahead.</div></li>
+  <li><span>Hot pot</span><div>Beijing-style copper pot lamb hot pot (铜锅涮肉) is a local favorite, especially once it gets cold.</div></li>
+  <li><span>Breakfast</span><div>Try a jianbing (煎饼), a savory crepe made to order at street stalls, usually paid by QR code.</div></li>
+  <li><span>Regional</span><div>Beijing has excellent restaurants from all over China. Yunnan and Xinjiang places are good choices for a group.</div></li>
+</ul>
+<p>Menus with pictures are common, and the camera translation in most translation apps handles the rest.</p>
+
+<p class="meta">Questions not answered here? Write to <a class="lk" href="mailto:{EMAIL}">{EMAIL}</a>.</p>"""
+
+page = head("en","visiting","Visiting Beijing · Lukas Hensel","").replace('<meta charset="utf-8">',
+        '<meta charset="utf-8">\n<meta name="robots" content="noindex">',1)
+page += header("en","visiting")+visiting("en")+footer("en", profiles=False)
+write("visiting.html", page); n+=1
+# English only: the language toggle's /zh/visiting points back to the English page.
+write("zh/visiting.html", ('<!doctype html>\n<html lang="zh-Hans">\n<head>\n<meta charset="utf-8">\n'
+      '<meta name="robots" content="noindex">\n<meta http-equiv="refresh" content="0; url=/visiting">\n'
+      '<link rel="canonical" href="%s/visiting">\n<title>Visiting Beijing · Lukas Hensel</title>\n</head>\n'
+      '<body>\n<p>本页仅提供英文版：<a href="/visiting">Visiting Beijing</a>。</p>\n'
+      '<script>location.replace("/visiting")</script>\n</body>\n</html>\n') % SITE); n+=1
 
 # robots + sitemap
 write("robots.txt", "User-agent: *\nAllow: /\nDisallow: /stats/\nDisallow: /signups/\n\nSitemap: %s/sitemap.xml\n" % SITE)
