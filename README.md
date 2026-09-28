@@ -1,119 +1,193 @@
-# lukashensel.com
+# Lukas Hensel — academic homepage
 
-Ten static pages — five in English, five in Chinese — plus a small build script.
-No frameworks, no npm, no external requests: the font is bundled, there is no
-JavaScript, and nothing on any page calls a host that is blocked in China.
+Source for [lukashensel.com](https://lukashensel.com). This is a small static
+site built with Python, HTML, and CSS, with no frontend framework or npm setup.
+Read this guide before editing. All file paths below are relative to the
+repository root, so the instructions work wherever the folder is checked out.
 
-## How you change things
+## Editing and publication rules
 
-Everything you'll actually want to edit lives in **`data.py`** — every paper,
-its authors, journal, abstract, and links. Edit it on github.com, commit, and
-the GitHub Action rebuilds all ten pages and pushes them to the server. Live in
-about forty seconds.
+- Edit the source files, then regenerate the pages. Direct HTML edits will be
+  overwritten by the next build.
+- Preserve existing local changes. Review `git status` and the diff before work.
+- Prepare a local, reviewable diff. Do not push, run deployment workflows, or
+  publish without Lukas's explicit request. A push to `main` deploys the site.
+- Use American spelling for this site's prose. Preserve source spelling in
+  paper titles, abstracts, quotations, and citations.
+- Keep author order and citation metadata faithful to the paper. Distinguish
+  published, accepted, revision, working-paper, and in-progress statuses.
+- Chinese copy is a draft and needs native-speaker review before publication.
+- Verify time-sensitive claims and external links against current sources when
+  editing them; a stored URL is not evidence that its destination is current.
+- Keep credentials and private personal context out of documentation and public
+  files. Store deployment secrets in the deployment platform's secret store.
 
-| I want to…                    | Edit                                            |
-|-------------------------------|-------------------------------------------------|
-| Add or update a paper         | `data.py`                                        |
-| Change the bio or a page's prose | `build.py` (the `home`, `teaching`, `cv` functions) |
-| Add courses                   | `build.py`, `teaching()` — the commented template |
-| Replace your CV               | upload over `cv.pdf`                             |
-| Replace your photo            | upload over `assets/photo.jpg`                   |
-| Host a paper on your own domain | drop the PDF into `papers/` — see `papers/README.md` |
-| Change colours or type        | `assets/style.css`                               |
+## Source map
 
-You never need to run anything locally. If you want to preview a change before
-committing, `python3 build.py` regenerates the HTML in place.
+| Change | Source |
+| --- | --- |
+| Papers, authors, journals, abstracts, coverage, and links | [data.py](data.py) |
+| Biography, page prose, navigation, and page structure | [build.py](build.py) |
+| Courses, supervision, and reference-letter guidance | `teaching()` in `build.py` |
+| Office hours in both languages | `OFFICE_HOURS_EN` and `OFFICE_HOURS_ZH` in `build.py` |
+| CV page summary | `cv()` in `build.py` |
+| Downloadable CV | [cv.pdf](cv.pdf); local LaTeX source is under `Academic CV/` |
+| Portrait and profile buttons | `assets/photo.jpg`, `PROFILE_BUTTONS` in `build.py` |
+| Colors, typography, and responsive layout | [assets/style.css](assets/style.css) |
+| Visiting-academic guide | `visiting()` in `build.py` |
+| Cycling itinerary and confirmation | `cycling()` and `cycling_thanks()` in `build.py` |
+| Cycling map and route coordinates | [cyclemap.py](cyclemap.py), [cycling-route.json](cycling-route.json) |
+| Hosted paper PDFs | `papers/`; see [paper guide](papers/README.md) |
+| Event sign-up service | `deploy/signup/`; see [service guide](deploy/signup/README.md) |
+| Server analytics and weekly digest | `deploy/analytics/`; see [analytics guide](deploy/analytics/README.md) |
+| Public deployment | [.github/workflows/deploy.yml](.github/workflows/deploy.yml) |
 
-## One-time setup
+The build uses Python's standard library. Run it from the repository root:
+several asset and paper paths are resolved relative to the working directory.
+The deployment workflow uses Python 3.12.
 
-1. Push this folder to a repository named `website` on your GitHub account.
-2. **Settings → Secrets and variables → Actions → New repository secret**, twice:
-   - `SERVER_IP` → `47.236.242.36`
-   - `SERVER_SSH_KEY` → the private key the server setup script printed
-     (everything from `-----BEGIN` to `-----END`, inclusive)
-3. **Actions** tab → *Deploy to server* → **Run workflow**. First deploy done.
+## Local workflow
 
-The server expects the files at `/var/www/lukashensel.com/`, which the setup
-script created. `rsync --delete` mirrors the repo, so deleting a file here
-deletes it there.
+1. Read this guide and inspect the existing changes:
 
-## Replace these three things first
+   ```sh
+   git status --short
+   git diff
+   ```
 
-- **`assets/photo.jpg`** — a placeholder. Plain background, shoulders up, at
-  least 480×600. It's also the preview image when someone shares the link.
-- **`cv.pdf`** — a placeholder. The address `lukashensel.com/cv.pdf` is stable,
-  so it's the link worth putting in your email signature.
-- **The Chinese pages** — I drafted them; you and a native-speaker colleague
-  should correct the tone before you tell anyone the site exists.
+2. Edit the relevant sources, including both language versions where applicable.
+3. Regenerate the HTML, robots file, and sitemap:
 
-## Citations
+   ```sh
+   python3 build.py
+   ```
 
-`build.py` generates the Citation and BibTeX panels from `data.py`. Two things
-control the author line:
+   On Windows, `py -3 build.py` is an alternative if Python is installed through
+   the Windows launcher. The script writes its outputs in place.
 
-- `authors=[...]` — the order printed on the paper. Set for every paper whose
-  title page I could check. Without it the build falls back to alphabetical,
-  which is right for most economics papers but not all.
-- `random_order=True` — for papers using the AEA Author Randomization Tool.
-  The citation then joins the names with ⓡ and adds a note; the BibTeX entry
-  carries `note = {Author order randomized}`.
+4. Review the source and generated changes:
 
-Both panels are formatted to match [econ.bst](https://ctan.org/pkg/econ-bst),
-which the BibTeX panel links to.
+   ```sh
+   git diff --check
+   git diff --stat
+   git diff
+   ```
 
-## Co-author links
+5. For layout changes, check desktop and phone widths, navigation, language
+   switching, and any affected abstract or citation panels. Confirm local
+   asset paths and changed external links. Leave the diff ready for review.
 
-`PEOPLE` at the top of `build.py` maps a name to a URL. Any co-author listed
-there becomes a link wherever their name appears, in both languages (the Chinese
-pages print surnames only, and those are matched too). Twenty-three are in. Elnura Kazakbaeva and Xinjue Yao have no page for now —
-add a line for each if that changes.
+A basic local file server can display `/index.html` and other explicit HTML
+paths, but production uses nginx to resolve extensionless routes such as
+`/publications`. A plain `python3 -m http.server` does not reproduce that routing
+or the sign-up backend; use a preview server with equivalent routing for a full
+navigation check. Keep production links extensionless.
 
-## The portrait and the profile buttons
+## Pages and assets
 
-`assets/photo.jpg` is shown at 212x265 (224x280 on a phone), so keep the file at
-least 560px wide. The four buttons under it come from `PROFILE_BUTTONS` in
-`build.py` and are driven by the `ORCID`, `SCHOLAR`, `TWITTER` and `BLUESKY`
-values at the top of that file — empty a value and the button disappears.
+As checked against the local source on September 28, 2026, the build writes
+20 HTML files:
 
-The logos live in `assets/icons/` as 96px PNGs with transparent backgrounds,
-shown at 24px. The build looks for `<key>.svg`, then `.png`, then `.webp`, and
-falls back to a text label if it finds nothing — so replacing a PNG with a
-crisper SVG is just a matter of dropping the file in.
+- Five main pages in English and Chinese: Home, CV, Publications, Work in
+  Progress, and Teaching and Supervision.
+- English and Chinese 404 pages.
+- Two `/references` redirect stubs pointing to `/teaching#references` in the
+  matching language.
+- English and Chinese cycling and cycling-confirmation pages.
+- An English visiting guide and a Chinese-path redirect to that English page.
 
-To change the order of the icons, reorder `PROFILE_BUTTONS`.
+Only the ten main pages are in the sitemap. Cycling and visiting pages are
+unlisted and marked `noindex`; this does not make them private.
 
-## House style
+English pages are at the root and Chinese pages under `zh/`. The shared page
+builder supplies canonical URLs, language links, and social preview metadata.
 
-American spelling throughout the page copy — labor, behavior, program,
-randomized. Paper titles, abstracts and citations are quoted verbatim and keep
-whatever spelling the source uses, so do not sweep those.
+Public Sans and IBM Plex Mono are bundled under `assets/fonts/`. Chinese text
+uses system font fallbacks. Abstracts and citation panels use native HTML
+`details` elements. Small inline scripts provide citation copying and redirects.
+The cycling map loads external Amap tiles and overlays the route locally;
+the site should not be described as making no external requests.
 
-## Coverage
+## Papers and citations
 
-Add `coverage=[("Label","中文标签","https://…")]` to any paper in `data.py` and
-a Coverage line appears under it. Two VoxDev pieces are in; anything else you
-have — press, IGC, VoxEU, J-PAL — drops in the same way.
+`data.py` contains four groups: `PUBS` (peer-reviewed publications), `WPS`
+(working papers), `WIP` (work in progress), and `NPR` (other writing).
 
-## Still missing
+- `authors=[...]` controls citation author order, including Lukas. The fallback
+  sorts names alphabetically by surname; use explicit metadata when available.
+- `random_order=True` marks randomized order with ⓡ in the citation panel and
+  adds an author-order note to BibTeX.
+- `cite_year` supplies the citation year when the displayed status is not a year.
+- `v`, `vs`, and `flag` control venue, volume/pages, and forthcoming status.
+- `a_en` and `a_zh` supply the visible coauthor text. Keep them consistent with
+  the full author list when editing a paper.
+- `pdf("name.pdf", "https://fallback")` selects the local file in `papers/` when
+  present, otherwise the external URL. See the paper guide for filenames.
+- Link URLs beginning with `REPLICATION_URL` are omitted from the rendered page.
+- Add coverage with `coverage=[("Label", "中文标签", "https://example.org/article")]`.
 
-- **Teaching page content.** The page is live but generic — courses, years, and
-  levels go in `build.py`, in the commented block inside `teaching()`.
-- **The replication link for *Income Shocks and Suicides*.** `data.py` has
-  `("analysis code", "分析代码", "REPLICATION_URL_TO_ADD")` — the build skips any
-  link whose URL starts with `REPLICATION_URL`, so nothing is broken meanwhile.
-  Replace the string and the chip appears.
-- **Author order for two papers I could not check**: *Political Activists are
-  Not Driven by Instrumental Motives* (BJPS) and *Mutual Knowledge of Social
-  Norms* are set from the PDF and the APSR page respectively; everything else
-  comes from a title page I read directly.
+Citation and BibTeX formatting is implemented in `build.py`, with a link to
+[econ.bst](https://ctan.org/pkg/econ-bst) for randomized-order entries. Check the
+rendered citation and BibTeX after changing publication metadata.
 
-## Notes
+`PEOPLE` maps coauthor names to URLs. Chinese pages also use `SURNAMES` and
+`ZH_NAMES`; ambiguous surnames are not linked automatically. Verify a person's
+current page before adding or replacing a link.
 
-- URLs have no `.html` on the end — nginx's `try_files` handles that. Keep
-  internal links written as `/publications`, not `/publications.html`.
-- Chinese pages live under `/zh/`. Each page links to its counterpart through
-  the EN / 中文 switch, and declares `hreflang` so search engines pair them.
-- Chinese text uses whatever serif the reader's device has (Songti, PingFang,
-  Noto). Bundling a CJK webfont would add several megabytes for no real gain.
-- Abstracts use `<details>` — no JavaScript, so they still open if scripts are
-  blocked or the page is printed.
+## Portrait and profiles
+
+The portrait is `assets/photo.jpg`, also used for social previews. CSS displays
+it at 212 × 265 pixels on desktop and 224 × 280 on phones; keep the source at
+least 560 pixels wide.
+
+`PROFILE_BUTTONS` controls the order of Google Scholar, ORCID, Twitter, Bluesky,
+and LinkedIn. Emptying the associated profile setting hides that button. Icons
+are loaded from `assets/icons/`, preferring SVG, then PNG, then WebP, with text
+as a fallback. CSS displays the icons at 26 × 26 pixels.
+
+## Deployment and server services
+
+The GitHub Actions deployment runs on pushes to `main` and on manual dispatch.
+It builds the pages, then mirrors files to the server using `rsync --delete`.
+Removing a deployed file from the repository can therefore remove it remotely.
+The workflow defines the destination and exclusions; `.gitignore` is not an
+rsync exclusion list. Review what will be uploaded before an authorized deploy.
+
+The deployment requires the `SERVER_IP` and `SERVER_SSH_KEY` repository secrets.
+Keep their values out of notes. Server setup for analytics and event sign-ups
+uses separate, manually dispatched workflows and the configuration described
+in their respective guides. A normal page deployment does not reinstall those
+services.
+
+## Current maintenance notes
+
+These are local-source observations from September 28, 2026, not a live-site
+or external-source audit:
+
+- Teaching already includes two Autumn 2026 courses, supervision guidance, and
+  reference-letter instructions. Update these as teaching arrangements change.
+- The analysis-code link for *Income Shocks and Suicides* is present in `data.py`.
+  Its destination still needs checking when that entry is updated.
+- The cycling page and confirmation say September 27, 2026; the sign-up service
+  and its guide still name September 26, with a September 23 deadline. Reconcile
+  the itinerary, service metadata, deadline, and messages before reusing it.
+- The visiting guide contains time-sensitive travel advice. Verify it against
+  current official sources before revising or publishing that advice.
+
+## Portable notes and handoffs
+
+Keep project knowledge in UTF-8 Markdown alongside the project so it can be
+read by people and tools on any platform. This README is the project's durable
+entry point; [START-HERE.md](START-HERE.md) is a short onboarding guide.
+
+- Use repository-relative file links and ordinary web links. Avoid absolute
+  user-directory paths, application-specific URLs, and references that require
+  access to a particular chat or assistant's memory.
+- State the working directory for commands and label any OS-specific steps.
+- Keep essential editing rules here. If another tool needs its own instruction
+  file, point it to this guide instead of maintaining a conflicting copy.
+- Date status snapshots and distinguish verified facts from pending checks.
+- Handoffs should state the task, changed files, validation performed, unresolved
+  issues, and publication status. Update stale notes when the work changes.
+- Do not copy private global profiles, credentials, or research-project files
+  into this repository merely to make a handoff self-contained.

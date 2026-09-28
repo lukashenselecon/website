@@ -1,85 +1,46 @@
 # Start here
 
-Everything for lukashensel.com lives in this folder. It is already a git
-repository with one commit. Four things left.
+This folder contains Lukas Hensel's academic homepage. The current source map,
+editing rules, and deployment behavior are in [README.md](README.md). Read that
+first; it is the shared guide for people and tools on any platform.
 
----
+## Work locally
 
-## 1. Stop Dropbox from syncing the `.git` folder
+From the repository root:
 
-Do this **before** you touch anything else.
-
-Git writes many small files very fast. Dropbox syncing them mid-write is the
-standard way a repository in a Dropbox folder gets corrupted — and it is much
-worse if you ever open this folder on a second machine. One line in Terminal
-fixes it permanently:
-
-```
-xattr -w com.dropbox.ignored 1 "/Users/lukas/Library/CloudStorage/Dropbox/Lukas_homepage/.git"
+```sh
+git status --short
+git diff
 ```
 
-Your files still sync and still back up. Only the repository's internal
-bookkeeping stops syncing — which is fine, because GitHub is where the history
-actually lives.
+Preserve existing work, edit the source identified in the README, then build:
 
----
-
-## 2. Put it on GitHub
-
-Create an empty repository at <https://github.com/new>:
-
-- **Name:** `website`
-- **Public** — the repo holds no secrets, and public repositories get unlimited
-  Actions minutes
-- Do **not** tick "Add a README" — this folder already has one
-
-Then, in Terminal:
-
-```
-cd "/Users/lukas/Library/CloudStorage/Dropbox/Lukas_homepage"
-git remote add origin https://github.com/YOUR-USERNAME/website.git
-git push -u origin main
+```sh
+python3 build.py
+git diff --check
+git diff
 ```
 
-If git asks for a password, it wants a personal access token, not your account
-password. The path of least resistance is to install GitHub Desktop, sign in
-once, and use **Add Local Repository** on this folder instead.
+On Windows, `py -3 build.py` is an alternative to `python3 build.py`. The build
+regenerates HTML in place. See the README for preview routing limitations and
+checks appropriate to your change.
 
----
+## Publication boundary
 
-## 3. Add the two deploy secrets
+Prepare a reviewable local diff. Pushes to `main` trigger public deployment;
+manual workflow dispatch can also publish. Do not push or trigger workflows
+without Lukas's explicit request. Keep secret values in the deployment
+platform's secret store, never in project notes.
 
-On GitHub: **Settings → Secrets and variables → Actions → New repository secret**.
-Twice:
+## Moving between computers or tools
 
-| Name | Value |
-|---|---|
-| `SERVER_IP` | `47.236.242.36` |
-| `SERVER_SSH_KEY` | the private key the server setup script printed — everything from `-----BEGIN` to `-----END`, inclusive |
+Use repository-relative paths and UTF-8 Markdown for notes. Record changed
+files, checks, unresolved issues, and publication status so another person or
+tool can continue without the original chat.
 
----
-
-## 4. Deploy
-
-**Actions** tab → *Deploy to server* → **Run workflow**.
-
-From then on every `git push` (or every commit made through github.com) rebuilds
-the pages and pushes them to the server. Roughly forty seconds.
-
----
-
-## Working on it afterwards
-
-Two equally good options, and you can switch freely:
-
-- **In this folder.** Edit, then `git add -A && git commit -m "..." && git push`.
-- **In the browser.** Open the file on github.com, click the pencil, commit.
-  Then run `git pull` here before your next local edit.
-
-What to edit for what is in `README.md`.
-
-## First three things worth replacing
-
-1. `assets/photo.jpg` — placeholder
-2. `cv.pdf` — placeholder
-3. The Chinese pages under `zh/` — my draft, needs a native speaker's eye
+When working in a cloud-synced folder, avoid concurrent Git operations from
+multiple computers. Prefer a separate Git checkout on each computer; configure
+any cloud-sync exclusions using the provider's instructions for that OS.
+Private CV source material under `Academic CV/` is ignored by Git, so a fresh
+clone may not include it. Transfer needed source material separately through
+an appropriate private channel.
