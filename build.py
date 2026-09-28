@@ -10,7 +10,6 @@ def _v(path):
 
 CSS_V = _v("assets/style.css")
 from data import PUBS, WPS, WIP, NPR
-from cyclemap import map_html
 
 SITE="https://lukashensel.com"
 EMAIL="lukas.hensel@gsm.pku.edu.cn"
@@ -635,72 +634,6 @@ def redirect_stub(lang):
 write("references.html", redirect_stub("en"))
 write("zh/references.html", redirect_stub("zh"))
 n+=2
-
-# Event sign-up pages. Unlisted: not in the menu or the sitemap, and marked
-# noindex. The form posts to the small service in deploy/signup/.
-def cycling(lang):
-    zh = lang=="zh"
-    T = (lambda e,z: z if zh else e)
-    stops = [
-        ("13:00", T("Lama Temple (Yonghegong)","雍和宫"),
-                  T("Meet at the main gate, bikes ready.","主门集合，准备好单车。")),
-        ("13:15", T("Wudaoying Hutong","五道营胡同"),
-                  T("West through the hutong.","沿胡同向西骑行。")),
-        ("13:35", T("Confucius Temple and Guozijian","孔庙与国子监"),
-                  T("Short stop under the old archways.","在牌楼下短暂停留。")),
-        ("14:00", T("Drum and Bell Towers","鼓楼与钟楼"),
-                  T("Along Gulou Dong Dajie.","沿鼓楼东大街骑行。")),
-        ("14:10", T("Houhai and Qianhai","后海与前海"),
-                  T("Yandai Xiejie, Silver Ingot Bridge, and the lake shore.","烟袋斜街、银锭桥，沿湖骑行。")),
-        ("14:30", T("Coffee at Voyage Coffee","Voyage Coffee 咖啡休息"),
-                  T("Di'anmen Dong Dajie 97, at the south end of Nanluoguxiang. Half an hour off the bikes.","地安门东大街97号（南锣鼓巷南口）。休息约半小时。")),
-        ("15:15", T("PKU Red Building","北大红楼"),
-                  T("Free entry, no booking needed, but bring your passport for the security check. Last admission 16:30.","免费参观，无需预约，但须携带护照通过安检。16:30 停止入馆。")),
-        ("16:30", T("Jingshan Park","景山公园"),
-                  T("2 yuan at the gate, then up to Wanchun Pavilion for the view.","门票2元，登万春亭俯瞰全城。")),
-    ]
-    dots = "①②③④⑤⑥⑦⑧"
-    rows = "".join('<li><span>%s %s</span><div><b>%s</b><br><span class="meta">%s</span></div></li>'
-                   % (dots[i], s_[0], s_[1], s_[2]) for i, s_ in enumerate(stops))
-    return f'''<p class="lbl lead">{T("Future Leaders &middot; Cohort 7","未来领导者国际班 &middot; 第七届")}</p>
-<h1>{T("Cycling trip: Lama Temple to Jingshan Park","城市骑行：雍和宫至景山公园")}</h1>
-<ul class="cvlist">
-  <li><span>{T("When","时间")}</span><div>{T("<b>Sunday, September 27, 2026</b>, starting at 1:00 pm. About four and a half hours, including a coffee break and the Red Building.","<b>2026年9月27日（周日）</b>13:00 出发，全程约四个半小时，含咖啡休息与北大红楼参观。")}</div></li>
-  <li><span>{T("Start","出发")}</span><div>{T("Yonghegong (Lama Temple), main gate","雍和宫主门")}</div></li>
-  <li><span>{T("Finish","终点")}</span><div>{T("Jingshan Park, with a view over the Forbidden City and Beijing","景山公园，俯瞰故宫及北京城全景")}</div></li>
-  <li><span>{T("Distance","距离")}</span><div>{T("About 11 km, at a relaxed pace","约11公里，节奏轻松")}</div></li>
-  <li><span>{T("Bikes","车辆")}</span><div>{T("Shared bikes. Please have a working, verified bike app (for example Meituan or Hellobike) before the day.","使用共享单车。请提前准备好已完成认证、可正常使用的单车应用（如美团、哈啰）。")}</div></li>
-  <li><span>{T("Bring","携带")}</span><div>{T("Your passport, for the Red Building security check, and a few yuan for the Jingshan ticket.","护照（北大红楼安检需要）以及少量现金或手机支付（景山门票）。")}</div></li>
-</ul>
-<p>{T("The pace is relaxed, so no need to be a fast cyclist. If you can, come early and explore the area around the Lama Temple first. I especially recommend a stroll down Wudaoying Hutong, just across the street.","骑行节奏轻松，不需要骑得很快。如有时间，欢迎提前到达，逛逛雍和宫周边，特别推荐马路对面的五道营胡同。")}</p>
-<h2 class="sec">{T("The route","路线")}</h2>
-<figure class="mapfig">
-{map_html(lang)}
-<figcaption>{T('Swipe or scroll the map sideways on a phone. Basemap &#169; AutoNavi (Amap); route drawn with OpenStreetMap data.','手机上可左右滑动查看地图。底图 &#169; 高德地图；路线基于 OpenStreetMap 数据绘制。')}</figcaption>
-</figure>
-<ul class="cvlist">{rows}</ul>
-<p class="meta">{T("Plans can shift on the day. If you can no longer come, or you are running late, let me know in the class WeChat group.","当天安排可能略有调整。如无法参加或迟到，请在班级微信群告知。")}</p>'''
-
-def cycling_thanks(lang):
-    zh = lang=="zh"
-    if zh:
-        return ('<p class="lbl lead">未来领导者国际班 &middot; 第七届</p><h1>报名成功</h1>'
-                '<p>感谢报名！9月27日（周日）13:00 雍和宫见。更多细节将稍后在班级微信群发布。</p>'
-                '')
-    return ('<p class="lbl lead">Future Leaders &middot; Cohort 7</p><h1>You are signed up</h1>'
-            '<p>Thanks for signing up! See you on Sunday, September 27 at 1:00 pm at the Lama Temple. '
-            'More details will follow in the class WeChat group.</p>'
-            '')
-
-EVENT_PAGES=[("cycling", cycling, "Cycling trip · Lukas Hensel", "骑行活动 · Lukas Hensel"),
-             ("cycling-thanks", cycling_thanks, "Signed up · Lukas Hensel", "报名成功 · Lukas Hensel")]
-for slug, fn, t_en, t_zh in EVENT_PAGES:
-    for lang in ("en","zh"):
-        title = t_zh if lang=="zh" else t_en
-        page = head(lang,slug,title,"").replace('<meta charset="utf-8">',
-                                                '<meta charset="utf-8">\n<meta name="robots" content="noindex">',1)
-        page += header(lang,slug)+fn(lang)+footer(lang, profiles=False)
-        write(("zh/" if lang=="zh" else "")+slug+".html", page); n+=1
 
 # Travel notes for visiting academics. English only and unlisted for now: not in
 # the menu or the sitemap, and marked noindex. /zh/visiting redirects here.

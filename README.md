@@ -35,10 +35,7 @@ repository root, so the instructions work wherever the folder is checked out.
 | Portrait and profile buttons | `assets/photo.jpg`, `PROFILE_BUTTONS` in `build.py` |
 | Colors, typography, and responsive layout | [assets/style.css](assets/style.css) |
 | Visiting-academic guide | `visiting()` in `build.py` |
-| Cycling itinerary and confirmation | `cycling()` and `cycling_thanks()` in `build.py` |
-| Cycling map and route coordinates | [cyclemap.py](cyclemap.py), [cycling-route.json](cycling-route.json) |
 | Hosted paper PDFs | `papers/`; see [paper guide](papers/README.md) |
-| Event sign-up service | `deploy/signup/`; see [service guide](deploy/signup/README.md) |
 | Server analytics and weekly digest | `deploy/analytics/`; see [analytics guide](deploy/analytics/README.md) |
 | Public deployment | [.github/workflows/deploy.yml](.github/workflows/deploy.yml) |
 
@@ -75,29 +72,28 @@ The deployment workflow uses Python 3.12.
 
 5. For layout changes, check desktop and phone widths, navigation, language
    switching, and any affected abstract or citation panels. Confirm local
-   asset paths and changed external links. Leave the diff ready for review.
+asset paths and changed external links. Leave the diff ready for review.
 
 A basic local file server can display `/index.html` and other explicit HTML
 paths, but production uses nginx to resolve extensionless routes such as
 `/publications`. A plain `python3 -m http.server` does not reproduce that routing
-or the sign-up backend; use a preview server with equivalent routing for a full
-navigation check. Keep production links extensionless.
+use a preview server with equivalent routing for a full navigation check. Keep
+production links extensionless.
 
 ## Pages and assets
 
 As checked against the local source on September 28, 2026, the build writes
-20 HTML files:
+16 HTML files:
 
 - Five main pages in English and Chinese: Home, CV, Publications, Work in
   Progress, and Teaching and Supervision.
 - English and Chinese 404 pages.
 - Two `/references` redirect stubs pointing to `/teaching#references` in the
   matching language.
-- English and Chinese cycling and cycling-confirmation pages.
 - An English visiting guide and a Chinese-path redirect to that English page.
 
-Only the ten main pages are in the sitemap. Cycling and visiting pages are
-unlisted and marked `noindex`; this does not make them private.
+Only the ten main pages are in the sitemap. The visiting guide is unlisted and
+marked `noindex`; this does not make it private.
 
 English pages are at the root and Chinese pages under `zh/`. The shared page
 builder supplies canonical URLs, language links, and social preview metadata.
@@ -105,8 +101,6 @@ builder supplies canonical URLs, language links, and social preview metadata.
 Public Sans and IBM Plex Mono are bundled under `assets/fonts/`. Chinese text
 uses system font fallbacks. Abstracts and citation panels use native HTML
 `details` elements. Small inline scripts provide citation copying and redirects.
-The cycling map loads external Amap tiles and overlays the route locally;
-the site should not be described as making no external requests.
 
 ## Papers and citations
 
@@ -154,10 +148,9 @@ The workflow defines the destination and exclusions; `.gitignore` is not an
 rsync exclusion list. Review what will be uploaded before an authorized deploy.
 
 The deployment requires the `SERVER_IP` and `SERVER_SSH_KEY` repository secrets.
-Keep their values out of notes. Server setup for analytics and event sign-ups
-uses separate, manually dispatched workflows and the configuration described
-in their respective guides. A normal page deployment does not reinstall those
-services.
+Keep their values out of notes. Server setup for analytics uses a separate,
+manually dispatched workflow and the configuration described in its guide. A
+normal page deployment does not reinstall that service.
 
 ## Current maintenance notes
 
@@ -168,9 +161,11 @@ or external-source audit:
   reference-letter instructions. Update these as teaching arrangements change.
 - The analysis-code link for *Income Shocks and Suicides* is present in `data.py`.
   Its destination still needs checking when that entry is updated.
-- The cycling page and confirmation say September 27, 2026; the sign-up service
-  and its guide still name September 26, with a September 23 deadline. Reconcile
-  the itinerary, service metadata, deadline, and messages before reusing it.
+- The September 2026 cycling pages and their sign-up source have been removed
+  locally. A future authorized deployment will remove the public static pages.
+  If the sign-up service was installed, its nginx and systemd configuration and
+  stored response CSV require separate server cleanup; `rsync` does not manage
+  them. Preserve any responses that must be retained before that cleanup.
 - The visiting guide contains time-sensitive travel advice. Verify it against
   current official sources before revising or publishing that advice.
 
