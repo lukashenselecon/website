@@ -17,7 +17,6 @@ PUBS = [
   ab="Firms in low- and middle-income countries rarely advertise their vacancies formally and instead use social networks to find employees. We experimentally reduce the cost of formal employee search for small and medium-sized enterprises in Ethiopia to test whether informal search constrains the number and type of positions firms create. We find that treated firms increase formal search and shift their labor demand towards more demanding white-collar positions. However, they struggle to fill these newly created vacancies. We provide suggestive evidence that expectations contribute to this result, especially when firms lack prior experience with formal hiring channels: firms appear overly optimistic about the applicant pools formal search will generate, and jobseekers&rsquo; wage expectations exceed firms&rsquo; wages.",
   links=[("gated","期刊版本","https://doi.org/10.1016/j.jdeveco.2026.103876"),
          ("ungated","免费版本",pdf("formalized-employee-search.pdf","https://github.com/Luthor113/papers/raw/main/Hensel_Formal_Hiring_Processes.pdf")),
-         ("online appendix","在线附录","/papers/formalized-employee-search-appendix.pdf"),
          ("replication package","复现材料","https://doi.org/10.17632/2fmcrwrt94.1")]),
 
  dict(y="2025", t="Voice and Political Engagement: Evidence from a Field Experiment",
@@ -27,7 +26,6 @@ PUBS = [
   ab="We conduct a natural field experiment with a major European party to test whether giving party supporters more voice increases their engagement in the party&rsquo;s electoral campaign. In the experiment, the party asked a random subset of supporters for their opinions on the importance of different policy areas. Giving supporters opportunities to voice their opinions increases their engagement in the campaign as measured using behavioral data from the party&rsquo;s smartphone application. Survey data reveals that giving voice also increases other margins of campaign effort as well as perceived voice. Our evidence highlights the importance of voice for increasing political engagement.",
   links=[("gated","期刊版本","https://direct.mit.edu/rest/article/doi/10.1162/rest_a_01320/115256/Voice-and-Political-Engagement-Evidence-from-a"),
          ("ungated","免费版本",pdf("voice-political-engagement.pdf","https://www.econtribute.de/RePEc/ajk/ajkdps/ECONtribute_133_2021.pdf")),
-         ("online appendix","在线附录","/papers/voice-political-engagement-appendix.pdf"),
          ("replication package","复现材料","https://doi.org/10.7910/DVN/WCGYI2")]),
 
  dict(y="2025", t="Political Activists are Not Driven by Instrumental Motives",
@@ -46,7 +44,6 @@ PUBS = [
   ab="How does a citizen&rsquo;s decision to participate in political activism depend on the participation of others? We conduct a nationwide natural field experiment in collaboration with a major European party during a recent national election. In a party survey, we randomly provide canvassers with true information about the canvassing intentions of their peers. When learning that more peers participate in canvassing than previously believed, canvassers significantly reduce both their canvassing intentions and behaviour. An additional survey among party supporters underscores the importance of free-riding motives and reveals that there is strong heterogeneity in motives underlying supporters&rsquo; behavioural responses.",
   links=[("gated","期刊版本","https://doi.org/10.1093/ej/uead020"),
          ("ungated","免费版本",pdf("political-activists-free-riders.pdf","https://github.com/Luthor113/papers/raw/main/Hensel_Political_Activists.pdf")),
-         ("online appendix","在线附录","/papers/political-activists-free-riders-appendix.pdf"),
          ("replication package","复现材料","https://doi.org/10.5281/zenodo.7663389")]),
 
  dict(y="2022", t="Group Size and Protest Mobilization across Movements and Countermovements",
@@ -74,7 +71,6 @@ PUBS = [
   ab="We provide one of the first systematic assessments of the development and determinants of economic anxiety at the onset of the coronavirus pandemic. Using a global data set on internet searches and two representative surveys from the United States, we document a substantial increase in economic anxiety during and after the arrival of the coronavirus. We also document a large dispersion in beliefs about the pandemic risk factors of the coronavirus and demonstrate that these beliefs causally affect individuals&rsquo; economic anxieties. Finally, we show that individuals&rsquo; mental models of infectious disease spread understate nonlinear growth and shape the extent of economic anxiety.",
   links=[("gated","期刊版本","https://www.mitpressjournals.org/doi/abs/10.1162/rest_a_00946"),
          ("ungated","免费版本",pdf("coronavirus-perceptions.pdf","https://arxiv.org/abs/2003.03848")),
-         ("online appendix","在线附录","/papers/coronavirus-perceptions-appendix.pdf"),
          ("replication package","复现材料","https://doi.org/10.7910/DVN/NGHYPI")]),
 
  dict(y="2021", t="Does Party Competition Affect Political Activism?",
@@ -94,7 +90,6 @@ PUBS = [
   ab="We examine how income shocks affect the suicide rate in Indonesia. We use a difference-in-differences approach, exploiting the cash transfer&rsquo;s nationwide rollout, and corroborate the findings using a randomized experiment. Our estimates show that the cash transfers reduce the yearly suicide rate by 0.36 per 100,000 people, corresponding to an 18% decrease. Moreover, a different type of income shock, variability in agricultural productivity, also affects the suicide rate. The cash transfer program reduces the causal impact of the agricultural productivity shocks, suggesting an important role for policy interventions. Finally, we provide evidence for depression as a psychological mechanism.",
   links=[("gated","期刊版本","https://www.mitpressjournals.org/doi/pdf/10.1162/rest_a_00777"),
          ("ungated","免费版本",pdf("income-shocks-suicides.pdf","https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2716684")),
-         ("online appendix","在线附录","/papers/income-shocks-suicides-appendix.pdf"),
          ("analysis code","分析代码","https://doi.org/10.7910/DVN/ETS5LV")]),
 ]
 
