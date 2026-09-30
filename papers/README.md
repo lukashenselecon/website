@@ -29,3 +29,21 @@ Filenames the build looks for:
 
 The two open-access articles (BJPS and APSR) keep pointing at the publisher —
 that is already the canonical free version.
+
+## Online appendices
+
+The publication pages link directly to these hosted PDFs:
+
+| File | Source |
+|---|---|
+| `formalized-employee-search-appendix.pdf` | Appendix extracted from the hosted August 2026 paper, pp. 47–111. |
+| `voice-political-engagement-appendix.pdf` | Appendix extracted from the [accepted manuscript](https://wrap.warwick.ac.uk/id/eprint/176701/), pp. 28–60. |
+| `political-activists-instrumental-motives-appendix.pdf` | [Cambridge supplementary PDF](https://www.cambridge.org/core/journals/british-journal-of-political-science/article/political-activists-are-not-driven-by-instrumental-motives-evidence-from-two-natural-field-experiments/48F339234B1B450641A65A420AC6D3FD). |
+| `political-activists-free-riders-appendix.pdf` | Appendix extracted from the hosted paper, pp. 27–77. |
+| `group-size-protest-mobilization-appendix.pdf` | [Cambridge supplementary PDF](https://www.cambridge.org/core/journals/american-political-science-review/article/group-size-and-protest-mobilization-across-movements-and-countermovements/258264834D40B96C3253CB7CF6671CE5). |
+| `coronavirus-perceptions-appendix.pdf` | Appendix extracted from the hosted paper, pp. 30–60. |
+| `party-competition-activism-appendix.pdf` | Appendix extracted from the [accepted manuscript](https://wrap.warwick.ac.uk/id/eprint/139035/), pp. 38–71. |
+| `income-shocks-suicides-appendix.pdf` | Appendix extracted from the hosted paper, pp. 46–87. |
+
+The *Global Behaviors* article contains appendices in its main PDF and lists a
+supplementary data file, but no separate online appendix PDF was found.
