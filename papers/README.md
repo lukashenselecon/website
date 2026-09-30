@@ -33,9 +33,10 @@ that is already the canonical free version.
 ## Online appendices
 
 These PDFs remain in `papers/` as standalone copies. The publication pages link
-separately only to the instrumental-motives, group-size, and party-competition
-appendices. The other five appendices are already included in the linked
-ungated paper PDFs, so they have no separate appendix link.
+separately only to the party-competition appendix. Five other appendices are
+already included in the linked ungated paper PDFs. The instrumental-motives and
+group-size entries link to open-access publisher pages that provide their
+supplementary materials, so they have no separate appendix links here.
 
 | File | Source |
 |---|---|
