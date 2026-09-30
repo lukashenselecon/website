@@ -10,10 +10,10 @@ def pdf(name, ext):
     return P + name if os.path.exists(os.path.join("papers", name)) else ext
 
 PUBS = [
- dict(y="2026", t="Formalized Employee Search and Labor Demand",
+ dict(y="2027", t="Formalized Employee Search and Labor Demand",
   a_en="Tsegay Tekleselassie &amp; Marc Witte", a_zh="与 Tekleselassie、Witte 合著",
   authors=["Lukas Hensel","Tsegay Tekleselassie","Marc Witte"],
-  v="Journal of Development Economics", flag=True,
+  v="Journal of Development Economics", vs="184, 103876",
   ab="Firms in low- and middle-income countries rarely advertise their vacancies formally and instead use social networks to find employees. We experimentally reduce the cost of formal employee search for small and medium-sized enterprises in Ethiopia to test whether informal search constrains the number and type of positions firms create. We find that treated firms increase formal search and shift their labor demand towards more demanding white-collar positions. However, they struggle to fill these newly created vacancies. We provide suggestive evidence that expectations contribute to this result, especially when firms lack prior experience with formal hiring channels: firms appear overly optimistic about the applicant pools formal search will generate, and jobseekers&rsquo; wage expectations exceed firms&rsquo; wages.",
   links=[("gated","期刊版本","https://doi.org/10.1016/j.jdeveco.2026.103876"),
          ("ungated","免费版本",pdf("formalized-employee-search.pdf","https://github.com/Luthor113/papers/raw/main/Hensel_Formal_Hiring_Processes.pdf")),
