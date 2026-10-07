@@ -412,8 +412,8 @@ def home(lang):
 
 <h2 class="sec">博士申请</h2>
 <p>博士招生由北京大学和光华管理学院统一组织。我不能独立录取博士生，也不能出具录取通知书。</p>
-<p>申请 2027 年入学的中国内地本科生，请在光华的<a class="lk" href="https://www.gsm.pku.edu.cn/graduate/zsxx1/zsjz.htm" rel="noopener">研究生招生通知</a>中查阅 2026 年全国优秀大学生学术夏令营通知（已于 2026 年 5 月发布）。持硕士学位的中国内地申请者，请留意同一页面上的 2027 年“申请—考核制”博士招生说明，预计于 2026 年 10 月前后发布。</p>
-<p>国际申请者持学士学位可申请研究型硕士（博士预备）项目，这是本科毕业生进入光华五年制博士培养项目的申请入口；持硕士学位可直接申请博士项目。请留意<a class="lk" href="https://iphd.gsm.pku.edu.cn/Admissions1/Application_Instructions.htm" rel="noopener">国际项目招生通知</a>中的 2027 年入学公告，预计于 2026 年 10 月下旬发布。</p>
+<p>中国内地本科生请在光华的<a class="lk" href="https://www.gsm.pku.edu.cn/graduate/zsxx1/zsjz.htm" rel="noopener">研究生招生通知</a>页面关注全国优秀大学生学术夏令营通知（通常于入学前一年的 5 月发布）。持硕士学位的中国内地申请者请关注同一页面上的“申请—考核制”博士招生说明（通常于入学前一年的 10 月发布）。</p>
+<p>对于持学士学位的国际申请者，研究型硕士（博士预备）项目是进入光华五年制博士培养项目的申请入口；持硕士学位的申请者可直接申请博士项目。请关注<a class="lk" href="https://iphd.gsm.pku.edu.cn/Admissions1/Application_Instructions.htm" rel="noopener">国际项目招生通知</a>中的相关公告（通常于入学前一年的 10 月发布）。</p>
 
 <h2 class="sec">联系方式</h2>
 <ul class="cvlist">
@@ -431,8 +431,8 @@ def home(lang):
 
 <h2 class="sec">Prospective PhD students</h2>
 <p>PhD admissions are handled centrally by Peking University and Guanghua. I cannot independently admit PhD students or issue acceptance letters.</p>
-<p>Mainland Chinese undergraduates seeking entry in 2027 should consult the 2026 academic summer camp notice on Guanghua's <a class="lk" href="https://www.gsm.pku.edu.cn/graduate/zsxx1/zsjz.htm" rel="noopener">graduate admissions notices</a> page (published in May 2026). Mainland Chinese applicants with a master's degree should watch the same page for the 2027 申请—考核制 PhD admissions notice, expected around October 2026.</p>
-<p>For international applicants with a bachelor's degree, the Research Master (Pre-doctoral) programme is the entry route into Guanghua's five-year PhD track. Those with a master's degree apply directly to the PhD programme. Watch the <a class="lk" href="https://iphd.gsm.pku.edu.cn/Admissions1/Application_Instructions.htm" rel="noopener">international admissions notices</a> for the 2027-entry announcements, expected in late October 2026.</p>
+<p>Mainland Chinese undergraduates should check the academic summer camp notice on Guanghua's <a class="lk" href="https://www.gsm.pku.edu.cn/graduate/zsxx1/zsjz.htm" rel="noopener">graduate admissions notices</a> page (usually published in May for next years' intake). Mainland Chinese applicants with a master's degree should watch the same page for the 申请—考核制 PhD admissions notice (usually published in October for next years' intake).</p>
+<p>For international applicants with a bachelor's degree, the Research Master (Pre-doctoral) programme is the entry route into Guanghua's five-year PhD track. Those with a master's degree apply directly to the PhD programme. Watch the <a class="lk" href="https://iphd.gsm.pku.edu.cn/Admissions1/Application_Instructions.htm" rel="noopener">international admissions notices</a> for the relevant announcements (usually published in October for next years' intake).</p>
 
 <h2 class="sec">Contact</h2>
 <ul class="cvlist">
