@@ -152,6 +152,9 @@ WPS = [
 ]
 
 WIP = [
+ dict(y="", t="Facts, Stories and Frontline Effort: Evidence from Garment Workers in Vietnam",
+  a_en="Yuyu Chen &amp; Xinjue Yao", a_zh="与 陈玉宇、姚心觉 合著",
+  v="Vietnam &middot; work in progress", vz="越南 · 进行中", links=[]),
  dict(y="", t="Hiring on Soft Skills or Qualifications",
   a_en="Robert Garlick, Kate Orkin &amp; Jennifer Kades", a_zh="与 Garlick、Orkin、Kades 合著",
   v="South Africa &middot; analysis underway", vz="南非 · 数据分析中", links=[]),
