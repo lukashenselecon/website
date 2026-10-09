@@ -56,6 +56,7 @@ PEOPLE = {
   "Stefano Fiorin":      "https://sites.google.com/site/stefanofiorineconomics/",
   "Damir Esenaliev":     "https://isdc.org/team/damir-esenaliev/",
   "Yuyu Chen":           "https://en.gsm.pku.edu.cn/faculty/chenyuyu/",
+  "Xinjue Yao":          "https://sites.google.com/view/xinjue-yao",
   "Jennifer Kades":      "https://jenniferkades.pythonanywhere.com",
   "Stefan Dercon":       "https://www.bsg.ox.ac.uk/people/stefan-dercon",
   "Pieter Gautier":      "https://sites.google.com/site/pietgautier/",
@@ -81,6 +82,7 @@ for _n, _u in PEOPLE.items():
 # Chinese coauthors are printed under their Chinese names on the zh pages.
 ZH_NAMES = {
   "陈玉宇": PEOPLE["Yuyu Chen"],
+  "姚心觉": PEOPLE["Xinjue Yao"],
   "孟涓涓": PEOPLE["Juanjuan Meng"],
   "陈依婷": PEOPLE["Yiting Chen"],
   "何浩然": PEOPLE["Haoran He"],
