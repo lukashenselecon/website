@@ -56,7 +56,7 @@ PEOPLE = {
   "Stefano Fiorin":      "https://sites.google.com/site/stefanofiorineconomics/",
   "Damir Esenaliev":     "https://isdc.org/team/damir-esenaliev/",
   "Yuyu Chen":           "https://en.gsm.pku.edu.cn/faculty/chenyuyu/",
-  "Xinjue Yao":          "https://sites.google.com/view/xinjue-yao",
+  "Xinjue Yao":          "https://xinjue-yao.com",
   "Jennifer Kades":      "https://jenniferkades.pythonanywhere.com",
   "Stefan Dercon":       "https://www.bsg.ox.ac.uk/people/stefan-dercon",
   "Pieter Gautier":      "https://sites.google.com/site/pietgautier/",
