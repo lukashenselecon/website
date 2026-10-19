@@ -73,10 +73,22 @@ chown root:root "$ENV_FILE"
 bash "$SOURCE_ROOT/deploy/office-hours/install.sh" "$SOURCE_ROOT"
 python3 "$SOURCE_ROOT/deploy/office-hours/configure-nginx.py"
 
-status=$(curl -sS -o /dev/null -w '%{http_code}' \
-    -X POST -H 'Content-Type: application/json' -d '{}' \
-    http://127.0.0.1:8765/api/office-hours/slots)
-test "$status" = 401 || { echo "Local API check returned $status, expected 401." >&2; exit 1; }
+status=""
+for ((attempt = 1; attempt <= 20; attempt++)); do
+    status=$(curl --connect-timeout 2 --max-time 3 -s -o /dev/null -w '%{http_code}' \
+        -X POST -H 'Content-Type: application/json' -d '{}' \
+        http://127.0.0.1:8765/api/office-hours/slots) || status=""
+    if [ "$status" = 401 ]; then
+        break
+    fi
+    sleep 1
+done
+if [ "$status" != 401 ]; then
+    echo "Local API did not become ready (last HTTP status: ${status:-connection failed})." >&2
+    systemctl status lukas-office-hours.service --no-pager -l >&2 || true
+    journalctl -u lukas-office-hours.service -n 60 --no-pager >&2 || true
+    exit 1
+fi
 
 printf 'From: %s\nTo: lukas.hensel@gsm.pku.edu.cn\nSubject: Office-hours email test\n\nThe Monday office-hours email account is configured.\n' "$sender" \
     | runuser -u officehours -- msmtp --file="$MAIL_FILE" lukas.hensel@gsm.pku.edu.cn
