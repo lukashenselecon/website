@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /stats/
 Disallow: /signups/
+Disallow: /api/office-hours/
 
 Sitemap: https://lukashensel.com/sitemap.xml

@@ -35,6 +35,7 @@ jobs:
           rsync -az --delete \
             --exclude '.git' --exclude '.github' \
             --exclude 'build.py' --exclude 'data.py' \
+            --exclude 'office_hours' --exclude 'tests' \
             --exclude '__pycache__' --exclude 'README.md' \
             --exclude 'deploy' --exclude 'START-HERE.md' \
             -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes" \

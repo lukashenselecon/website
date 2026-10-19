@@ -15,12 +15,12 @@ SITE="https://lukashensel.com"
 EMAIL="lukas.hensel@gsm.pku.edu.cn"
 
 # --- things you may want to change -------------------------------------
-# Office hours, shown on the home page and repeated on Teaching.
+# Office-hours link on the home page.
 # For a fixed slot, write it out, e.g.
 #   OFFICE_HOURS_EN = "Wednesdays 14:00–16:00, Guanghua Building 2, Room 217"
 #   OFFICE_HOURS_ZH = "每周三 14:00–16:00，光华管理学院 2 号楼 217 室"
-OFFICE_HOURS_EN = "Tuesdays 10:30–11:45, Guanghua Building 2, Office 343."
-OFFICE_HOURS_ZH = "每周二 10:30–11:45，光华管理学院 2 号楼 343 室。"
+OFFICE_HOURS_EN = '<a class="lk" href="/office-hours">Sign up for office hours</a>.'
+OFFICE_HOURS_ZH = '<a class="lk" href="/zh/office-hours">预约办公时间</a>。'
 
 # Profile links. Leave a value empty and the link is left off the page.
 TWITTER = "LukasHenselEcon"
@@ -443,6 +443,55 @@ def home(lang):
 </ul>
 <p class="meta">Students asking for a letter should read the <a class="lk" href="/teaching#references">Reference letters</a> section first; on thesis supervision, see <a class="lk" href="/teaching#supervision">Thesis supervision</a>.</p>"""
 
+def office_hours(lang):
+    if lang == "zh":
+        return f'''<p class="lbl">北京大学 · 光华管理学院</p>
+<h1>预约办公时间</h1>
+<p>请输入姓名和北京大学邮箱，查看可预约的时间。预约时请简要说明会面目的；如有需要，也可以附上文件。</p>
+<p class="meta">如果这些时间都不方便，请<a class="lk" href="mailto:{EMAIL}">发邮件给我</a>。</p>
+<section id="office-booking" data-lang="zh">
+<form id="identity-form" class="booking-form" method="post" action="/api/office-hours/start">
+<label for="visitor-name">姓名</label><input id="visitor-name" name="name" autocomplete="name" maxlength="120" required>
+<label for="visitor-email">北京大学邮箱</label><input id="visitor-email" name="email" type="email" autocomplete="email" required>
+<input class="booking-trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button type="submit" class="cta">查看可预约时间</button></form>
+<div id="identity-status" class="booking-status" role="status" aria-live="polite"></div>
+<section id="booking-step" hidden><h2 class="sec">选择时间</h2>
+<p class="meta">时间均为北京时间。每周一 20:00 截止预约次日的办公时间。</p>
+<form id="booking-form" class="booking-form" method="post" action="/api/office-hours/book" enctype="multipart/form-data"><div id="booking-slots"></div>
+<label for="meeting-purpose">会面目的</label>
+<textarea id="meeting-purpose" name="purpose" rows="5" maxlength="2000" required></textarea>
+<label for="meeting-files">附件（可选）</label>
+<input id="meeting-files" name="attachments" type="file" multiple accept=".pdf,.docx,.png,.jpg,.jpeg">
+<p class="meta">最多 3 个文件，每个不超过 10 MB。可上传 PDF、DOCX、PNG 或 JPEG。预约信息和附件会在会面 90 天后的下一次每周清理中删除。</p>
+<button type="submit" class="cta">确认预约</button></form>
+<div id="booking-status" class="booking-status" role="status" aria-live="polite"></div></section>
+<section id="booking-receipt" class="booking-receipt" hidden aria-live="polite"></section>
+</section><script src="/assets/office-hours.js" defer></script>'''
+    return f'''<p class="lbl">Peking University · Guanghua School of Management</p>
+<h1>Sign up for office hours</h1>
+<p>Enter your name and PKU email address to see available appointments. When booking, briefly explain what you would like to discuss. You may also attach files.</p>
+<p class="meta">If you cannot make my office hours, please <a class="lk" href="mailto:{EMAIL}">reach out by email</a>.</p>
+<section id="office-booking" data-lang="en">
+<form id="identity-form" class="booking-form" method="post" action="/api/office-hours/start">
+<label for="visitor-name">Name</label><input id="visitor-name" name="name" autocomplete="name" maxlength="120" required>
+<label for="visitor-email">PKU email</label><input id="visitor-email" name="email" type="email" autocomplete="email" required>
+<input class="booking-trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button type="submit" class="cta">See available times</button></form>
+<div id="identity-status" class="booking-status" role="status" aria-live="polite"></div>
+<section id="booking-step" hidden><h2 class="sec">Choose a time</h2>
+<p class="meta">All times are Beijing time. Bookings for Tuesday close at 20:00 on Monday.</p>
+<form id="booking-form" class="booking-form" method="post" action="/api/office-hours/book" enctype="multipart/form-data"><div id="booking-slots"></div>
+<label for="meeting-purpose">Purpose of meeting</label>
+<textarea id="meeting-purpose" name="purpose" rows="5" maxlength="2000" required></textarea>
+<label for="meeting-files">Attachments (optional)</label>
+<input id="meeting-files" name="attachments" type="file" multiple accept=".pdf,.docx,.png,.jpg,.jpeg">
+<p class="meta">Up to 3 files, 10 MB each. PDF, DOCX, PNG, or JPEG. Booking details and files are deleted in the weekly cleanup after 90 days.</p>
+<button type="submit" class="cta">Confirm booking</button></form>
+<div id="booking-status" class="booking-status" role="status" aria-live="polite"></div></section>
+<section id="booking-receipt" class="booking-receipt" hidden aria-live="polite"></section>
+</section><script src="/assets/office-hours.js" defer></script>'''
+
 def pubs(lang):
     lbl="期刊论文与其他写作" if lang=="zh" else "Journal articles and other writing"
     h="发表论文" if lang=="zh" else "Publications"
@@ -466,6 +515,7 @@ def teaching(lang):
         return f"""<p class="lbl">北京大学光华管理学院</p>
 <h1>教学与指导</h1>
 <p>本页说明我在光华管理学院讲授的课程、论文指导的方式与要求，以及申请推荐信的流程。来信之前，请先阅读相关部分。</p>
+<p class="meta">如需在办公时间见面，请<a class="lk" href="/zh/office-hours">在线预约</a>；如果这些时间都不方便，请<a class="lk" href="mailto:{EMAIL}">发邮件给我</a>。</p>
 <p class="meta"><a class="lk" href="#courses">课程</a> · <a class="lk" href="#supervision">论文指导</a> · <a class="lk" href="#references">推荐信</a></p>
 
 <h2 class="sec" id="courses">课程</h2>
@@ -509,6 +559,7 @@ def teaching(lang):
     return f"""<p class="lbl">Guanghua School of Management</p>
 <h1>Teaching and Supervision</h1>
 <p>This page sets out the courses I teach at Guanghua, the terms on which I supervise theses, and the procedure for requesting a reference letter. Students are asked to read the relevant section before writing to me.</p>
+<p class="meta">To meet during office hours, <a class="lk" href="/office-hours">sign up online</a>. If you cannot make my office hours, please <a class="lk" href="mailto:{EMAIL}">reach out by email</a>.</p>
 <p class="meta"><a class="lk" href="#courses">Courses</a> &middot; <a class="lk" href="#supervision">Thesis supervision</a> &middot; <a class="lk" href="#references">Reference letters</a></p>
 
 <h2 class="sec" id="courses">Courses</h2>
@@ -604,6 +655,9 @@ PAGES=[("", home, "Lukas Hensel", "Lukas Hensel，北京大学光华管理学院
        ("teaching", teaching, "Teaching and Supervision · Lukas Hensel", "教学与指导 · Lukas Hensel",
         "Courses at Guanghua, thesis supervision, and how to request a reference letter.",
         "在光华管理学院讲授的课程、论文指导，以及推荐信的申请流程。"),
+       ("office-hours", office_hours, "Office hours · Lukas Hensel", "办公时间预约 · Lukas Hensel",
+        "Sign up for an office-hours appointment with Lukas Hensel.",
+        "预约 Lukas Hensel 的办公时间。"),
        ("cv", cv, "CV · Lukas Hensel", "个人简历 · Lukas Hensel",
         "Positions, affiliations, and education. Full CV as a PDF.", "任职经历、学术兼职与教育背景，完整简历见 PDF。")]
 
@@ -728,7 +782,7 @@ write("zh/visiting.html", ('<!doctype html>\n<html lang="zh-Hans">\n<head>\n<met
       '<script>location.replace("/visiting")</script>\n</body>\n</html>\n') % SITE); n+=1
 
 # robots + sitemap
-write("robots.txt", "User-agent: *\nAllow: /\nDisallow: /stats/\nDisallow: /signups/\n\nSitemap: %s/sitemap.xml\n" % SITE)
+write("robots.txt", "User-agent: *\nAllow: /\nDisallow: /stats/\nDisallow: /signups/\nDisallow: /api/office-hours/\n\nSitemap: %s/sitemap.xml\n" % SITE)
 urls=[]
 for slug,_,_,_,_,_ in PAGES:
     for lang in ("en","zh"):

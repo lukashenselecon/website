@@ -29,7 +29,8 @@ repository root, so the instructions work wherever the folder is checked out.
 | Papers, authors, journals, abstracts, coverage, and links | [data.py](data.py) |
 | Biography, page prose, navigation, and page structure | [build.py](build.py) |
 | Courses, supervision, and reference-letter guidance | `teaching()` in `build.py` |
-| Office hours in both languages | `OFFICE_HOURS_EN` and `OFFICE_HOURS_ZH` in `build.py` |
+| Office-hours links and sign-up pages in both languages | `OFFICE_HOURS_EN`, `OFFICE_HOURS_ZH`, and `office_hours()` in `build.py` |
+| Booking API, private owner view, and Monday email | `office_hours/`; see `deploy/office-hours/README.md` |
 | CV page summary | `cv()` in `build.py` |
 | Downloadable CV | [cv.pdf](cv.pdf); local LaTeX source is under `Academic CV/` |
 | Portrait and profile buttons | `assets/photo.jpg`, `PROFILE_BUTTONS` in `build.py` |
@@ -82,17 +83,19 @@ production links extensionless.
 
 ## Pages and assets
 
-As checked against the local source on September 28, 2026, the build writes
-16 HTML files:
+As checked against the local source on October 19, 2026, the build writes
+18 HTML files:
 
 - Five main pages in English and Chinese: Home, CV, Publications, Work in
   Progress, and Teaching and Supervision.
+- English and Chinese office-hours sign-up pages. The available times come
+  from the private booking API after a visitor enters a name and PKU email.
 - English and Chinese 404 pages.
 - Two `/references` redirect stubs pointing to `/teaching#references` in the
   matching language.
 - An English visiting guide and a Chinese-path redirect to that English page.
 
-Only the ten main pages are in the sitemap. The visiting guide is unlisted and
+The twelve main and sign-up pages are in the sitemap. The visiting guide is unlisted and
 marked `noindex`; this does not make it private.
 
 English pages are at the root and Chinese pages under `zh/`. The shared page
@@ -150,7 +153,11 @@ rsync exclusion list. Review what will be uploaded before an authorized deploy.
 The deployment requires the `SERVER_IP` and `SERVER_SSH_KEY` repository secrets.
 Keep their values out of notes. Server setup for analytics uses a separate,
 manually dispatched workflow and the configuration described in its guide. A
-normal page deployment does not reinstall that service.
+normal page deployment does not reinstall that service. The office-hours
+booking service is also separate: install and test it on the server before
+publishing pages that call its API. Its source is excluded from the static web
+root, and its database and uploads live under `/var/lib/lukas-office-hours/`.
+See `deploy/office-hours/README.md` for the private configuration and checks.
 
 ## Current maintenance notes
 
