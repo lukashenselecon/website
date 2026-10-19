@@ -18,7 +18,9 @@ umask 022
 
 id officehours >/dev/null 2>&1 || useradd --system --home-dir /var/lib/lukas-office-hours --shell /usr/sbin/nologin officehours
 install -d -m 700 -o officehours -g officehours /var/lib/lukas-office-hours /var/lib/lukas-office-hours/uploads
-install -d -m 700 -o root -g root /etc/lukas-office-hours
+# Allow the service group to reach its own mail configuration without exposing
+# the directory listing or the root-owned environment file.
+install -d -m 710 -o root -g officehours /etc/lukas-office-hours
 chmod 600 /etc/lukas-office-hours/office-hours.env
 chown root:root /etc/lukas-office-hours/office-hours.env
 chmod 600 /etc/lukas-office-hours/msmtprc
