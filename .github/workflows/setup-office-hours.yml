@@ -36,13 +36,13 @@ jobs:
       - name: Transfer the private service and configuration
         env:
           ADMIN_PASS: ${{ secrets.OFFICE_HOURS_ADMIN_PASSWORD }}
-          MSMTP_CONFIG: ${{ secrets.MSMTP_CONFIG }}
         run: |
           set -euo pipefail
           tar --exclude='__pycache__' -czf - office_hours deploy/office-hours \
             | ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
                 root@${{ secrets.SERVER_IP }} \
                 'install -d -m 700 /root/office-hours-stage \
+                 && rm -rf /root/office-hours-stage/office_hours /root/office-hours-stage/deploy/office-hours \
                  && rm -f /root/office-hours-stage/admin-password /root/office-hours-stage/msmtprc-incoming \
                  && tar xzf - -C /root/office-hours-stage'
           private_dir=$(mktemp -d)
@@ -52,21 +52,14 @@ jobs:
           chmod 600 "$private_dir/admin-password"
           scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
             "$private_dir/admin-password" root@${{ secrets.SERVER_IP }}:/root/office-hours-stage/admin-password
-          if [ -n "$MSMTP_CONFIG" ]; then
-            printf '%s' "$MSMTP_CONFIG" > "$private_dir/msmtprc-incoming"
-            chmod 600 "$private_dir/msmtprc-incoming"
-            scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
-              "$private_dir/msmtprc-incoming" root@${{ secrets.SERVER_IP }}:/root/office-hours-stage/msmtprc-incoming
-          fi
 
-      - name: Install the service, nginx route, and Monday alert
+      - name: Install the service and nginx route
         run: |
           ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
             root@${{ secrets.SERVER_IP }} \
             'bash /root/office-hours-stage/deploy/office-hours/setup-from-actions.sh \
               /root/office-hours-stage \
-              /root/office-hours-stage/admin-password \
-              /root/office-hours-stage/msmtprc-incoming'
+              /root/office-hours-stage/admin-password'
 
       - name: Check the live booking API
         run: |
@@ -77,4 +70,10 @@ jobs:
             echo "Live booking API returned $status; expected 401." >&2
             exit 1
           fi
-          echo 'Live booking API is responding.'
+          report_status=$(curl -sS -o /dev/null -w '%{http_code}' \
+            'https://lukashensel.com/api/office-hours/admin/summary?date=2026-10-20')
+          if [ "$report_status" != 401 ]; then
+            echo "Private report returned $report_status without owner login; expected 401." >&2
+            exit 1
+          fi
+          echo 'Live booking API and private report are responding.'

@@ -68,10 +68,6 @@ CREATE TABLE IF NOT EXISTS access_attempts (
   count INTEGER NOT NULL,
   PRIMARY KEY(ip_hash, window_start)
 );
-CREATE TABLE IF NOT EXISTS digest_log (
-  slot_date TEXT PRIMARY KEY,
-  sent_at TEXT NOT NULL
-);
 """
 
 
@@ -376,6 +372,42 @@ article h2{{font-size:18px}}.inline{{display:inline}}button{{cursor:pointer}}</s
 <input id="date" type="date" name="date" required><button type="submit">Block date</button></form>
 <ul>{blocks}</ul></main></body></html>'''
         return Response(page, mimetype="text/html")
+
+    @app.get("/api/office-hours/admin/summary")
+    @admin_required
+    def admin_summary():
+        raw = request.args.get("date", "")
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", raw):
+            return jsonify(error="Provide a Tuesday date as YYYY-MM-DD."), 400
+        try:
+            target = date.fromisoformat(raw)
+        except ValueError:
+            return jsonify(error="Provide a Tuesday date as YYYY-MM-DD."), 400
+        if target.weekday() != 1:
+            return jsonify(error="The date must be a Tuesday."), 400
+        db = connect_db(app.config["DATABASE"])
+        try:
+            rows = db.execute(
+                "SELECT id, slot_time, name, email, purpose FROM bookings "
+                "WHERE slot_date=? AND status='active' ORDER BY slot_time", (raw,)
+            ).fetchall()
+            bookings = []
+            for row in rows:
+                files = db.execute(
+                    "SELECT id, original_name FROM uploads WHERE booking_id=? ORDER BY original_name",
+                    (row["id"],)
+                ).fetchall()
+                bookings.append({
+                    "time": row["slot_time"], "end": slot_end(row["slot_time"]),
+                    "name": row["name"], "email": row["email"],
+                    "purpose": row["purpose"],
+                    "files": [{"name": file["original_name"],
+                               "url": f"https://lukashensel.com/api/office-hours/admin/file/{file['id']}"}
+                              for file in files],
+                })
+        finally:
+            db.close()
+        return jsonify(date=raw, count=len(bookings), bookings=bookings)
 
     @app.post("/api/office-hours/admin/cancel/<booking_id>")
     @admin_required

@@ -10,7 +10,7 @@ from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
 from office_hours.app import connect_db, create_app, slot_end, upcoming_tuesdays
-from office_hours.digest import build_message, remove_expired_bookings, send_digest
+from office_hours.maintenance import remove_expired_bookings
 
 
 MONDAY = datetime(2026, 10, 19, 12, 0, tzinfo=ZoneInfo("Asia/Shanghai"))
@@ -123,17 +123,20 @@ class BookingTests(unittest.TestCase):
         token = self.enter()
         self.assertEqual(self.book(token).status_code, 409)
 
-    def test_monday_digest_is_sent_once_and_lists_purpose(self):
+    def test_private_summary_lists_tuesday_bookings_and_requires_owner_login(self):
         token = self.enter()
-        self.assertEqual(self.book(token).status_code, 201)
-        target = MONDAY.date().replace(day=20)
-        with connect_db(self.db_path) as db:
-            message = build_message(db, target, "Office hours <sender@example.com>", "owner@example.com")
-        self.assertIn("Discuss my thesis", message.get_content())
-        with patch("office_hours.digest.send_with_msmtp") as mail:
-            self.assertTrue(send_digest(self.db_path, target, "sender@example.com", "owner@example.com", "/tmp/mail"))
-            self.assertFalse(send_digest(self.db_path, target, "sender@example.com", "owner@example.com", "/tmp/mail"))
-            self.assertEqual(mail.call_count, 1)
+        self.assertEqual(self.book(token, attachments=[(io.BytesIO(b"%PDF-1.4\nhello"), "notes.pdf")]).status_code, 201)
+        url = "/api/office-hours/admin/summary?date=2026-10-20"
+        self.assertEqual(self.client.get(url).status_code, 401)
+        auth = {"Authorization": "Basic bHVrYXM6b3duZXItdGVzdC1wYXNzd29yZA=="}
+        self.assertEqual(self.client.get(url.replace("2026-10-20", "2026-10-19"), headers=auth).status_code, 400)
+        response = self.client.get(url, headers=auth)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json["count"], 1)
+        booking = response.json["bookings"][0]
+        self.assertEqual((booking["time"], booking["end"]), ("10:00", "10:15"))
+        self.assertEqual(booking["purpose"], "Discuss my thesis")
+        self.assertEqual(booking["files"][0]["name"], "notes.pdf")
 
     def test_expired_booking_and_file_are_removed(self):
         token = self.enter()

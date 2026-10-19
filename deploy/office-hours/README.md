@@ -1,7 +1,7 @@
 # Office-hours service deployment
 
-The static pages in `build.py` link to the API at `/api/office-hours/`. The API
-is a separate Python service on the existing server. Static `rsync --delete`
+When published, the static sign-up pages use the API at `/api/office-hours/`.
+The API is a separate Python service on the existing server. Static `rsync --delete`
 deployments exclude its source, database, uploads, and secrets. **Install and
 verify this service before publishing the new static pages.**
 
@@ -16,18 +16,10 @@ OFFICE_HOURS_ADMIN_USER=lukas
 OFFICE_HOURS_ADMIN_PASSWORD=<long unique password>
 OFFICE_HOURS_DB=/var/lib/lukas-office-hours/bookings.sqlite3
 OFFICE_HOURS_UPLOAD_DIR=/var/lib/lukas-office-hours/uploads
-OFFICE_HOURS_MAIL_FROM=<address allowed by the configured SMTP account>
-OFFICE_HOURS_MAIL_TO=lukas.hensel@gsm.pku.edu.cn
-OFFICE_HOURS_MSMTP_CONFIG=/etc/lukas-office-hours/msmtprc
 ```
 
-Keep secrets out of Git and chat. The mail account must be able to send from
-`OFFICE_HOURS_MAIL_FROM`. Put its `msmtp` configuration in
-`/etc/lukas-office-hours/msmtprc`; the installer gives it to the dedicated
-`officehours` user with mode `0600`. The existing analytics configuration at
-`/etc/msmtprc`, if present and suitable, can be copied privately. If it has a
-`logfile` setting, use a path writable by `officehours` or remove that setting. The booking
-system sends no messages to visitors. The Monday digest goes only to Lukas.
+Keep secrets out of Git and chat. The booking service sends no email. The
+server's existing analytics mail configuration is separate and is untouched.
 
 ## Install
 
@@ -41,18 +33,15 @@ installs the private service only; the public sign-up page remains paused.
 Before running it, add an Actions secret named
 `OFFICE_HOURS_ADMIN_PASSWORD` under **Settings → Secrets and variables →
 Actions**. Choose a new unique password of at least 20 characters; do not put
-it in Git, chat, or a workflow input. If the server already has `/etc/msmtprc`
-for the analytics digest, the action copies that mail account into the booking
-service. Otherwise, set the `MSMTP_CONFIG` Actions secret to a working msmtp
-configuration (see `deploy/analytics/README.md`).
+it in Git, chat, or a workflow input.
 
 Run the action after committing and pushing the workflow. It transfers the
 service, creates its private configuration, installs the systemd service and
-Monday timer, adds the nginx proxy, and sends one test message to Lukas's
-Guanghua address. Check that message in the inbox. The workflow checks that the
-live API returns 401 without a visitor token. A 404 means the proxy is not yet
-connected. Re-running the action preserves existing bookings and the signing
-key; it updates the admin password to the current secret.
+retention timer, and adds the nginx proxy. It removes the old office-hours mail
+configuration and email timer. The workflow checks that the live API returns
+401 without a visitor token. A 404 means the proxy is not yet connected.
+Re-running the action preserves existing bookings and the signing key; it
+updates the admin password to the current secret.
 
 ### Direct server installation
 
@@ -64,8 +53,8 @@ temporary source directory on the server, then run as root:
 bash <source-directory>/deploy/office-hours/install.sh <source-directory>
 ```
 
-The script installs a Gunicorn service on `127.0.0.1:8765`, a Monday evening
-systemd timer, and `/etc/nginx/snippets/office-hours.conf`. Add its one-line
+The script installs a Gunicorn service on `127.0.0.1:8765`, a weekly retention
+timer, and `/etc/nginx/snippets/office-hours.conf`. Add its one-line
 `include` to the HTTPS `lukashensel.com` server block after backing up the
 nginx configuration. Run `nginx -t`, reload nginx, and verify the API before
 publishing the static pages. Only `/api/office-hours/` is proxied; the regular
@@ -83,24 +72,41 @@ never under the public web root. Use HTTPS for all access.
 2. Confirm `curl -i -X POST -H 'Content-Type: application/json' -d '{}' https://lukashensel.com/api/office-hours/slots` receives 401.
 3. Confirm a valid PKU address reaches the seven slots per Tuesday and another
    domain is rejected. Use a test booking, then cancel it in the owner view.
-4. Test the configured `msmtp` account from the server, then run the digest
-   for a chosen future Tuesday with `python -m office_hours.digest --date
-   YYYY-MM-DD` as `officehours`, using the same private environment file as the
-   service. Verify that the summary arrives in the Guanghua inbox. A successful
-   send is recorded in SQLite, so choose a different date for another test.
-5. Confirm `systemctl list-timers lukas-office-hours-digest.timer` shows a
-   Monday 21:00 Beijing run. Additional attempts at 21:15, 21:30, 22:00, and
-   23:00 retry a failed send; successful dates are sent only once.
+4. Confirm the private owner report at
+   `/api/office-hours/admin/summary?date=YYYY-MM-DD` rejects unauthenticated
+   requests and returns Tuesday's bookings when signed in as `lukas`.
+5. Confirm `systemctl list-timers lukas-office-hours-maintenance.timer` shows
+   a weekly Monday 21:00 Beijing cleanup.
 
-Each Tuesday's bookings close Monday at 20:00 Beijing time. The digest contains
-names, email addresses, purposes, and file names, with a link to the password
-protected owner view. It sends even if there are zero bookings. With no email
+Each Tuesday's bookings close Monday at 20:00 Beijing time. The private report
+contains names, email addresses, purposes, and attachment links. With no email
 verification, a visitor can enter a made-up PKU address to view availability;
 the form is a visibility step rather than an identity check.
 
-The digest job also deletes booking records and private uploads during the
+The maintenance job deletes booking records and private uploads during the
 first weekly run more than 90 days after their appointment. The sign-up form
 tells visitors about this period.
+
+## Monday summary in this app
+
+The Codex scheduled task runs at 21:00 on Mondays in Beijing, after the 20:00
+booking cutoff. It runs `deploy/office-hours/report-in-app.py` from this local
+project and posts the output to the scheduling chat, including a zero-booking
+summary. The script retrieves the private report over HTTPS. For local access,
+store the existing office-hours admin password in macOS Keychain yourself:
+
+```sh
+security add-generic-password -a lukas -s lukas-office-hours \
+  -l "Lukas office-hours report" -U -w
+```
+
+The final `-w` prompts for the password without putting it in the command or
+Git. Do not paste the password into chat. After deploying the new API, run
+`python3 deploy/office-hours/report-in-app.py` once locally and allow Keychain
+access if macOS asks. The output should list the next Tuesday's bookings.
+Keep this computer on and the desktop app running for local scheduled tasks;
+review the first Monday run in the app's Scheduled view. A failed fetch should
+be reported as an error, never as zero bookings.
 
 For backups, preserve `/var/lib/lukas-office-hours/` and the private
 configuration under `/etc/lukas-office-hours/`. Do not place those paths in the
