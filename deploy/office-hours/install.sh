@@ -12,6 +12,10 @@ python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)' || {
   echo "Python 3.10 or newer is required on the server." >&2; exit 1;
 }
 
+# The caller keeps private configuration at mode 0600. The installed code and
+# virtual environment must be readable and traversable by the officehours user.
+umask 022
+
 id officehours >/dev/null 2>&1 || useradd --system --home-dir /var/lib/lukas-office-hours --shell /usr/sbin/nologin officehours
 install -d -m 700 -o officehours -g officehours /var/lib/lukas-office-hours /var/lib/lukas-office-hours/uploads
 install -d -m 700 -o root -g root /etc/lukas-office-hours
@@ -28,6 +32,7 @@ cp -R "$SOURCE_ROOT/office_hours" /opt/lukas-office-hours/office_hours
 chown -R root:root /opt/lukas-office-hours/office_hours
 python3 -m venv /opt/lukas-office-hours/venv
 /opt/lukas-office-hours/venv/bin/pip install --disable-pip-version-check -r /opt/lukas-office-hours/office_hours/requirements.txt
+chmod -R a+rX /opt/lukas-office-hours/office_hours /opt/lukas-office-hours/venv
 
 cat > /etc/systemd/system/lukas-office-hours.service <<'UNIT'
 [Unit]
