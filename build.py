@@ -9,6 +9,8 @@ def _v(path):
         return "1"
 
 CSS_V = _v("assets/style.css")
+OFFICE_HOURS_JS_V = _v("assets/office-hours.js")
+OFFICE_HOURS_CONFIRMED_JS_V = _v("assets/office-hours-confirmed.js")
 from data import PUBS, WPS, WIP, NPR
 
 SITE="https://lukashensel.com"
@@ -420,7 +422,7 @@ def home(lang):
 <h2 class="sec">联系方式</h2>
 <ul class="cvlist">
   <li><span>邮箱</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
-  <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}<br><a class="cta office-hour-link" href="/zh/office-hours">预约 15 分钟会面</a></div></li>
+  <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}<br>如果你想来，请<a class="lk" href="/zh/office-hours">在这里预约一个时段</a>。</div></li>
 </ul>
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/teaching#references">推荐信</a>一节；关于论文指导，请见<a class="lk" href="/zh/teaching#supervision">论文指导</a>一节。</p>"""
     return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
@@ -439,7 +441,7 @@ def home(lang):
 <h2 class="sec">Contact</h2>
 <ul class="cvlist">
   <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
-  <li><span>Office hours</span><div>{OFFICE_HOURS_EN}<br><a class="cta office-hour-link" href="/office-hours">Book a 15-minute meeting</a></div></li>
+  <li><span>Office hours</span><div>{OFFICE_HOURS_EN}<br>If you would like to come, please <a class="lk" href="/office-hours">sign up for a slot here</a>.</div></li>
 </ul>
 <p class="meta">Students asking for a letter should read the <a class="lk" href="/teaching#references">Reference letters</a> section first; on thesis supervision, see <a class="lk" href="/teaching#supervision">Thesis supervision</a>.</p>"""
 
@@ -468,7 +470,7 @@ def office_hours(lang):
 <button type="submit" class="cta">确认预约</button></form>
 <div id="booking-status" class="booking-status" role="status" aria-live="polite"></div></section>
 <section id="booking-receipt" class="booking-receipt" hidden aria-live="polite"></section>
-</section><script src="/assets/office-hours.js" defer></script>'''
+</section><script src="/assets/office-hours.js?v={OFFICE_HOURS_JS_V}" defer></script>'''
     return f'''<p class="lbl">Peking University · Guanghua School of Management</p>
 <h1>Sign up for office hours</h1>
 <p>{OFFICE_HOURS_EN}</p>
@@ -492,7 +494,7 @@ def office_hours(lang):
 <button type="submit" class="cta">Confirm booking</button></form>
 <div id="booking-status" class="booking-status" role="status" aria-live="polite"></div></section>
 <section id="booking-receipt" class="booking-receipt" hidden aria-live="polite"></section>
-</section><script src="/assets/office-hours.js" defer></script>'''
+</section><script src="/assets/office-hours.js?v={OFFICE_HOURS_JS_V}" defer></script>'''
 
 def office_hours_confirmed(lang):
     zh = lang == "zh"
@@ -504,14 +506,13 @@ def office_hours_confirmed(lang):
 <dl class="confirmation-facts">
 <div><dt>{'日期和时间' if zh else 'Date and time'}</dt><dd id="confirmation-when"></dd></div>
 <div><dt>{'地点' if zh else 'Location'}</dt><dd id="confirmation-location"></dd></div>
-<div><dt>{'预约编号' if zh else 'Reference'}</dt><dd id="confirmation-reference"></dd></div>
 </dl>
-<p class="confirmation-save">{'请现在将此时间加入日历并保存。系统不会发送确认邮件。' if zh else 'Save this time in your calendar now. No confirmation email will be sent.'}</p>
+<p class="confirmation-save">{'如果你想设置提醒，可以将这次预约加入日历。' if zh else "If you'd like a reminder, you can add this appointment to your calendar."}</p>
 <button id="calendar-download" class="cta" type="button">{'下载日历文件（.ics）' if zh else 'Download calendar entry (.ics)'}</button>
-<p class="meta">{'打开下载的文件，并在日历中保存；文件包含提前一天的提醒。' if zh else 'Open the downloaded file and save the event in your calendar. It includes a reminder one day before.'}</p>
+<p class="meta">{'打开下载的文件，将预约加入日历。日历文件包含提前一天的提醒；系统不会另行发送确认邮件。' if zh else "Open the downloaded file to add the appointment to your calendar. It includes a reminder one day before; we won't send a separate confirmation email."}</p>
 <p class="meta">{'如果无法按时参加，请' if zh else 'If you cannot attend, please '}<a class="lk" href="mailto:{EMAIL}">{'发邮件告诉我' if zh else 'email me'}</a>{'。' if zh else '.'}</p>
 </section>
-<script src="/assets/office-hours-confirmed.js" defer></script>'''
+<script src="/assets/office-hours-confirmed.js?v={OFFICE_HOURS_CONFIRMED_JS_V}" defer></script>'''
 
 def pubs(lang):
     lbl="期刊论文与其他写作" if lang=="zh" else "Journal articles and other writing"

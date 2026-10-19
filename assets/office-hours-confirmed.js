@@ -9,8 +9,7 @@
     details = JSON.parse(sessionStorage.getItem("office-hours-confirmed-booking"));
   } catch (_) { return; }
   if (!details || !/^\d{4}-\d{2}-\d{2}$/.test(details.date) ||
-      !/^\d{2}:\d{2}$/.test(details.time) || !/^\d{2}:\d{2}$/.test(details.end) ||
-      !/^[A-F0-9]{8}$/.test(details.reference)) return;
+      !/^\d{2}:\d{2}$/.test(details.time) || !/^\d{2}:\d{2}$/.test(details.end)) return;
 
   const start = new Date(details.date + "T" + details.time + ":00+08:00");
   const end = new Date(details.date + "T" + details.end + ":00+08:00");
@@ -25,7 +24,6 @@
     date + ", " + details.time + "–" + details.end + (zh ? "（北京时间）" : " (Beijing time)");
   document.getElementById("confirmation-location").textContent =
     (zh && details.location_zh) || details.location || "Guanghua Building 2, Office 343";
-  document.getElementById("confirmation-reference").textContent = details.reference;
   document.getElementById("confirmation-missing").hidden = true;
   root.hidden = false;
   heading.focus();
@@ -43,11 +41,11 @@
     const lines = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Lukas Hensel//Office Hours//EN",
       "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "BEGIN:VEVENT",
-      "UID:office-hours-" + details.reference + "-" + details.date + "-" + details.time.replace(":", "") + "@lukashensel.com",
+      "UID:office-hours-" + details.date + "-" + details.time.replace(":", "") + "@lukashensel.com",
       "DTSTAMP:" + icsTime(new Date()), "DTSTART:" + icsTime(start), "DTEND:" + icsTime(end),
       "SUMMARY:Office hours with Lukas Hensel",
       "LOCATION:" + icsText("Guanghua Building 2, Office 343"),
-      "DESCRIPTION:" + icsText("Booking reference: " + details.reference + ". Please save this event; no confirmation email will be sent."),
+      "DESCRIPTION:" + icsText("Office hours at Guanghua Building 2, Office 343."),
       "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:Office hours with Lukas Hensel tomorrow",
       "TRIGGER:-P1D", "END:VALARM", "END:VEVENT", "END:VCALENDAR", ""
     ];

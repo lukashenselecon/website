@@ -19,14 +19,14 @@
     unavailable: "已预约", blocked: "当天不可预约", choose: "请先选择一个时间。",
     fileCount: "最多可附加 3 个文件。", fileSize: "每个文件不能超过 10 MB。",
     sending: "正在提交预约……", failed: "请求未完成，请重试。",
-    confirmed: "预约成功", ref: "预约编号", location: "地点", save: "请保存此页面上的预约信息；系统不会发送确认邮件。",
+    confirmed: "预约成功", location: "地点", save: "可以记下预约时间；系统不会另行发送确认邮件。",
     beijing: "北京时间"
   } : {
     loading: "Checking available times…", noSlots: "No appointments are available on these dates.",
     unavailable: "Booked", blocked: "No office hours", choose: "Choose a time first.",
     fileCount: "Attach at most 3 files.", fileSize: "Each file must be 10 MB or smaller.",
     sending: "Submitting your booking…", failed: "The request did not finish. Please try again.",
-    confirmed: "Booking confirmed", ref: "Reference", location: "Location", save: "Please save this booking information. No confirmation email will be sent.",
+    confirmed: "Booking confirmed", location: "Location", save: "You may wish to note the time. We won't send a separate confirmation email.",
     beijing: "Beijing time"
   };
   const chineseErrors = {
@@ -158,7 +158,7 @@
       completed = true;
       try {
         sessionStorage.setItem(receiptKey, JSON.stringify({
-          reference: result.reference, date: result.date, time: result.time,
+          date: result.date, time: result.time,
           end: result.end, location: result.location, location_zh: result.location_zh
         }));
         window.location.assign((zh ? "/zh" : "") + "/office-hours-confirmed");
@@ -171,12 +171,10 @@
       details.textContent = dateLabel(result.date) + ", " + result.time + "–" + result.end + " · " + words.beijing;
       const location = document.createElement("p");
       location.textContent = words.location + ": " + (zh ? result.location_zh : result.location);
-      const reference = document.createElement("p");
-      reference.textContent = words.ref + ": " + result.reference;
       const save = document.createElement("p");
       save.className = "meta";
       save.textContent = words.save;
-      receipt.replaceChildren(heading, details, location, reference, save);
+      receipt.replaceChildren(heading, details, location, save);
       receipt.hidden = false;
       receipt.scrollIntoView({behavior: "smooth", block: "start"});
     } catch (error) {
