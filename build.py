@@ -21,7 +21,7 @@ EMAIL="lukas.hensel@gsm.pku.edu.cn"
 # For a fixed slot, write it out, e.g.
 #   OFFICE_HOURS_EN = "Wednesdays 14:00–16:00, Guanghua Building 2, Room 217"
 #   OFFICE_HOURS_ZH = "每周三 14:00–16:00，光华管理学院 2 号楼 217 室"
-OFFICE_HOURS_EN = "Tuesdays 10:00–11:45 (Beijing time), Guanghua Building 2, Office 343."
+OFFICE_HOURS_EN = "Tuesdays 10:00–11:45, Guanghua Building 2, Office 343."
 OFFICE_HOURS_ZH = "每周二 10:00–11:45（北京时间），光华管理学院 2 号楼 343 室。"
 
 # Profile links. Leave a value empty and the link is left off the page.
@@ -441,7 +441,7 @@ def home(lang):
 <h2 class="sec">Contact</h2>
 <ul class="cvlist">
   <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
-  <li><span>Office hours</span><div>{OFFICE_HOURS_EN}<br>If you would like to come, please <a class="lk" href="/office-hours">sign up for a slot here</a>.</div></li>
+  <li><span>Office hours</span><div>{OFFICE_HOURS_EN}<br>Please book a slot in advance <a class="lk" href="https://lukashensel.com/office-hours">here</a>.</div></li>
 </ul>
 <p class="meta">Students asking for a letter should read the <a class="lk" href="/teaching#references">Reference letters</a> section first; on thesis supervision, see <a class="lk" href="/teaching#supervision">Thesis supervision</a>.</p>"""
 
@@ -581,7 +581,7 @@ def teaching(lang):
     return f"""<p class="lbl">Guanghua School of Management</p>
 <h1>Teaching and Supervision</h1>
 <p>This page sets out the courses I teach at Guanghua, the terms on which I supervise theses, and the procedure for requesting a reference letter. Students are asked to read the relevant section before writing to me.</p>
-<p class="meta">Office hours: {OFFICE_HOURS_EN} <a class="lk" href="/office-hours">Book a 15-minute meeting</a>. If you cannot make my office hours, please <a class="lk" href="mailto:{EMAIL}">reach out by email</a>.</p>
+<p class="meta">Office hours: {OFFICE_HOURS_EN} Please book a slot in advance <a class="lk" href="https://lukashensel.com/office-hours">here</a>. If you cannot make my office hours, please <a class="lk" href="mailto:{EMAIL}">reach out by email</a>.</p>
 <p class="meta"><a class="lk" href="#courses">Courses</a> &middot; <a class="lk" href="#supervision">Thesis supervision</a> &middot; <a class="lk" href="#references">Reference letters</a></p>
 
 <h2 class="sec" id="courses">Courses</h2>
