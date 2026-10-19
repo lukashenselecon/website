@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import base64
+import binascii
 import hashlib
 import hmac
 import html
@@ -145,13 +147,21 @@ def valid_upload(file_storage) -> tuple[str, bytes, str]:
 
 
 def create_app(config: dict | None = None) -> Flask:
+    encoded_admin_password = os.environ.get("OFFICE_HOURS_ADMIN_PASSWORD_B64", "")
+    if encoded_admin_password:
+        try:
+            admin_password = base64.b64decode(encoded_admin_password, validate=True).decode("utf-8")
+        except (binascii.Error, ValueError, UnicodeDecodeError) as exc:
+            raise RuntimeError("Invalid OFFICE_HOURS_ADMIN_PASSWORD_B64.") from exc
+    else:
+        admin_password = os.environ.get("OFFICE_HOURS_ADMIN_PASSWORD", "")
     app = Flask(__name__)
     app.config.update(
         DATABASE=os.environ.get("OFFICE_HOURS_DB", "/var/lib/lukas-office-hours/bookings.sqlite3"),
         UPLOAD_DIR=os.environ.get("OFFICE_HOURS_UPLOAD_DIR", "/var/lib/lukas-office-hours/uploads"),
         SIGNING_KEY=os.environ.get("OFFICE_HOURS_SIGNING_KEY", ""),
         ADMIN_USER=os.environ.get("OFFICE_HOURS_ADMIN_USER", "lukas"),
-        ADMIN_PASSWORD=os.environ.get("OFFICE_HOURS_ADMIN_PASSWORD", ""),
+        ADMIN_PASSWORD=admin_password,
         MAX_CONTENT_LENGTH=32 * 1024 * 1024,
     )
     if config:

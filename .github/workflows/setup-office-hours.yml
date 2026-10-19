@@ -1,0 +1,80 @@
+name: Set up office hours
+
+# This workflow is manual. It uses the same server key as the website deploy.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: office-hours-setup
+  cancel-in-progress: false
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check required secret
+        env:
+          ADMIN_PASS: ${{ secrets.OFFICE_HOURS_ADMIN_PASSWORD }}
+        run: |
+          if [ "${#ADMIN_PASS}" -lt 20 ]; then
+            echo 'Add a repository Actions secret called OFFICE_HOURS_ADMIN_PASSWORD with at least 20 characters.' >&2
+            exit 1
+          fi
+
+      - name: Load the existing server deploy key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "${{ secrets.SERVER_IP }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Transfer the private service and configuration
+        env:
+          ADMIN_PASS: ${{ secrets.OFFICE_HOURS_ADMIN_PASSWORD }}
+          MSMTP_CONFIG: ${{ secrets.MSMTP_CONFIG }}
+        run: |
+          set -euo pipefail
+          tar --exclude='__pycache__' -czf - office_hours deploy/office-hours \
+            | ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+                root@${{ secrets.SERVER_IP }} \
+                'install -d -m 700 /root/office-hours-stage \
+                 && rm -f /root/office-hours-stage/admin-password /root/office-hours-stage/msmtprc-incoming \
+                 && tar xzf - -C /root/office-hours-stage'
+          private_dir=$(mktemp -d)
+          trap 'rm -rf "$private_dir"' EXIT
+          chmod 700 "$private_dir"
+          printf '%s' "$ADMIN_PASS" > "$private_dir/admin-password"
+          chmod 600 "$private_dir/admin-password"
+          scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+            "$private_dir/admin-password" root@${{ secrets.SERVER_IP }}:/root/office-hours-stage/admin-password
+          if [ -n "$MSMTP_CONFIG" ]; then
+            printf '%s' "$MSMTP_CONFIG" > "$private_dir/msmtprc-incoming"
+            chmod 600 "$private_dir/msmtprc-incoming"
+            scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+              "$private_dir/msmtprc-incoming" root@${{ secrets.SERVER_IP }}:/root/office-hours-stage/msmtprc-incoming
+          fi
+
+      - name: Install the service, nginx route, and Monday alert
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+            root@${{ secrets.SERVER_IP }} \
+            'bash /root/office-hours-stage/deploy/office-hours/setup-from-actions.sh \
+              /root/office-hours-stage \
+              /root/office-hours-stage/admin-password \
+              /root/office-hours-stage/msmtprc-incoming'
+
+      - name: Check the live booking API
+        run: |
+          status=$(curl -sS -o /dev/null -w '%{http_code}' \
+            -X POST -H 'Content-Type: application/json' -d '{}' \
+            https://lukashensel.com/api/office-hours/slots)
+          if [ "$status" != 401 ]; then
+            echo "Live booking API returned $status; expected 401." >&2
+            exit 1
+          fi
+          echo 'Live booking API is responding.'

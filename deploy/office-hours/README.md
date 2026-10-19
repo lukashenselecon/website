@@ -31,6 +31,31 @@ system sends no messages to visitors. The Monday digest goes only to Lukas.
 
 ## Install
 
+### From GitHub Actions, without the server password
+
+The repository has a manual **Actions → Set up office hours → Run workflow**
+action. It uses the same `SERVER_IP` and `SERVER_SSH_KEY` repository secrets as
+the site's existing deployment, so a separate SSH login is unnecessary. It
+installs the private service only; the public sign-up page remains paused.
+
+Before running it, add an Actions secret named
+`OFFICE_HOURS_ADMIN_PASSWORD` under **Settings → Secrets and variables →
+Actions**. Choose a new unique password of at least 20 characters; do not put
+it in Git, chat, or a workflow input. If the server already has `/etc/msmtprc`
+for the analytics digest, the action copies that mail account into the booking
+service. Otherwise, set the `MSMTP_CONFIG` Actions secret to a working msmtp
+configuration (see `deploy/analytics/README.md`).
+
+Run the action after committing and pushing the workflow. It transfers the
+service, creates its private configuration, installs the systemd service and
+Monday timer, adds the nginx proxy, and sends one test message to Lukas's
+Guanghua address. Check that message in the inbox. The workflow checks that the
+live API returns 401 without a visitor token. A 404 means the proxy is not yet
+connected. Re-running the action preserves existing bookings and the signing
+key; it updates the admin password to the current secret.
+
+### Direct server installation
+
 The server needs Python 3.10 or newer. Transfer the `office_hours/` and
 `deploy/office-hours/` directories to a
 temporary source directory on the server, then run as root:

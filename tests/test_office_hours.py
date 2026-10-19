@@ -1,4 +1,6 @@
+import base64
 import io
+import os
 import tempfile
 import threading
 import unittest
@@ -52,6 +54,21 @@ class BookingTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json["dates"]), 4)
         self.assertEqual(len(response.json["dates"][0]["slots"]), 7)
+
+    def test_encoded_admin_password_from_deployment(self):
+        password = "a private admin password with punctuation!"
+        encoded = base64.b64encode(password.encode()).decode()
+        with patch.dict(os.environ, {"OFFICE_HOURS_ADMIN_PASSWORD_B64": encoded}):
+            deployed = create_app({
+                "TESTING": True,
+                "DATABASE": str(Path(self.temp.name) / "encoded.sqlite3"),
+                "UPLOAD_DIR": self.uploads,
+                "SIGNING_KEY": "a-test-secret-key-longer-than-thirty-two-chars",
+            })
+        credentials = base64.b64encode(f"lukas:{password}".encode()).decode()
+        response = deployed.test_client().get(
+            "/api/office-hours/admin/", headers={"Authorization": f"Basic {credentials}"})
+        self.assertEqual(response.status_code, 200)
 
     def test_two_simultaneous_submissions_cannot_take_one_slot(self):
         token = self.enter()
