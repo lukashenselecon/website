@@ -29,7 +29,7 @@ repository root, so the instructions work wherever the folder is checked out.
 | Papers, authors, journals, abstracts, coverage, and links | [data.py](data.py) |
 | Biography, page prose, navigation, and page structure | [build.py](build.py) |
 | Courses, supervision, and reference-letter guidance | `teaching()` in `build.py` |
-| Office-hours links and sign-up pages in both languages | `OFFICE_HOURS_EN`, `OFFICE_HOURS_ZH`, and `office_hours()` in `build.py` |
+| Visible office-hours times and the paused sign-up template | `OFFICE_HOURS_EN`, `OFFICE_HOURS_ZH`, and `office_hours()` in `build.py` |
 | Booking API, private owner view, and Monday email | `office_hours/`; see `deploy/office-hours/README.md` |
 | CV page summary | `cv()` in `build.py` |
 | Downloadable CV | [cv.pdf](cv.pdf); local LaTeX source is under `Academic CV/` |
@@ -84,18 +84,17 @@ production links extensionless.
 ## Pages and assets
 
 As checked against the local source on October 19, 2026, the build writes
-18 HTML files:
+16 HTML files:
 
 - Five main pages in English and Chinese: Home, CV, Publications, Work in
   Progress, and Teaching and Supervision.
-- English and Chinese office-hours sign-up pages. The available times come
-  from the private booking API after a visitor enters a name and PKU email.
 - English and Chinese 404 pages.
 - Two `/references` redirect stubs pointing to `/teaching#references` in the
   matching language.
 - An English visiting guide and a Chinese-path redirect to that English page.
 
-The twelve main and sign-up pages are in the sitemap. The visiting guide is unlisted and
+The ten main pages are in the sitemap. The office-hours sign-up pages are
+paused and not generated. The visiting guide is unlisted and
 marked `noindex`; this does not make it private.
 
 English pages are at the root and Chinese pages under `zh/`. The shared page
