@@ -193,6 +193,7 @@ details.dd[open] .car{transform:rotate(90deg)}
 .cta{display:inline-block;text-decoration:none;border:1px solid var(--ink);background:var(--ink);
   color:var(--card);padding:9px 18px;font-size:14px;font-weight:600;border-radius:3px}
 .cta:hover{background:transparent;color:var(--ink)}
+.office-hour-link{margin-top:10px}
 
 /* office-hours sign-up */
 #office-booking [hidden]{display:none!important}
@@ -224,6 +225,22 @@ details.dd[open] .car{transform:rotate(90deg)}
 .booking-receipt{background:var(--card);border:1px solid var(--rule);padding:20px 22px;margin:28px 0}
 .booking-receipt h2{margin:0 0 12px;font-size:21px}
 .booking-receipt p:last-child{margin-bottom:0}
+.booking-confirmation[hidden],#confirmation-missing[hidden]{display:none!important}
+.booking-confirmation{background:var(--card);border:1px solid var(--rule);border-top:4px solid var(--ink);
+  padding:24px 28px;margin:26px 0 38px}
+.confirmation-success{font-size:19px;font-weight:700;margin:0 0 18px}
+.confirmation-facts{margin:0 0 24px}
+.confirmation-facts>div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;
+  border-top:1px solid var(--rule);padding:12px 0}
+.confirmation-facts dt{font-family:var(--mono);font-size:12px;color:var(--faint)}
+.confirmation-facts dd{margin:0;font-weight:600}
+.confirmation-save{font-weight:700;margin:0 0 18px}
+.booking-confirmation .cta{cursor:pointer}
+.booking-confirmation .meta{margin:14px 0 0}
+@media (max-width:640px){
+  .booking-confirmation{padding:20px 18px}
+  .confirmation-facts>div{grid-template-columns:minmax(0,1fr);gap:3px}
+}
 
 footer{max-width:730px;margin:0 auto;padding:26px 34px 56px;border-top:1px solid var(--rule);
   font-size:14px;color:var(--muted)}

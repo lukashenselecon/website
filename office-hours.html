@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Office hours sign-up · Lukas Hensel</title>
+<meta name="description" content="Book a 15-minute office-hours appointment with Lukas Hensel at Guanghua.">
+<link rel="canonical" href="https://lukashensel.com/office-hours">
+<link rel="alternate" hreflang="en" href="https://lukashensel.com/office-hours">
+<link rel="alternate" hreflang="zh-Hans" href="https://lukashensel.com/zh/office-hours">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Office hours sign-up · Lukas Hensel">
+<meta property="og:description" content="Book a 15-minute office-hours appointment with Lukas Hensel at Guanghua.">
+<meta property="og:url" content="https://lukashensel.com/office-hours">
+<meta property="og:image" content="https://lukashensel.com/assets/photo.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/assets/style.css?v=3756c14c">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="head">
+<a class="name" href="/">Lukas Hensel</a>
+<div class="right">
+<nav class="nav" aria-label="Main"><a href="/">Home</a><a href="/cv">CV</a><a href="/publications">Publications</a><a href="/work-in-progress">Work in Progress</a><a href="/teaching">Teaching</a></nav>
+<div class="lang"><a href="/office-hours" hreflang="en" aria-current="true">EN</a><a href="/zh/office-hours" hreflang="zh-Hans">中文</a></div>
+</div>
+</header>
+<main id="main">
+<p class="lbl">Peking University · Guanghua School of Management</p>
+<h1>Sign up for office hours</h1>
+<p>Tuesdays 10:00–11:45 (Beijing time), Guanghua Building 2, Office 343.</p>
+<p>Enter your name and PKU email address to see available appointments. When booking, briefly explain what you would like to discuss. You may also attach files.</p>
+<p class="meta">If you cannot make my office hours, please <a class="lk" href="mailto:lukas.hensel@gsm.pku.edu.cn">reach out by email</a>.</p>
+<section id="office-booking" data-lang="en">
+<form id="identity-form" class="booking-form" method="post" action="/api/office-hours/start">
+<label for="visitor-name">Name</label><input id="visitor-name" name="name" autocomplete="name" maxlength="120" required>
+<label for="visitor-email">PKU email</label><input id="visitor-email" name="email" type="email" autocomplete="email" required>
+<input class="booking-trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button type="submit" class="cta">See available times</button></form>
+<div id="identity-status" class="booking-status" role="status" aria-live="polite"></div>
+<section id="booking-step" hidden><h2 class="sec">Choose a time</h2>
+<p class="meta">All times are Beijing time. Bookings for Tuesday close at 20:00 on Monday.</p>
+<form id="booking-form" class="booking-form" method="post" action="/api/office-hours/book" enctype="multipart/form-data"><div id="booking-slots"></div>
+<label for="meeting-purpose">Purpose of meeting</label>
+<textarea id="meeting-purpose" name="purpose" rows="5" maxlength="2000" required></textarea>
+<label for="meeting-files">Attachments (optional)</label>
+<input id="meeting-files" name="attachments" type="file" multiple accept=".pdf,.docx,.png,.jpg,.jpeg">
+<p class="meta">Up to 3 files, 10 MB each. PDF, DOCX, PNG, or JPEG. Booking details and files are deleted in the weekly cleanup after 90 days.</p>
+<button type="submit" class="cta">Confirm booking</button></form>
+<div id="booking-status" class="booking-status" role="status" aria-live="polite"></div></section>
+<section id="booking-receipt" class="booking-receipt" hidden aria-live="polite"></section>
+</section><script src="/assets/office-hours.js" defer></script></main>
+<footer>
+Guanghua School of Management, Peking University, Beijing &nbsp;·&nbsp; <a href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a><br>
+Also on <a href="https://scholar.google.com/citations?user=_swX_6kAAAAJ" rel="me noopener">Google Scholar</a>, <a href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="me noopener">IZA</a>, <a href="https://www.povertyactionlab.org/invited-researchers" rel="me noopener"><span class="nb">J-PAL</span></a>, <a href="https://orcid.org/0000-0002-4962-2885" rel="me noopener">ORCID</a>, <a href="https://twitter.com/LukasHenselEcon" rel="me noopener">Twitter</a> and <a href="https://bsky.app/profile/lukashenselecon.bsky.social" rel="me noopener">Bluesky</a>.
+</footer>
+<script>
+/* Copy buttons for citations. No external requests; if this does not run the
+   text is still there to select. */
+(function(){
+  if(!navigator.clipboard) return;
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.hidden=false;
+    b.addEventListener("click",function(){
+      var box=b.parentNode, src=box.querySelector("pre")||box.querySelector("p");
+      navigator.clipboard.writeText(src.innerText).then(function(){
+        var t=b.textContent; b.textContent=b.dataset.done||"Copied"; b.dataset.done2=1;
+        b.setAttribute("data-done","1");
+        setTimeout(function(){b.textContent=t;b.removeAttribute("data-done");},1600);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -11,6 +11,7 @@
   const bookingStatus = document.getElementById("booking-status");
   const slotsBox = document.getElementById("booking-slots");
   const receipt = document.getElementById("booking-receipt");
+  const receiptKey = "office-hours-confirmed-booking";
   let token = "";
 
   const words = zh ? {
@@ -151,8 +152,18 @@
     data.append("time", parts[1]);
     data.append("purpose", document.getElementById("meeting-purpose").value);
     Array.from(files).forEach(file => data.append("attachments", file));
+    let completed = false;
     try {
       const result = await api("book", {method: "POST", body: data});
+      completed = true;
+      try {
+        sessionStorage.setItem(receiptKey, JSON.stringify({
+          reference: result.reference, date: result.date, time: result.time,
+          end: result.end, location: result.location, location_zh: result.location_zh
+        }));
+        window.location.assign((zh ? "/zh" : "") + "/office-hours-confirmed");
+        return;
+      } catch (_) { /* Keep the receipt visible here if browser storage is unavailable. */ }
       step.hidden = true;
       const heading = document.createElement("h2");
       heading.textContent = words.confirmed;
@@ -178,7 +189,7 @@
         renderDates(refreshed.dates);
       } catch (_) { /* The original error remains visible. */ }
     } finally {
-      button.disabled = false;
+      if (!completed) button.disabled = false;
     }
   });
 })();

@@ -1,6 +1,6 @@
 # Office-hours service deployment
 
-When published, the static sign-up pages use the API at `/api/office-hours/`.
+The static sign-up pages use the API at `/api/office-hours/`.
 The API is a separate Python service on the existing server. Static `rsync --delete`
 deployments exclude its source, database, uploads, and secrets. **Install and
 verify this service before publishing the new static pages.**
@@ -28,7 +28,8 @@ server's existing analytics mail configuration is separate and is untouched.
 The repository has a manual **Actions → Set up office hours → Run workflow**
 action. It uses the same `SERVER_IP` and `SERVER_SSH_KEY` repository secrets as
 the site's existing deployment, so a separate SSH login is unnecessary. It
-installs the private service only; the public sign-up page remains paused.
+installs the private service; the public sign-up pages are deployed by the
+normal website workflow.
 
 Before running it, add an Actions secret named
 `OFFICE_HOURS_ADMIN_PASSWORD` under **Settings → Secrets and variables →
@@ -60,11 +61,21 @@ nginx configuration. Run `nginx -t`, reload nginx, and verify the API before
 publishing the static pages. Only `/api/office-hours/` is proxied; the regular
 website remains static.
 
-The private owner view is at
-`https://lukashensel.com/api/office-hours/admin/`. It uses the admin password
-from the environment file. It lists upcoming bookings, lets Lukas cancel a
-booking or block a Tuesday, and serves private attachments. Uploaded files are
-never under the public web root. Use HTTPS for all access.
+## Manually look up bookings
+
+Open `https://lukashensel.com/api/office-hours/admin/` in a browser. Sign in
+with username `lukas` and the office-hours admin password stored as the
+`OFFICE_HOURS_ADMIN_PASSWORD` GitHub Actions secret (and in macOS Keychain for
+the Monday app task). The page lists upcoming bookings with names, email
+addresses, meeting purposes, and attachment links. It also lets Lukas cancel
+a booking or block a Tuesday. Uploaded files are never under the public web
+root. Use HTTPS for all access; do not put the password in a URL or chat. If
+the password is lost, set a new `OFFICE_HOURS_ADMIN_PASSWORD` secret, rerun
+**Set up office hours**, and update the matching Keychain item; the workflow
+preserves existing bookings.
+
+The Monday task uses the same protected API to fetch the next Tuesday's
+bookings. It does not replace the owner view, which can be checked at any time.
 
 ## Verify before publication
 

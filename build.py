@@ -420,7 +420,7 @@ def home(lang):
 <h2 class="sec">联系方式</h2>
 <ul class="cvlist">
   <li><span>邮箱</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
-  <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}</div></li>
+  <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}<br><a class="cta office-hour-link" href="/zh/office-hours">预约 15 分钟会面</a></div></li>
 </ul>
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/teaching#references">推荐信</a>一节；关于论文指导，请见<a class="lk" href="/zh/teaching#supervision">论文指导</a>一节。</p>"""
     return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
@@ -439,7 +439,7 @@ def home(lang):
 <h2 class="sec">Contact</h2>
 <ul class="cvlist">
   <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
-  <li><span>Office hours</span><div>{OFFICE_HOURS_EN}</div></li>
+  <li><span>Office hours</span><div>{OFFICE_HOURS_EN}<br><a class="cta office-hour-link" href="/office-hours">Book a 15-minute meeting</a></div></li>
 </ul>
 <p class="meta">Students asking for a letter should read the <a class="lk" href="/teaching#references">Reference letters</a> section first; on thesis supervision, see <a class="lk" href="/teaching#supervision">Thesis supervision</a>.</p>"""
 
@@ -494,6 +494,25 @@ def office_hours(lang):
 <section id="booking-receipt" class="booking-receipt" hidden aria-live="polite"></section>
 </section><script src="/assets/office-hours.js" defer></script>'''
 
+def office_hours_confirmed(lang):
+    zh = lang == "zh"
+    return f'''<p class="lbl">{'办公时间' if zh else 'Office hours'}</p>
+<h1 id="confirmation-title" tabindex="-1">{'预约信息' if zh else 'Booking details'}</h1>
+<p id="confirmation-missing" class="meta" role="status">{'此浏览器中没有预约确认信息。如果你刚刚提交了预约，请先' if zh else 'No booking confirmation is available in this browser. If you just submitted a booking, please '}<a class="lk" href="mailto:{EMAIL}">{'发邮件确认' if zh else 'email me'}</a>{'，不要重复预约。' if zh else ' before trying again.'}</p>
+<section id="confirmation-details" class="booking-confirmation" data-lang="{'zh' if zh else 'en'}" hidden>
+<p class="confirmation-success">{'预约成功' if zh else 'Your booking is confirmed'}</p>
+<dl class="confirmation-facts">
+<div><dt>{'日期和时间' if zh else 'Date and time'}</dt><dd id="confirmation-when"></dd></div>
+<div><dt>{'地点' if zh else 'Location'}</dt><dd id="confirmation-location"></dd></div>
+<div><dt>{'预约编号' if zh else 'Reference'}</dt><dd id="confirmation-reference"></dd></div>
+</dl>
+<p class="confirmation-save">{'请现在将此时间加入日历并保存。系统不会发送确认邮件。' if zh else 'Save this time in your calendar now. No confirmation email will be sent.'}</p>
+<button id="calendar-download" class="cta" type="button">{'下载日历文件（.ics）' if zh else 'Download calendar entry (.ics)'}</button>
+<p class="meta">{'打开下载的文件，并在日历中保存；文件包含提前一天的提醒。' if zh else 'Open the downloaded file and save the event in your calendar. It includes a reminder one day before.'}</p>
+<p class="meta">{'如果无法按时参加，请' if zh else 'If you cannot attend, please '}<a class="lk" href="mailto:{EMAIL}">{'发邮件告诉我' if zh else 'email me'}</a>{'。' if zh else '.'}</p>
+</section>
+<script src="/assets/office-hours-confirmed.js" defer></script>'''
+
 def pubs(lang):
     lbl="期刊论文与其他写作" if lang=="zh" else "Journal articles and other writing"
     h="发表论文" if lang=="zh" else "Publications"
@@ -517,7 +536,7 @@ def teaching(lang):
         return f"""<p class="lbl">北京大学光华管理学院</p>
 <h1>教学与指导</h1>
 <p>本页说明我在光华管理学院讲授的课程、论文指导的方式与要求，以及申请推荐信的流程。来信之前，请先阅读相关部分。</p>
-<p class="meta">办公时间：{OFFICE_HOURS_ZH}如果这些时间都不方便，请<a class="lk" href="mailto:{EMAIL}">发邮件给我</a>。</p>
+<p class="meta">办公时间：{OFFICE_HOURS_ZH}<a class="lk" href="/zh/office-hours">预约 15 分钟会面</a>。如果这些时间都不方便，请<a class="lk" href="mailto:{EMAIL}">发邮件给我</a>。</p>
 <p class="meta"><a class="lk" href="#courses">课程</a> · <a class="lk" href="#supervision">论文指导</a> · <a class="lk" href="#references">推荐信</a></p>
 
 <h2 class="sec" id="courses">课程</h2>
@@ -561,7 +580,7 @@ def teaching(lang):
     return f"""<p class="lbl">Guanghua School of Management</p>
 <h1>Teaching and Supervision</h1>
 <p>This page sets out the courses I teach at Guanghua, the terms on which I supervise theses, and the procedure for requesting a reference letter. Students are asked to read the relevant section before writing to me.</p>
-<p class="meta">Office hours: {OFFICE_HOURS_EN} If you cannot make my office hours, please <a class="lk" href="mailto:{EMAIL}">reach out by email</a>.</p>
+<p class="meta">Office hours: {OFFICE_HOURS_EN} <a class="lk" href="/office-hours">Book a 15-minute meeting</a>. If you cannot make my office hours, please <a class="lk" href="mailto:{EMAIL}">reach out by email</a>.</p>
 <p class="meta"><a class="lk" href="#courses">Courses</a> &middot; <a class="lk" href="#supervision">Thesis supervision</a> &middot; <a class="lk" href="#references">Reference letters</a></p>
 
 <h2 class="sec" id="courses">Courses</h2>
@@ -658,7 +677,10 @@ PAGES=[("", home, "Lukas Hensel", "Lukas Hensel，北京大学光华管理学院
         "Courses at Guanghua, thesis supervision, and how to request a reference letter.",
         "在光华管理学院讲授的课程、论文指导，以及推荐信的申请流程。"),
        ("cv", cv, "CV · Lukas Hensel", "个人简历 · Lukas Hensel",
-        "Positions, affiliations, and education. Full CV as a PDF.", "任职经历、学术兼职与教育背景，完整简历见 PDF。")]
+        "Positions, affiliations, and education. Full CV as a PDF.", "任职经历、学术兼职与教育背景，完整简历见 PDF。"),
+       ("office-hours", office_hours, "Office hours sign-up · Lukas Hensel", "预约办公时间 · Lukas Hensel",
+        "Book a 15-minute office-hours appointment with Lukas Hensel at Guanghua.",
+        "预约北京大学光华管理学院的 15 分钟办公时间。")]
 
 def write(path, text):
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
@@ -672,6 +694,16 @@ for slug, fn, t_en, t_zh, d_en, d_zh in PAGES:
         html  = head(lang,slug,title,desc)+header(lang,slug)+fn(lang)+footer(lang, profiles=(slug!=""))
         out = ("zh/" if lang=="zh" else "")+((slug+".html") if slug else "index.html")
         write(out, html); n+=1
+
+# The receipt is reached only after a successful booking. It is deliberately
+# omitted from the sitemap and shows no confirmation on a direct visit.
+for lang in ("en", "zh"):
+    slug = "office-hours-confirmed"
+    title = "预约确认 · Lukas Hensel" if lang == "zh" else "Office hours confirmation · Lukas Hensel"
+    page = head(lang, slug, title, "").replace('<meta charset="utf-8">',
+        '<meta charset="utf-8">\n<meta name="robots" content="noindex">', 1)
+    page += header(lang, slug) + office_hours_confirmed(lang) + footer(lang, profiles=False)
+    write(("zh/" if lang == "zh" else "") + slug + ".html", page); n += 1
 
 # 404
 for lang in ("en","zh"):

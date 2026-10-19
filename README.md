@@ -29,8 +29,8 @@ repository root, so the instructions work wherever the folder is checked out.
 | Papers, authors, journals, abstracts, coverage, and links | [data.py](data.py) |
 | Biography, page prose, navigation, and page structure | [build.py](build.py) |
 | Courses, supervision, and reference-letter guidance | `teaching()` in `build.py` |
-| Visible office-hours times and the paused sign-up template | `OFFICE_HOURS_EN`, `OFFICE_HOURS_ZH`, and `office_hours()` in `build.py` |
-| Booking API, private owner view, and Monday email | `office_hours/`; see `deploy/office-hours/README.md` |
+| Visible office-hours times, sign-up, and confirmation pages | `OFFICE_HOURS_EN`, `OFFICE_HOURS_ZH`, `office_hours()`, and `office_hours_confirmed()` in `build.py` |
+| Booking API, private owner view, and Monday in-app summary | `office_hours/`; see `deploy/office-hours/README.md` |
 | CV page summary | `cv()` in `build.py` |
 | Downloadable CV | [cv.pdf](cv.pdf); local LaTeX source is under `Academic CV/` |
 | Portrait and profile buttons | `assets/photo.jpg`, `PROFILE_BUTTONS` in `build.py` |
@@ -84,18 +84,20 @@ production links extensionless.
 ## Pages and assets
 
 As checked against the local source on October 19, 2026, the build writes
-16 HTML files:
+20 HTML files:
 
-- Five main pages in English and Chinese: Home, CV, Publications, Work in
-  Progress, and Teaching and Supervision.
+- Six main pages in English and Chinese: Home, CV, Publications, Work in
+  Progress, Teaching and Supervision, and Office Hours sign-up.
 - English and Chinese 404 pages.
 - Two `/references` redirect stubs pointing to `/teaching#references` in the
   matching language.
 - An English visiting guide and a Chinese-path redirect to that English page.
+- English and Chinese booking confirmation pages.
 
-The ten main pages are in the sitemap. The office-hours sign-up pages are
-paused and not generated. The visiting guide is unlisted and
-marked `noindex`; this does not make it private.
+The twelve main pages are in the sitemap. Confirmation pages are omitted from
+it and marked `noindex`; they show a receipt only after a successful booking
+in the same browser tab. The visiting guide is unlisted and marked `noindex`;
+this does not make it private.
 
 English pages are at the root and Chinese pages under `zh/`. The shared page
 builder supplies canonical URLs, language links, and social preview metadata.
