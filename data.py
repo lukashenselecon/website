@@ -100,6 +100,14 @@ WPS = [
   ab="We propose the first study testing firms&rsquo; demand for insurance against layoff costs. Job-loss insurance policies for workers, such as severance pay, impose substantial financial burdens on firms precisely when they face shocks motivating layoffs. We evaluate demand for a novel product, Severance Insurance, which protects firms against these costs, among formal employers in Addis Ababa, Ethiopia. Guided by a model of firm behavior in the presence of layoff risk and Severance Insurance, we estimate key parameters to assess the welfare effects of this product: firms&rsquo; value of insurance and adverse selection in insurance purchase. We also provide evidence of hypothetical behavioral responses to insurance, including moral hazard through increased layoffs, firm growth and workforce formalization. Our findings offer critical insights for designing employer-based social insurance policies and shed light on firms&rsquo; capacity to manage risk.",
   links=[("draft","工作论文",pdf("designing-severance-insurance.pdf","https://afosterri.org/jdepreresults/wp-content/uploads/2025/11/abebe-caria-spaziani-hensel-gerard-designing-severance-insurance-0eec1b64a5769d0280159fc16bc1fcfd.pdf"))]),
 
+ dict(y="R&amp;R", yz="修改重投", t="From Followers to Leaders: The Career Impact of High-quality Managers",
+  a_en="Yuyu Chen &amp; Xinjue Yao", a_zh="与 陈玉宇、姚心觉 合著",
+  authors=["Yuyu Chen","Lukas Hensel","Xinjue Yao"], cite_year=2026,
+  ab="How does manager quality affect subordinates&rsquo; career progression? We leverage frequent worker-manager reassignments to identify the causal effect of manager quality on workers&rsquo; career outcomes in the context of managerial teams at a large construction firm. Using both difference-in-differences and instrumental variable approaches, we find that exposure to a high-quality manager increases workers&rsquo; subsequent promotion rates by 9 to 13 percentage points. We provide evidence in support of managerial human capital transmission as the primary mechanism: effects are concentrated among workers and positions that require most managerial skills, and exposed workers earn significantly higher performance-based bonuses.",
+  v="Revise and resubmit at Management Science",
+  vz="Management Science 修改重投",
+  links=[("draft","工作论文",pdf("followers-to-leaders.pdf","https://www.iza.org/publications/dp/17848/from-followers-to-leaders-the-career-impact-of-high-quality-managers"))]),
+
  dict(y="R&amp;R", yz="修改重投", t="Jobseekers&rsquo; Beliefs about Comparative Advantage and (Mis)Directed Search",
   a_en="Andrea Kiss, Robert Garlick &amp; Kate Orkin", a_zh="与 Kiss、Garlick、Orkin 合著",
   authors=["Andrea Kiss","Robert Garlick","Kate Orkin","Lukas Hensel"], random_order=True, cite_year=2024,
@@ -125,14 +133,6 @@ WPS = [
   ab="We conduct a field experiment with job seekers to investigate how feedback influences job search and labor market outcomes. Job seekers who receive feedback on their ability compared to other job seekers update their beliefs and increase their search effort. Specifically, initially underconfident individuals intensify their job search. In contrast, overconfident individuals do not adjust their behavior. Moreover, job seekers&rsquo; willingness-to-pay (WTP) for feedback predicts treatment effects: only among underconfident individuals with positive WTP, we observe significant increases in both search effort and search success. We present suggestive evidence that this pattern arises from heterogeneity in how job seekers perceive the relevance of relative cognitive ability to job search returns. While the intervention appears cost-effective, job seekers&rsquo; WTP remains insufficient to cover its costs.",
   # The March 2026 draft here supersedes IZA DP 17761, so that link is not shown.
   links=[("draft","工作论文",pdf("feedback-confidence-job-search.pdf","https://www.iza.org/publications/dp/17761"))]),
-
- dict(y="2026", t="From Followers to Leaders: The Career Impact of High-quality Managers",
-  a_en="Yuyu Chen &amp; Xinjue Yao", a_zh="与 陈玉宇、姚心觉 合著",
-  authors=["Yuyu Chen","Lukas Hensel","Xinjue Yao"],
-  ab="How does manager quality affect subordinates&rsquo; career progression? We leverage frequent worker-manager reassignments to identify the causal effect of manager quality on workers&rsquo; career outcomes in the context of managerial teams at a large construction firm. Using both difference-in-differences and instrumental variable approaches, we find that exposure to a high-quality manager increases workers&rsquo; subsequent promotion rates by 9 to 13 percentage points. We provide evidence in support of managerial human capital transmission as the primary mechanism: effects are concentrated among workers and positions that require most managerial skills, and exposed workers earn significantly higher performance-based bonuses.",
-  v="IZA Discussion Paper 17848, superseded by the January 2026 draft",
-  vz="IZA 讨论稿 17848，已由 2026 年 1 月稿替代",
-  links=[("draft","工作论文",pdf("followers-to-leaders.pdf","https://www.iza.org/publications/dp/17848/from-followers-to-leaders-the-career-impact-of-high-quality-managers"))]),
 
  dict(y="2025", t="Wage Information and Applicant Selection",
   a_en="Maria Balgova, Tsegay Tekleselassie &amp; Marc Witte", a_zh="与 Balgova、Tekleselassie、Witte 合著",
