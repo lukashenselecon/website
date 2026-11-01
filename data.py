@@ -155,7 +155,7 @@ WIP = [
  dict(y="", t="Facts, Stories and Frontline Effort: Evidence from Garment Workers in Vietnam",
   a_en="Yuyu Chen &amp; Xinjue Yao", a_zh="与 陈玉宇、姚心觉 合著",
   v="Vietnam &middot; analysis underway", vz="越南 · 数据分析中", links=[]),
- dict(y="", t="Hiring on Soft Skills or Qualifications",
+ dict(y="", t="Employer Screening Technology and Hiring",
   a_en="Robert Garlick, Kate Orkin &amp; Jennifer Kades", a_zh="与 Garlick、Orkin、Kades 合著",
   v="South Africa &middot; analysis underway", vz="南非 · 数据分析中", links=[]),
  dict(y="", t="Do Labor Market Frictions Reduce Employment in Low-Income Countries? Experimental Evidence from Ethiopia",
