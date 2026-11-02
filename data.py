@@ -127,8 +127,8 @@ WPS = [
   a_en="Girum Abebe, Stefano Caria &amp; Fran&ccedil;ois Gerard", a_zh="与 Abebe、Caria、Gerard 合著",
   authors=["Lukas Hensel","Girum Abebe","François Gerard","Stefano Caria"], random_order=True,
   coverage=[("VoxDev","VoxDev","https://voxdev.org/topic/social-protection/benefits-financial-support-after-job-loss-and-why-programme-design-matters")],
-  v="IZA Discussion Paper 18537, superseded by the April 2026 draft",
-  vz="IZA 讨论稿 18537，已由 2026 年 4 月稿替代",
+  v="IZA Discussion Paper 18537",
+  vz="IZA 讨论稿 18537",
   ab="Job loss is an understudied risk for formal workers in lower-income countries. In these settings, lump-sum severance pay is often the only source of job-loss insurance. We quasi-experimentally show that female factory workers in Ethiopia displaced by a tariff hike experience lasting declines in employment and consumption spending, and rising poverty. Experimentally, we find that additional lump-sum support induces early spending and reduces overall and manufacturing employment persistently. Disbursing an equivalent amount in tranches improves consumption smoothing and avoids adverse employment effects. Further, we document a high willingness to pay for additional insurance, alongside heterogeneous preferences over disbursement modality that shape responses to our interventions. These findings imply that increasing job-loss insurance raises welfare, although moving away from the lump-sum default can generate substantial additional gains.",
   links=[("draft","工作论文",pdf("mitigating-job-loss-ethiopia.pdf","https://github.com/Luthor113/papers/raw/main/Hensel_%28r%29_Displacement.pdf"))]),
 
