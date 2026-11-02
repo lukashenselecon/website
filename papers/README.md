@@ -12,6 +12,7 @@ Filenames the build looks for:
 
 | File | Paper |
 |---|---|
+| `facts-role-models-frontline-effort.pdf` | Facts, Role Models, and Frontline Effort: Evidence from Garment Workers in Vietnam |
 | `formalized-employee-search.pdf` | Formalized Employee Search and Labor Demand |
 | `voice-political-engagement.pdf` | Voice and Political Engagement |
 | `political-activists-free-riders.pdf` | Political Activists as Free-Riders |

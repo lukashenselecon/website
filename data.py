@@ -92,6 +92,13 @@ PUBS = [
 ]
 
 WPS = [
+ dict(y="2026", t="Facts, Role Models, and Frontline Effort: Evidence from Garment Workers in Vietnam",
+  a_en="Yuyu Chen &amp; Xinjue Yao", a_zh="与 陈玉宇、姚心觉 合著",
+  authors=["Yuyu Chen","Lukas Hensel","Xinjue Yao"],
+  v="Working paper", vz="工作论文",
+  ab="Complex and opaque pay systems can weaken the link between incentives and worker behavior. We conduct a field experiment with 1,749 sewing-machine operators in Vietnam, using cross-randomized social-media videos about pay incentives. The information increases worker effort, potentially because of increased occupational self-efficacy. However, information also shifts workers toward less difficult tasks, offsetting the effort effect and leaving total output and earnings unchanged. Adding a story of a successful worker backfired and offset the effort gain. This shows that information about incentive systems must account for the multidimensionality of behavior and perceived agency at work.",
+  links=[("working paper","工作论文","/papers/facts-role-models-frontline-effort.pdf")]),
+
  dict(y="R&amp;R", yz="修改重投", t="Designing Severance Insurance: Theory and Evidence from Ethiopia",
   a_en="Girum Abebe, Stefano Caria, Sara Spaziani &amp; Fran&ccedil;ois Gerard", a_zh="与 Abebe、Caria、Spaziani、Gerard 合著",
   v="Conditionally accepted based on pre-results review: Journal of Development Economics",
@@ -152,9 +159,6 @@ WPS = [
 ]
 
 WIP = [
- dict(y="", t="Facts, Stories and Frontline Effort: Evidence from Garment Workers in Vietnam",
-  a_en="Yuyu Chen &amp; Xinjue Yao", a_zh="与 陈玉宇、姚心觉 合著",
-  v="Vietnam &middot; analysis underway", vz="越南 · 数据分析中", links=[]),
  dict(y="", t="Employer Screening Technology and Hiring",
   a_en="Robert Garlick, Kate Orkin &amp; Jennifer Kades", a_zh="与 Garlick、Orkin、Kades 合著",
   v="South Africa &middot; analysis underway", vz="南非 · 数据分析中", links=[]),
