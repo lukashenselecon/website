@@ -194,13 +194,6 @@ NPR = [
   ab="A phone-survey protocol for eliciting jobseekers&rsquo; earnings expectations, developed with young jobseekers in Johannesburg. Respondents give probabilities over three states &ndash; formal permanent work, informal or temporary work, and unemployment &ndash; followed by mean, minimum and maximum expected earnings and a question on distributional shape. Fitted uniform and triangular distributions correlate 0.86&ndash;0.92 with direct elicitation, so the short version recovers mean expectations at much lower respondent burden.",
   links=[("methods note","方法说明","https://mbrg.bsg.ox.ac.uk/method/measuring-income-expectations-using-phone-surveys")]),
 
- dict(y="2021", t="The Determinants and Implications of Worker Turnover in a Nascent Industry",
-  a_en="Girum Abebe, Stefano Caria &amp; Stefan Dercon", a_zh="与 Abebe、Caria、Dercon 合著",
-  v="Working paper &middot; International Growth Centre", vz="工作论文 · International Growth Centre",
-  ab="We study the drivers of worker exit in Ethiopia&rsquo;s nascent garment industry. Comparing retention incentives against unconditional payments, we find no statistically significant difference in three-month retention rates between the two, which points to low wage levels rather than bonus design as the main driver of the industry&rsquo;s high turnover.",
-  links=[("working paper","工作论文",pdf("igc-worker-turnover.pdf","https://www.theigc.org/sites/default/files/2021/05/Abebe-et-al-2019-Working-paper-2.pdf")),
-         ("IGC page","IGC 页面","https://www.theigc.org/publications/determinants-and-implications-worker-turnover-nascent-industry")]),
-
  dict(y="2020", t="Incorporating Social Norms-based Messaging Strategies into Programmes",
   v="Policy brief &middot; Mind &amp; Behaviour Research Group, Oxford",
   vz="政策简报 · 牛津大学 Mind &amp; Behaviour 研究组",
