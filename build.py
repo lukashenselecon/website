@@ -23,6 +23,8 @@ EMAIL="lukas.hensel@gsm.pku.edu.cn"
 #   OFFICE_HOURS_ZH = "每周三 14:00–16:00，光华管理学院 2 号楼 217 室"
 OFFICE_HOURS_EN = "Tuesdays 10:00–11:45, Guanghua Building 2, Office 343."
 OFFICE_HOURS_ZH = "每周二 10:00–11:45（北京时间），光华管理学院 2 号楼 343 室。"
+OFFICE_HOURS_HOME_HIDES = "2026-11-11"  # Beijing date, after today's office hours.
+OFFICE_HOURS_HOME_RESUMES = "2026-11-25"  # Beijing date, after two travel Tuesdays.
 
 # Profile links. Leave a value empty and the link is left off the page.
 TWITTER = "LukasHenselEcon"
@@ -404,6 +406,17 @@ def portrait(lang):
             '<img class="shot" src="/assets/photo.jpg" alt="%s" width="184" height="230">'
             '<ul class="profiles">%s</ul></figure>' % (alt, "".join(items)))
 
+def office_hours_home_resume_script():
+    return f'''<script>
+(function () {{
+  const beijingDate = new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  if (beijingDate < "{OFFICE_HOURS_HOME_HIDES}" || beijingDate >= "{OFFICE_HOURS_HOME_RESUMES}") {{
+    document.getElementById("office-hours-home").hidden = false;
+  }}
+}})();
+</script>'''
+
+
 def home(lang):
     if lang=="zh":
         return f"""<p class="lbl lead">北京大学 · 光华管理学院</p>
@@ -422,9 +435,9 @@ def home(lang):
 <h2 class="sec">联系方式</h2>
 <ul class="cvlist">
   <li><span>邮箱</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
-  <li><span>办公时间</span><div>{OFFICE_HOURS_ZH}<br>如果你想来，请<a class="lk" href="/zh/office-hours">在这里预约一个时段</a>。</div></li>
+  <li id="office-hours-home" hidden><span>办公时间</span><div>{OFFICE_HOURS_ZH}<br>如果你想来，请<a class="lk" href="/zh/office-hours">在这里预约一个时段</a>。</div></li>
 </ul>
-<p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/teaching#references">推荐信</a>一节；关于论文指导，请见<a class="lk" href="/zh/teaching#supervision">论文指导</a>一节。</p>"""
+<p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/teaching#references">推荐信</a>一节；关于论文指导，请见<a class="lk" href="/zh/teaching#supervision">论文指导</a>一节。</p>{office_hours_home_resume_script()}"""
     return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
 {portrait(lang)}
 <p class="drop">I am an Associate Professor of Economics at the Guanghua School of Management, Peking University, a <a class="lk nb" href="https://www.povertyactionlab.org/invited-researchers" rel="noopener">J-PAL</a> Invited Researcher, and an <a class="lk" href="https://www.iza.org/en/people/fellows/27501/lukas-hensel" rel="noopener">IZA</a> Research Fellow. My research is about how people find work, stay in it, and cope when they lose it.</p>
@@ -441,9 +454,9 @@ def home(lang):
 <h2 class="sec">Contact</h2>
 <ul class="cvlist">
   <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
-  <li><span>Office hours</span><div>{OFFICE_HOURS_EN}<br>Please book a slot in advance <a class="lk" href="https://lukashensel.com/office-hours">here</a>.</div></li>
+  <li id="office-hours-home" hidden><span>Office hours</span><div>{OFFICE_HOURS_EN}<br>Please book a slot in advance <a class="lk" href="https://lukashensel.com/office-hours">here</a>.</div></li>
 </ul>
-<p class="meta">Students asking for a letter should read the <a class="lk" href="/teaching#references">Reference letters</a> section first; on thesis supervision, see <a class="lk" href="/teaching#supervision">Thesis supervision</a>.</p>"""
+<p class="meta">Students asking for a letter should read the <a class="lk" href="/teaching#references">Reference letters</a> section first; on thesis supervision, see <a class="lk" href="/teaching#supervision">Thesis supervision</a>.</p>{office_hours_home_resume_script()}"""
 
 def office_hours(lang):
     if lang == "zh":

@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://lukashensel.com/zh/">
 <meta property="og:image" content="https://lukashensel.com/assets/photo.jpg">
 <meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="/assets/style.css?v=5cc8c33c">
+<link rel="stylesheet" href="/assets/style.css?v=2e363e92">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -43,9 +43,16 @@
 <h2 class="sec">联系方式</h2>
 <ul class="cvlist">
   <li><span>邮箱</span><div><a class="lk" href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a></div></li>
-  <li><span>办公时间</span><div>每周二 10:00–11:45（北京时间），光华管理学院 2 号楼 343 室。<br>如果你想来，请<a class="lk" href="/zh/office-hours">在这里预约一个时段</a>。</div></li>
+  <li id="office-hours-home" hidden><span>办公时间</span><div>每周二 10:00–11:45（北京时间），光华管理学院 2 号楼 343 室。<br>如果你想来，请<a class="lk" href="/zh/office-hours">在这里预约一个时段</a>。</div></li>
 </ul>
-<p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/teaching#references">推荐信</a>一节；关于论文指导，请见<a class="lk" href="/zh/teaching#supervision">论文指导</a>一节。</p></main>
+<p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/teaching#references">推荐信</a>一节；关于论文指导，请见<a class="lk" href="/zh/teaching#supervision">论文指导</a>一节。</p><script>
+(function () {
+  const beijingDate = new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  if (beijingDate < "2026-11-11" || beijingDate >= "2026-11-25") {
+    document.getElementById("office-hours-home").hidden = false;
+  }
+})();
+</script></main>
 <footer>
 北京大学光华管理学院 · 北京 &nbsp;·&nbsp; <a href="mailto:lukas.hensel@gsm.pku.edu.cn">lukas.hensel@gsm.pku.edu.cn</a><br>
 
