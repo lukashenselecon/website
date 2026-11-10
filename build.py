@@ -413,6 +413,9 @@ def office_hours_home_resume_script():
   if (beijingDate < "{OFFICE_HOURS_HOME_HIDES}" || beijingDate >= "{OFFICE_HOURS_HOME_RESUMES}") {{
     document.getElementById("office-hours-home").hidden = false;
   }}
+  if (beijingDate < "{OFFICE_HOURS_HOME_RESUMES}") {{
+    document.getElementById("office-hours-travel-note").hidden = false;
+  }}
 }})();
 </script>'''
 
@@ -437,6 +440,7 @@ def home(lang):
   <li><span>邮箱</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
   <li id="office-hours-home" hidden><span>办公时间</span><div>{OFFICE_HOURS_ZH}<br>如果你想来，请<a class="lk" href="/zh/office-hours">在这里预约一个时段</a>。</div></li>
 </ul>
+<p id="office-hours-travel-note" class="meta" hidden>11 月 17 日和 24 日没有办公时间，12 月 1 日恢复。</p>
 <p class="meta">学生如需推荐信，请先阅读<a class="lk" href="/zh/teaching#references">推荐信</a>一节；关于论文指导，请见<a class="lk" href="/zh/teaching#supervision">论文指导</a>一节。</p>{office_hours_home_resume_script()}"""
     return f"""<p class="lbl lead">Peking University &middot; Guanghua School of Management</p>
 {portrait(lang)}
@@ -456,6 +460,7 @@ def home(lang):
   <li><span>Email</span><div><a class="lk" href="mailto:{EMAIL}">{EMAIL}</a></div></li>
   <li id="office-hours-home" hidden><span>Office hours</span><div>{OFFICE_HOURS_EN}<br>Please book a slot in advance <a class="lk" href="https://lukashensel.com/office-hours">here</a>.</div></li>
 </ul>
+<p id="office-hours-travel-note" class="meta" hidden>There will be no office hours on 17 or 24 November. They resume on 1 December.</p>
 <p class="meta">Students asking for a letter should read the <a class="lk" href="/teaching#references">Reference letters</a> section first; on thesis supervision, see <a class="lk" href="/teaching#supervision">Thesis supervision</a>.</p>{office_hours_home_resume_script()}"""
 
 def office_hours(lang):
